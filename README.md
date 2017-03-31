@@ -2,11 +2,11 @@
 
 # Micro Frontends
 
-This repository ~~contains~~ <u>will contain</u> techniques, strategies and recipes for building a website with multiple indepentent teams.
+This repository ~~contains~~ <u>will contain</u> techniques, strategies and recipes for building a website with multiple independent teams.
 
 ## What are Micro Frontends?
 
-The term __Micro Frontends__ first came up in [ThoughtWorks Technology Radar](https://www.thoughtworks.com/radar/techniques/micro-frontends) end of 2016. It brings the concepts of micro services to the frontend. The current trend is to build feature rich and powerful browser applications, aka single page apps, which over time become more and more complex and harder to maintain.
+The term __Micro Frontends__ first came up in [ThoughtWorks Technology Radar](https://www.thoughtworks.com/radar/techniques/micro-frontends)at end of 2016. It brings the concepts of micro services to the frontend. The current trend is to build feature-rich and powerful browser applications, aka single page apps, which over time become more and more complex and harder to maintain.
 
 The idea behind Micro Frontends is to think about your user interface as a composition of components that are developed by independent teams.
 
@@ -14,7 +14,7 @@ Before the term existed we were calling this technique [Frontend Integration for
 
 ## The DOM is the API
 
-[Custom Elements](https://developers.google.com/web/fundamentals/getting-started/primers/customelements), the interoperability aspect from the Web Components Spec, are a good primitive for integration in the browser. Each team builds their component using their web technology of choice and wraps it inside a Custom Element (e.g. `<order-minicart></order-minicart>`). The DOM specification of this particular element (tag-name, attributes & events) acts as the contract for other teams to use the component and its functionality without having to know the implementation.
+[Custom Elements](https://developers.google.com/web/fundamentals/getting-started/primers/customelements), the interoperability aspect from the Web Components Spec, are a good primitive for integration in the browser. Each team builds their component using their web technology of choice and wraps it inside a Custom Element (e.g. `<order-minicart></order-minicart>`). The DOM specification of this particular element (tag-name, attributes & events) acts as the contract for other teams. The advantage is that they can use the component and its functionality without having to know the implementation.
 
 But Custom Elements alone are not the solution to all our needs. To address universal rendering or routing we need additional pieces of software.
 
