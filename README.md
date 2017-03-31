@@ -6,7 +6,7 @@ This repository ~~contains~~ <u>will contain</u> techniques, strategies and reci
 
 ## What are Micro Frontends?
 
-The term __Micro Frontends__ first came up in [ThoughtWorks Technology Radar](https://www.thoughtworks.com/radar/techniques/micro-frontends)at end of 2016. It brings the concepts of micro services to the frontend. The current trend is to build feature-rich and powerful browser applications, aka single page apps, which over time become more and more complex and harder to maintain.
+The term __Micro Frontends__ first came up in [ThoughtWorks Technology Radar](https://www.thoughtworks.com/radar/techniques/micro-frontends) at end of 2016. It brings the concepts of micro services to the frontend. The current trend is to build feature-rich and powerful browser applications, aka single page apps, which over time become more and more complex and harder to maintain.
 
 The idea behind Micro Frontends is to think about your user interface as a composition of components that are developed by independent teams.
 
