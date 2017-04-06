@@ -6,11 +6,11 @@ This repository ~~contains~~ <u>will contain</u> techniques, strategies and reci
 
 ## What are Micro Frontends?
 
-The term __Micro Frontends__ first came up in [ThoughtWorks Technology Radar](https://www.thoughtworks.com/radar/techniques/micro-frontends) at end of 2016. It brings the concepts of micro services to the frontend. The current trend is to build feature-rich and powerful browser applications, aka single page apps, which over time become more and more complex and harder to maintain.
+The term __Micro Frontends__ first came up in [ThoughtWorks Technology Radar](https://www.thoughtworks.com/radar/techniques/micro-frontends) at end of 2016. It extends the concepts of micro services to the frontend. The current trend is to build a feature-rich and powerful browser application, aka single page app, that sits ontop of a micro service architecture. Over time the frontend layer, often developed by a seperate team, grows and gets harder to maintain. That's what we call a [Frontend Monolith](https://www.youtube.com/watch?v=pU1gXA0rfwc).
 
-The idea behind Micro Frontends is to think about your user interface as a composition of components that are developed by independent teams.
+The idea behind Micro Frontends is to think about your UI as a composition of components that are developed by independent teams. This teams are cross functional and develops features end-to-end, from database to user interface.
 
-Before the term existed we were calling this technique [Frontend Integration for Verticalized / ](https://dev.otto.de/2014/07/29/scaling-with-microservices-and-vertical-decomposition/)[Self contained Systems](https://www.innoq.com/de/podcast/025-scs-frontend-integration/) or [Micro­service Websites](https://gustafnk.github.io/microservice-websites/). But Micro Frontends is clearly a more friendly and less bulky term.
+Before the term existed we were calling this composition technique [Frontend Integration for Verticalized Systems](https://dev.otto.de/2014/07/29/scaling-with-microservices-and-vertical-decomposition/), [Self contained Systems](https://www.innoq.com/de/podcast/025-scs-frontend-integration/) or [Micro­service Websites](https://gustafnk.github.io/microservice-websites/). But Micro Frontends is clearly a more friendly and less bulky term.
 
 ## The DOM is the API
 
