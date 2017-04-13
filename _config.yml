@@ -3,4 +3,5 @@ show_downloads: false
 title: Micro Frontends
 description: build a modern web app with multiple teams
 github:
-  is_project_page: false
+  is_project_page: true
+  repository_url: https://github.com/neuland/micro-frontends
