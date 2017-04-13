@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>0 Product Page - Plain JavaScript, One Team, Client Render</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+      * {
+        box-sizing: border-box;
+        font-family: "Helvetica Neue", Arial, sans-serif;
+      }
+      aside {
+        border-top: 1px solid gray;
+        padding-top: 20px;
+      }
+      dl {
+        display: grid;
+        max-width: 300px;
+        grid-row-gap: 2px;
+        grid-column-gap: 15px;
+        grid-template-columns: 2fr 1fr;
+      }
+      dt {
+        text-align: right;
+      }
+      dd {
+        margin: 0;
+      }
+      #app {
+        display: grid;
+        grid-template-columns: 4fr 3fr;
+        grid-gap: 20px;
+        grid-row-gap: 10px;
+        grid-column-gap: 20px;
+        grid-template-areas:
+          "store  basket"
+          "image  name"
+          "image  options"
+          "image  buy"
+          "reco   reco";
+        max-width: 800px;
+        margin: 20px auto;
+      }
+      #store {
+        grid-area: store;
+        font-weight: 400;
+      }
+      #basket {
+        grid-area: basket;
+        align-self: center;
+        justify-self: end;
+        background-color: gray;
+        color: white;
+        padding: 5px 10px;
+        border-radius: 5px;
+      }
+      #image {
+        grid-area: image;
+      }
+      #image img {
+        max-width: 100%;
+      }
+      #name {
+        grid-area: name;
+        font-weight: 400;
+      }
+      #name small {
+        font-size: 1em;
+        font-weight: 200;
+      }
+      #options {
+        grid-area: options;
+        display: flex;
+        align-self: center;
+      }
+      #options button {
+        margin: 2px;
+        padding: 0;
+        border: none;
+        display: block;
+        outline: none;
+        border-bottom: 2px solid white;
+        cursor: pointer;
+      }
+      #options button.active,
+      #options button:hover {
+        border-bottom-color: green;
+      }
+      #options img {
+        max-width: 100%;
+        display: block;
+      }
+      #buy {
+        grid-area: buy;
+        font-size: 20px;
+        padding: 20px;
+        align-self: center;
+        border: 1px solid gray;
+        background: none;
+        border-radius: 20px;
+        cursor: pointer;
+      }
+      #buy:hover {
+        background-color: #eee;
+      }
+      #reco {
+        grid-area: reco;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-around;
+        align-items: center;
+        margin-top: 20px;
+        border-top: 1px dashed gray;
+        padding-top: 20px;
+      }
+      #reco h3 {
+        font-weight: 400;
+      }
+      #reco img {
+        max-width: 180px;
+      }
+    </style>
+  </head>
+  <body>
+    <main id="app"></main>
+    <aside>
+      <p><strong>Example 0:</strong> Product Page - Plain JavaScript, One Team, Client Render</p>
+      <dl>
+        <dt>teams</dt> <dd>1</dd>
+        <dt>integration</dt> <dd>none</dd>
+        <dt>libraries</dt> <dd>none</dd>
+        <dt>client render</dt> <dd>yes</dd>
+        <dt>server render</dt> <dd>no</dd>
+        <dt>data fetching</dt> <dd>no</dd>
+        <dt>isolated css</dt> <dd>no</dd>
+        <dt>isolated js</dt> <dd>no</dd>
+        <dt>on demand js</dt> <dd>no</dd>
+        <dt>client routing</dt> <dd>no</dd>
+        <dt>head update</dt> <dd>no</dd>
+      </dl>
+    </aside>
+    <script src="./page.js"></script>
+  </body>
+</html>

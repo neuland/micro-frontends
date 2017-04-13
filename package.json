@@ -1,0 +1,27 @@
+{
+  "name": "micro-frontends",
+  "version": "1.0.0",
+  "description": "**This site is a work in progress and will be extended on a regular basis. Please watch the repository to recieve change notifications.**",
+  "main": "index.js",
+  "dependencies": {},
+  "devDependencies": {
+    "eslint": "^3.19.0",
+    "eslint-config-airbnb": "^14.1.0",
+    "eslint-plugin-import": "^2.2.0",
+    "eslint-plugin-jsx-a11y": "^4.0.0",
+    "eslint-plugin-react": "^6.10.3"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/neuland/micro-frontends.git"
+  },
+  "author": "neuland",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/neuland/micro-frontends/issues"
+  },
+  "homepage": "https://github.com/neuland/micro-frontends#readme"
+}
