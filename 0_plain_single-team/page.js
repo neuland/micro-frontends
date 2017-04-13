@@ -1,3 +1,4 @@
+/* eslint-disable no-use-before-define */
 /* globals document */
 const $app = document.getElementById('app');
 
@@ -40,7 +41,7 @@ const recos = {
 
 const state = {
   variant: 't_blue',
-  cart: 0,
+  basket: 0,
 };
 
 function renderOption(variant) {
@@ -61,7 +62,7 @@ function renderPage() {
   const reco = recos[variant.sku];
   $app.innerHTML = `
     <h1 id="store">The Model Store</h1>
-    <div id="basket">basket: ${state.cart} item(s)</div>
+    <div id="basket">basket: ${state.basket} item(s)</div>
     <div id="image"><img src="${variant.image}" alt="${variant.name}" /></div>
     <h2 id="name">${product.name} <small>${variant.name}</small></h2>
     <div id="options">${product.variants.map(renderOption).join('')}</div>
@@ -82,11 +83,17 @@ function handleClickOption(e) {
   rerender();
 }
 
+function handleClickBuy() {
+  state.basket += 1;
+  rerender();
+}
+
 function addListeners() {
   const $btns = document.querySelectorAll('#options button');
   Array.prototype.forEach.call($btns, $btn =>
      $btn.addEventListener('click', handleClickOption)
   );
+  document.getElementById('buy').addEventListener('click', handleClickBuy);
 }
 
 function removeListeners() {
@@ -94,6 +101,7 @@ function removeListeners() {
   Array.prototype.forEach.call($btns, $btn =>
      $btn.removeEventListener('click', handleClickOption)
   );
+  document.getElementById('buy').removeEventListener('click', handleClickBuy);
 }
 
 renderPage();
