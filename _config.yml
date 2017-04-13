@@ -1,4 +1,6 @@
 theme: jekyll-theme-architect
 show_downloads: false
 title: Micro Frontends
-description: building a modern web app with multiple teams
+description: build a modern web app with multiple teams
+github:
+  is_project_page: false
