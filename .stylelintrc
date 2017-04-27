@@ -1,3 +1,16 @@
 {
-  "extends": "stylelint-config-standard"
+  "extends": "stylelint-config-standard",
+  "plugins": [
+    "stylelint-order"
+  ],
+  "rules": {
+    "string-quotes": "single",
+    "indentation": 2,
+    "order/declaration-block-properties-alphabetical-order": true,
+    "selector-pseudo-class-no-unknown": null,
+    "selector-type-no-unknown": null,
+    "at-rule-no-unknown": null,
+    "color-hex-length": "long",
+    "color-hex-case": "lower"
+  }
 }

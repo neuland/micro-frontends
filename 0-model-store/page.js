@@ -40,7 +40,7 @@ const recos = {
 };
 
 const state = {
-  variant: 't_blue',
+  variant: 't_red',
   basket: 0,
 };
 
@@ -62,8 +62,8 @@ function renderPage() {
   const reco = recos[variant.sku];
   $app.innerHTML = `
     <h1 id="store">The Model Store</h1>
-    <div id="basket">basket: ${state.basket} item(s)</div>
-    <div id="image"><img src="${variant.image}" alt="${variant.name}" /></div>
+    <div id="basket" class="${state.basket === 0 ? 'empty' : ''}">basket: ${state.basket} item(s)</div>
+    <div id="image"><div><img src="${variant.image}" alt="${variant.name}" /></div></div>
     <h2 id="name">${product.name} <small>${variant.name}</small></h2>
     <div id="options">${product.variants.map(renderOption).join('')}</div>
     <button id="buy" type="button">buy for ${variant.price}</button>
@@ -90,17 +90,17 @@ function handleClickBuy() {
 
 function addListeners() {
   const $btns = document.querySelectorAll('#options button');
-  Array.prototype.forEach.call($btns, $btn =>
+  Array.prototype.forEach.call($btns, $btn => (
      $btn.addEventListener('click', handleClickOption)
-  );
+  ));
   document.getElementById('buy').addEventListener('click', handleClickBuy);
 }
 
 function removeListeners() {
   const $btns = document.querySelectorAll('#options button');
-  Array.prototype.forEach.call($btns, $btn =>
+  Array.prototype.forEach.call($btns, $btn => (
      $btn.removeEventListener('click', handleClickOption)
-  );
+  ));
   document.getElementById('buy').removeEventListener('click', handleClickBuy);
 }
 

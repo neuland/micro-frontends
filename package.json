@@ -11,9 +11,11 @@
     "eslint-plugin-jsx-a11y": "^4.0.0",
     "eslint-plugin-react": "^6.10.3",
     "stylelint": "^7.10.1",
-    "stylelint-config-standard": "^16.0.0"
+    "stylelint-config-standard": "^16.0.0",
+    "stylelint-order": "^0.4.3"
   },
   "scripts": {
+    "lint": "eslint 0-model-store/*.js && stylelint 0-model-store/*.css",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {

@@ -16,7 +16,7 @@ However, this idea is not new, in the past it went by the name of [Frontend Inte
 
 In the introduction I've used the phrase "building a modern web app". Let's define the assumptions that are connected with this term.
 
-To put this into a broader perspective, [Aral Balkan](https://ar.al/) has written a blog post about what he calls the [Documents‐to‐Applications Continuum](https://ar.al/notes/the-documents-to-applications-continuum/). He comes up with the conecpt of a sliding scale where a site, built out of __static documents__, connected via links is __on the left__ end and a pure behaviour driven, __contentless applications__ like an online photo editor is __on the right__. 
+To put this into a broader perspective, [Aral Balkan](https://ar.al/) has written a blog post about what he calls the [Documents‐to‐Applications Continuum](https://ar.al/notes/the-documents-to-applications-continuum/). He comes up with the conecpt of a sliding scale where a site, built out of __static documents__, connected via links is __on the left__ end and a pure behaviour driven, __contentless applications__ like an online photo editor is __on the right__.
 
 If you would position your project on the __left side of this spectrum__, an __integration on webserver level__ is a good fit. With this model a server collects and __concatenates HTML strings__ from all components that makup the page requested by the user. Updates are done by reloading the page from the server or replacing parts of it via ajax. [Gustaf Nilsson Kotte](https://twitter.com/gustaf_nk/) has written a [comprehensive article](https://gustafnk.github.io/microservice-websites/) on this topic.
 
@@ -24,9 +24,37 @@ When your user interface has to provide __instant feedback__, even on unreliable
 
 ## The DOM is the API
 
-[Custom Elements](https://developers.google.com/web/fundamentals/getting-started/primers/customelements), the interoperability aspect from the Web Components Spec, are a good primitive for integration in the browser. Each team builds their component using their web technology of choice and wraps it inside a Custom Element (e.g. `<order-minicart></order-minicart>`). The DOM specification of this particular element (tag-name, attributes & events) acts as the contract for other teams. The advantage is that they can use the component and its functionality without having to know the implementation.
+[Custom Elements](https://developers.google.com/web/fundamentals/getting-started/primers/customelements), the interoperability aspect from the Web Components Spec, are a good primitive for integration in the browser. Each team builds their component __using their web technology of choice__ and __wraps it inside a Custom Element__ (e.g. `<order-minicart></order-minicart>`). The DOM specification of this particular element (tag-name, attributes & events) acts as the contract for other teams. The advantage is that they can use the component and its functionality without having to know the implementation.
 
 But Custom Elements alone are not the solution to all our needs. To address progressive enhancment, universal rendering or routing we need additional pieces of software.
+
+This page is divided into two main areas. First we will discuss [Page Composition](#page-composition) - how to assamble a page out of components owned by different teams. After that we'll show examples for implementing clientside [Page Transition](#page-transition).
+
+## Page Composition
+
+Beside the __client-__ and __serverside__ integration of code written in __different frameworks__ itself, there are a lot of side topics that should be discussed. Mechanisms to __isolate js__, __avoid css conflicts__, __load ressources__ as needed, __share common ressources__ between teams, handle __data fetching__ and think about good __loading states__ for the user. We'll go into these topics one step at a time.
+
+### The Base Prototype
+
+This product page of the imaginative model store will serve as the basis for the following examples.
+
+It features a __variant selector__ to switch between the three different tractor models. On change product image, name, price and recommendations are updated. There is also a __buy button__, which adds the selected variant to the basket and a __minibasket__ at the top that updated accordingly.
+
+[![Example 0 - Product Page - Plain JS](./ressources/video/model-store-0.gif)](./model-store-0/)
+
+[try in browser](./model-store-0/)
+
+All HTML is generated client side using __plain JavaScript__ and ES6 Template Strings with __no dependencies__. The code uses a simple state/markup separation and rerenders the entiere html client side on every change - no fancy DOM diffing and __no universal rendering__ for now. Also __no team separation__ - [the code](https://github.com/neuland/micro-frontends/tree/master/0-model-store) is written in one js/css file.
+
+### Clientside Integration
+
+tba
+
+...
+
+## Page Transition
+
+tba
 
 ## Additional Resources
 [Slides: Micro Frontends by Michael Geers | JSUnconf.eu 2017](https://speakerdeck.com/naltatis/micro-frontends-building-a-modern-webapp-with-multiple-teams)
