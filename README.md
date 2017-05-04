@@ -12,6 +12,13 @@ The idea behind Micro Frontends is to think about your __UI as a composition of 
 
 However, this idea is not new, in the past it went by the name of [Frontend Integration for Verticalized Systems](https://dev.otto.de/2014/07/29/scaling-with-microservices-and-vertical-decomposition/) or [Self contained Systems](https://www.innoq.com/de/podcast/025-scs-frontend-integration/). But Micro Frontends is clearly a more friendly and less bulky term.
 
+__Monolithic Frontends__
+![Monolithic Frontends](./ressources/diagrams/organisational/monolith-frontback-microservices.png)
+
+
+__Organisation in Verticals__
+![End-To-End Teams with Micro Frontends](./ressources/diagrams/organisational/verticals-headline.png)
+
 ## What's a modern web app?
 
 In the introduction I've used the phrase "building a modern web app". Let's define the assumptions that are connected with this term.
