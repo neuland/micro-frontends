@@ -60,13 +60,14 @@ dd {
 #store {
   font-weight: 400;
   grid-area: store;
+  margin-top: 5px;
 }
 
 #basket {
   align-self: baseline;
   grid-area: basket;
   justify-self: end;
-  margin-top: 26px;
+  margin-top: 11px;
 }
 
 #basket .empty,
