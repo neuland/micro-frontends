@@ -15,7 +15,7 @@
     "stylelint-order": "^0.4.3"
   },
   "scripts": {
-    "lint": "eslint 0-model-store/*.js && stylelint 0-model-store/*.css",
+    "lint": "eslint . && stylelint **/*.css",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
