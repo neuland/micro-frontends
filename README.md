@@ -45,7 +45,7 @@ Beside the __client-__ and __serverside__ integration of code written in __diffe
 
 This product page of the imaginative model store will serve as the basis for the following examples.
 
-It features a __variant selector__ to switch between the three different tractor models. On change product image, name, price and recommendations are updated. There is also a __buy button__, which adds the selected variant to the basket and a __minibasket__ at the top that updated accordingly.
+It features a __variant selector__ to switch between the three different tractor models. On change product image, name, price and recommendations are updated. There is also a __buy button__, which adds the selected variant to the basket and a __mini basket__ at the top that updates accordingly.
 
 [![Example 0 - Product Page - Plain JS](./ressources/video/model-store-0.gif)](./0-model-store/)
 
@@ -54,6 +54,15 @@ It features a __variant selector__ to switch between the three different tractor
 All HTML is generated client side using __plain JavaScript__ and ES6 Template Strings with __no dependencies__. The code uses a simple state/markup separation and rerenders the entiere html client side on every change - no fancy DOM diffing and __no universal rendering__ for now. Also __no team separation__ - [the code](https://github.com/neuland/micro-frontends/tree/master/0-model-store) is written in one js/css file.
 
 ### Clientside Integration
+
+In this example, we've introduced two new teams. __Team Checkout__ (blue) is now responsible for everything regading the purchasing process - namely the __buy button__ and __mini basket__. __Team Inspire__ (green) now manages the __product recommendations__ on this page. The page itself is handled by __Team Product__ (red).
+
+[![Example 1 - Product Page - Composition](./ressources/screen/three-teams.png)](./1-composition-client-only/)
+
+[try in browser](./1-composition-client-only/)
+
+This team decides what functionality is included and where it is positioned in the layout. The page contains information owned by the Team Product like the product name, image and the selectable variants. But it also includes fragments from the other teams.
+
 
 tba
 
