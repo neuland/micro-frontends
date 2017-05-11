@@ -1,0 +1,6 @@
+// Platzieren Sie Ihre Einstellungen in dieser Datei, um Standard- und Benutzereinstellungen zu überschreiben.
+{
+	"spellchecker.checkInterval": 500,
+	"spellchecker.language": "en_GB-ise",
+  "spellchecker.ignoreWordsList": ["frontend"]
+}
