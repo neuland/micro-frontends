@@ -59,7 +59,7 @@
     }
     render() {
       const sku = this.getAttribute('sku');
-      const price = prices[sku] || '66,00 €';
+      const price = prices[sku];
       this.innerHTML = `<button type="button">buy for ${price}</button>`;
     }
     attributeChangedCallback(attr, oldValue, newValue) {
