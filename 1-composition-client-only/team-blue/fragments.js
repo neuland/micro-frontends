@@ -2,9 +2,9 @@
 /* globals HTMLElement, window, CustomEvent */
 (function fragments() {
   const prices = {
-    t_red: '66,00 €',
-    t_green: '54,00 €',
-    t_blue: '58,00 €',
+    t_porsche: '66,00 €',
+    t_fendt: '54,00 €',
+    t_eicher: '58,00 €',
   };
 
   const state = {
@@ -40,6 +40,9 @@
 
 
   class BlueBuy extends HTMLElement {
+    static get observedAttributes() {
+      return ['sku'];
+    }
     connectedCallback() {
       this.addToCart = this.addToCart.bind(this);
       const sku = this.getAttribute('sku');
@@ -56,14 +59,12 @@
     }
     render() {
       const sku = this.getAttribute('sku');
-      const price = prices[sku];
+      const price = prices[sku] || '66,00 €';
       this.innerHTML = `<button type="button">buy for ${price}</button>`;
     }
     attributeChangedCallback(attr, oldValue, newValue) {
       this.log('attributeChanged', attr, oldValue, newValue);
-      if (attr === 'sku') {
-        this.render();
-      }
+      this.render();
     }
     disconnectedCallback() {
       this.firstChild.removeEventListener('click', this.addToCart);

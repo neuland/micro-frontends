@@ -2,12 +2,15 @@
 /* globals HTMLElement, window */
 (function fragments() {
   const recos = {
-    t_red: ['3', '5', '6'],
-    t_green: ['3', '6', '4'],
-    t_blue: ['1', '8', '7'],
+    t_porsche: ['3', '5', '6'],
+    t_fendt: ['3', '6', '4'],
+    t_eicher: ['1', '8', '7'],
   };
 
   class GreenRecos extends HTMLElement {
+    static get observedAttributes() {
+      return ['sku'];
+    }
     connectedCallback() {
       const sku = this.getAttribute('sku');
       this.log('connected', sku);
@@ -15,9 +18,7 @@
     }
     attributeChangedCallback(attr, oldValue, newValue) {
       this.log('attributeChanged', attr, newValue);
-      if (attr === 'sku') {
-        this.render();
-      }
+      this.render();
     }
     render() {
       const sku = this.getAttribute('sku');

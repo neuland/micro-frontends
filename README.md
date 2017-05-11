@@ -49,20 +49,41 @@ It features a __variant selector__ to switch between the three different tractor
 
 [![Example 0 - Product Page - Plain JS](./ressources/video/model-store-0.gif)](./0-model-store/)
 
-[try in browser](./0-model-store/)
+[try in browser](./0-model-store/) & [inspect the code](https://github.com/neuland/micro-frontends/tree/master/0-model-store)
 
 All HTML is generated client side using __plain JavaScript__ and ES6 Template Strings with __no dependencies__. The code uses a simple state/markup separation and rerenders the entire HTML client side on every change - no fancy DOM diffing and __no universal rendering__ for now. Also __no team separation__ - [the code](https://github.com/neuland/micro-frontends/tree/master/0-model-store) is written in one js/css file.
 
 ### Clientside Integration
 
-In this example, we've introduced two new teams. __Team Checkout__ (blue) is now responsible for everything regrading the purchasing process - namely the __buy button__ and __mini basket__. __Team Inspire__ (green) now manages the __product recommendations__ on this page. The page itself is handled by __Team Product__ (red).
+In this example, we've introduced two new teams. __Team Checkout__ (blue) is now responsible for everything regrading the purchasing process - namely the __buy button__ and __mini basket__. __Team Inspire__ (green) manages the __product recommendations__ on this page. The page itself is owned by __Team Product__ (red).
 
 [![Example 1 - Product Page - Composition](./ressources/screen/three-teams.png)](./1-composition-client-only/)
 
-[try in browser](./1-composition-client-only/)
+[try in browser](./1-composition-client-only/) & [inspect the code](https://github.com/neuland/micro-frontends/tree/master/1-composition-client-only)
 
-This team decides what functionality is included and where it is positioned in the layout. The page contains information owned by the Team Product like the product name, image and the selectable variants. But it also includes fragments from the other teams.
+This team decides what functionality is included and where it is positioned in the layout. The page contains information that can be provided by Team Product itself, like the product name, image and the available variants. But it also includes fragments (Custom Elements) from the other teams.
 
+### Who do Custom Elements work?
+
+Lets take the __buy button__ as an example. Team Product includes the button simply adding `<blue-buy sku="t_porsche"></blue-buy>` to the desired position in the markup. For this to work, Team Checkout has the register the element `blue-buy` in the browser.
+
+    class BlueBuy extends HTMLElement {
+      constructor() {
+        super();
+        this.innerHTML = `<button type="button">buy for 66,00 €</button>`;
+      }
+    }
+    window.customElements.define('blue-buy', BlueBuy);
+
+Now every time the browse comes across a new `blue-buy` tag the constructor is called. `this` is the reference to the root DOM node of the custom element. All properties and methods of a standard DOM element like `innerHTML` or `getAttribut()` can be used.
+
+![Custom Element in Action](./ressources/video/custom-element.gif)
+
+When naming your element the only requirement the spec makes is that your name has to __include a dash (-)__ to maintain compatibility with upcoming new HTML tags. In the examples we've used the naming convention `[team_color]-[feature]`. The team namespace guards against collisions and this way the ownership of a features becomes obvious, simply by looking at the DOM.
+
+...
+
+![Custom Element Attribute Change](./ressources/video/custom-element-attribute.gif)
 
 tba
 

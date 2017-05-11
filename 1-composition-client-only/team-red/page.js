@@ -7,7 +7,7 @@ const product = {
   name: 'Tractor',
   variants: [
     {
-      sku: 't_red',
+      sku: 't_porsche',
       color: 'red',
       name: 'Porsche-Diesel Master 419',
       image: './team-red/images/tractor-red.jpg',
@@ -15,7 +15,7 @@ const product = {
       price: '66,00 €',
     },
     {
-      sku: 't_green',
+      sku: 't_fendt',
       color: 'green',
       name: 'Fendt F20 Dieselroß',
       image: './team-red/images/tractor-green.jpg',
@@ -23,7 +23,7 @@ const product = {
       price: '54,00 €',
     },
     {
-      sku: 't_blue',
+      sku: 't_eicher',
       color: 'blue',
       name: 'Eicher Diesel 215/16',
       image: './team-red/images/tractor-blue.jpg',
@@ -34,7 +34,7 @@ const product = {
 };
 
 const state = {
-  variant: 't_red',
+  variant: 't_porsche',
 };
 
 function renderOption(variant) {
