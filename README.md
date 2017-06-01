@@ -63,7 +63,7 @@ In this example, we've introduced two new teams. __Team Checkout__ (blue) is now
 
 This team decides what functionality is included and where it is positioned in the layout. The page contains information that can be provided by Team Product itself, like the product name, image and the available variants. But it also includes fragments (Custom Elements) from the other teams.
 
-### Who to create a Custom Elemente?
+### How to create a Custom Elemente?
 
 Lets take the __buy button__ as an example. Team Product includes the button simply adding `<blue-buy sku="t_porsche"></blue-buy>` to the desired position in the markup. For this to work, Team Checkout has the register the element `blue-buy` on the page.
 
