@@ -63,15 +63,16 @@ In this example, we've introduced two new teams. __Team Checkout__ (blue) is now
 
 This team decides what functionality is included and where it is positioned in the layout. The page contains information that can be provided by Team Product itself, like the product name, image and the available variants. But it also includes fragments (Custom Elements) from the other teams.
 
-### Who do Custom Elements work?
+### Who to create a Custom Elemente?
 
-Lets take the __buy button__ as an example. Team Product includes the button simply adding `<blue-buy sku="t_porsche"></blue-buy>` to the desired position in the markup. For this to work, Team Checkout has the register the element `blue-buy` in the browser.
+Lets take the __buy button__ as an example. Team Product includes the button simply adding `<blue-buy sku="t_porsche"></blue-buy>` to the desired position in the markup. For this to work, Team Checkout has the register the element `blue-buy` on the page.
 
     class BlueBuy extends HTMLElement {
       constructor() {
         super();
         this.innerHTML = `<button type="button">buy for 66,00 €</button>`;
       }
+      disconnectedCallback() { ... }
     }
     window.customElements.define('blue-buy', BlueBuy);
 
@@ -79,11 +80,63 @@ Now every time the browse comes across a new `blue-buy` tag the constructor is c
 
 ![Custom Element in Action](./ressources/video/custom-element.gif)
 
-When naming your element the only requirement the spec makes is that your name has to __include a dash (-)__ to maintain compatibility with upcoming new HTML tags. In the examples we've used the naming convention `[team_color]-[feature]`. The team namespace guards against collisions and this way the ownership of a features becomes obvious, simply by looking at the DOM.
+When naming your element the only requirement the spec defines, is that your name must __include a dash (-)__ to maintain compatibility with upcoming new HTML tags. In the examples we are using the naming convention `[team_color]-[feature]`. The team namespace guards against collisions and this way the ownership of a features becomes obvious, simply by looking at the DOM.
 
-...
+### Choose another Tractor / Parent Child Communication
+
+When the user selects another tractor in the __variant selector__, the __buy button has to be updated__ accordingly. To archive this Team Product can simply __remove__ the existing element from the DOM __and insert__ a new one.
+
+    container.innerHTML;
+    // => <blue-buy sku="t_porsche">...</blue-buy>
+    container.innerHTML = '<blue-buy sku="t_fendt"></blue-buy>';
+
+ The `disconnectedCallback` of the old element gets invoked synchronously to provide the element with the chance to clean up things like event listeners. After that the `constructor` of the newly created fendt element is called.
+
+Another more performant option is to just update the `sku`-Attribute on the existing element.
+
+    document.querySelector('blue-buy').setAttribute('sku', 't_fendt');
+
+When Team Product would use a templating engine that features DOM diffing like React, this would be done by the algorithm automatically.
 
 ![Custom Element Attribute Change](./ressources/video/custom-element-attribute.gif)
+
+To support this the Custom Element can implement the `attributeChangedCallback` and specify a list of `observedAttributes` for which this callback should be triggered.
+
+    const prices = {
+      t_porsche: '66,00 €',
+      t_fendt: '54,00 €',
+      t_eicher: '58,00 €',
+    };
+
+    class BlueBuy extends HTMLElement {
+      static get observedAttributes() {
+        return ['sku'];
+      }
+      constructor() {
+        super();
+        this.render();
+      }
+      render() {
+        const sku = this.getAttribute('sku');
+        const price = prices[sku];
+        this.innerHTML = `<button type="button">buy for ${price}</button>`;
+      }
+      attributeChangedCallback(attr, oldValue, newValue) {
+        this.render();
+      }
+      disconnectedCallback() {...}
+    }
+    window.customElements.define('blue-buy', BlueBuy);
+
+Do avoid duplication we've introduced a `render()` method that is called from `constructor` and `attributeChangedCallback`. This is a method that collects needed data and innerHTML's the new markup. When you decide to go with a more sophisticated templating engine or framework inside the Custom Element, this is the place where its initialisation code would go.
+
+### Browser Support
+
+### Child Parent Communication
+
+### Siblings Communication
+
+###
 
 tba
 
