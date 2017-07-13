@@ -82,7 +82,7 @@ Now every time the browse comes across a new `blue-buy` tag the constructor is c
 
 When naming your element the only requirement the spec defines, is that your name must __include a dash (-)__ to maintain compatibility with upcoming new HTML tags. In the examples we are using the naming convention `[team_color]-[feature]`. The team namespace guards against collisions and this way the ownership of a features becomes obvious, simply by looking at the DOM.
 
-### Parent Child Communication / Choosing a Tractor
+### Parent-Child Communication / DOM Modification
 
 When the user selects another tractor in the __variant selector__, the __buy button has to be updated__ accordingly. To archive this Team Product can simply __remove__ the existing element from the DOM __and insert__ a new one.
 
@@ -134,15 +134,58 @@ Do avoid duplication we've introduced a `render()` method that is called from `c
 
 The above example uses the Custom Element V1 Spec which is currently [supported in Chrome, Safari and Opera](http://caniuse.com/#feat=custom-elementsv1). But with [document-register-element](https://github.com/WebReflection/document-register-element), a lightweight and battle tested polyfill is available to make this work in all browsers. Under the hood, it uses the [widely supported](http://caniuse.com/#feat=mutationobserver) Mutation Observer API, so there is no hacky DOM tree watching going on in the background.
 
-### Child Parent Communication
+### Child-Parent or Siblings Communication / DOM Events
 
-### Siblings Communication
+But passing down attributes is not sufficient for all interactions. In our example the __mini basket should refresh__ when the user performs a __click on the buy button__.
 
-###
+Both fragments are owned by Team Checkout (blue), so they could build some kind of internal JavaScript API that lets the mini basket know when the button was pressed. But this would required that the components instances know each other and would also be an isolation violation.
 
-tba
+A cleaner way is to use a PubSub mechanism, where a component can publish a message and other components can subscribe to specific topics. Luckily browsers have this feature builtin. This is exactly how browser events like `click`, `select` or `mouseover` work. In addition to native events you also have the ability to create higher level events with `new CustomEvent(...)`. Events are always tied to the DOM node they were created/dispatched on. Most native events also feature bubbling. This makes it possible to listen for all events on a specific subtree of the DOM. If you want to listen to all events on the page you would attach your event listener to the window element. Here is how the creation of the `blue:basket:changed`-event looks like in our example:
 
-...
+    class BlueBuy extends HTMLElement {
+      [...]
+      connectedCallback() {
+        [...]
+        this.render();
+        this.firstChild.addEventListener('click', this.addToCart);
+      }
+      addToCart() {
+        // maybe talk to an api
+        this.dispatchEvent(new CustomEvent('blue:basket:changed', {
+          bubbles: true,
+        }));
+      }
+      render() {
+        this.innerHTML = `<button type="button">buy</button>`;
+      }
+      disconnectedCallback() {
+        this.firstChild.removeEventListener('click', this.addToCart);
+      }
+    }
+
+The mini basket can now subscribe to this event on `window` and get notified when it should refresh its data.
+
+    class BlueBasket extends HTMLElement {
+      connectedCallback() {
+        [...]
+        window.addEventListener('blue:basket:changed', this.refresh);
+      }
+      refresh() {
+        // fetch new data and render it
+      }
+      disconnectedCallback() {
+        window.removeEventListener('blue:basket:changed', this.refresh);
+      }
+    }
+
+With this approach the mini basket add a listener to a DOM element it does not own (`window`). This should be ok for many applications, but if you are uncomfortable with this you could also implement an approach where the page itself (Team Product) listens to the event and notifies the mini basket by calling the `refresh()` method imperatively on the DOM element.
+
+    // page.js
+    const $ = document.getElementsByTagName;
+
+    $('blue-buy')[0].addEventListener('blue:basket:changed', function() {
+      $('blue-basket')[0].refresh();
+    });
 
 ## Page Transition
 
