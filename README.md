@@ -8,7 +8,7 @@ This repository ~~contains~~ <u>will contain</u> techniques, strategies and reci
 
 The term __Micro Frontends__ first came up in [ThoughtWorks Technology Radar](https://www.thoughtworks.com/radar/techniques/micro-frontends) at the end of 2016. It extends the concepts of micro services to the frontend world. The current trend is to build a feature-rich and powerful browser application, aka single page app, which sits on top of a micro service architecture. Over time the frontend layer, often developed by a separate team, grows and gets more difficult to maintain. That's what we call a [Frontend Monolith](https://www.youtube.com/watch?v=pU1gXA0rfwc).
 
-The idea behind Micro Frontends is to think about your __UI as a composition of components__ which is maintained by __independent teams__. These teams are cross functional and develop features __end-to-end__, from database to user interface.
+The idea behind Micro Frontends is to think about your __UI as a composition of components__ which are maintained by __independent teams__. These teams are cross functional and develop features __end-to-end__, from database to user interface.
 
 However, this idea is not new, in the past it went by the name of [Frontend Integration for Verticalised Systems](https://dev.otto.de/2014/07/29/scaling-with-microservices-and-vertical-decomposition/) or [Self contained Systems](https://www.innoq.com/de/podcast/025-scs-frontend-integration/). But Micro Frontends is clearly a more friendly and less bulky term.
 
@@ -31,7 +31,7 @@ When your user interface has to provide __instant feedback__, even on unreliable
 
 ## The DOM is the API
 
-[Custom Elements](https://developers.google.com/web/fundamentals/getting-started/primers/customelements), the interoperability aspect from the Web Components Spec, are a good primitive for integration in the browser. Each team builds their component __using their web technology of choice__ and __wraps it inside a Custom Element__ (e.g. `<order-minicart></order-minicart>`). The DOM specification of this particular element (tag-name, attributes & events) acts as the contract for other teams. The advantage is that they can use the component and its functionality without having to know the implementation.
+[Custom Elements](https://developers.google.com/web/fundamentals/getting-started/primers/customelements), the interoperability aspect from the Web Components Spec, are a good primitive for integration in the browser. Each team builds their component __using their web technology of choice__ and __wraps it inside a Custom Element__ (e.g. `<order-minicart></order-minicart>`). The DOM specification of this particular element (tag-name, attributes & events) acts as the contract or public API for other teams. The advantage is that they can use the component and its functionality without having to know the implementation. They just have to be able to interact with the DOM.
 
 But Custom Elements alone are not the solution to all our needs. To address progressive enhancement, universal rendering or routing we need additional pieces of software.
 
@@ -43,7 +43,7 @@ Beside the __client-__ and __serverside__ integration of code written in __diffe
 
 ### The Base Prototype
 
-This product page of the imaginative model store will serve as the basis for the following examples.
+This product page of the imaginative model tractor store will serve as the basis for the following examples.
 
 It features a __variant selector__ to switch between the three different tractor models. On change product image, name, price and recommendations are updated. There is also a __buy button__, which adds the selected variant to the basket and a __mini basket__ at the top that updates accordingly.
 
@@ -55,7 +55,7 @@ All HTML is generated client side using __plain JavaScript__ and ES6 Template St
 
 ### Clientside Integration
 
-In this example, we've introduced two new teams. __Team Checkout__ (blue) is now responsible for everything regrading the purchasing process - namely the __buy button__ and __mini basket__. __Team Inspire__ (green) manages the __product recommendations__ on this page. The page itself is owned by __Team Product__ (red).
+In this example, we've split the page into separate components/fragments owned by three teams. __Team Checkout__ (blue) is now responsible for everything regrading the purchasing process - namely the __buy button__ and __mini basket__. __Team Inspire__ (green) manages the __product recommendations__ on this page. The page itself is owned by __Team Product__ (red).
 
 [![Example 1 - Product Page - Composition](./ressources/screen/three-teams.png)](./1-composition-client-only/)
 
@@ -82,7 +82,7 @@ Now every time the browse comes across a new `blue-buy` tag the constructor is c
 
 When naming your element the only requirement the spec defines, is that your name must __include a dash (-)__ to maintain compatibility with upcoming new HTML tags. In the examples we are using the naming convention `[team_color]-[feature]`. The team namespace guards against collisions and this way the ownership of a features becomes obvious, simply by looking at the DOM.
 
-### Choose another Tractor / Parent Child Communication
+### Parent Child Communication / Choosing a Tractor
 
 When the user selects another tractor in the __variant selector__, the __buy button has to be updated__ accordingly. To archive this Team Product can simply __remove__ the existing element from the DOM __and insert__ a new one.
 
@@ -131,6 +131,8 @@ To support this the Custom Element can implement the `attributeChangedCallback` 
 Do avoid duplication we've introduced a `render()` method that is called from `constructor` and `attributeChangedCallback`. This is a method that collects needed data and innerHTML's the new markup. When you decide to go with a more sophisticated templating engine or framework inside the Custom Element, this is the place where its initialisation code would go.
 
 ### Browser Support
+
+The above example uses the Custom Element V1 which is currently [supported in Chrome, Safari and Opera](http://caniuse.com/#feat=custom-elementsv1). But with [document-register-element](https://github.com/WebReflection/document-register-element), a lightweight and battle tested polyfill is available to make this work in all browsers. Under the hood, it uses the [widely supported](http://caniuse.com/#feat=mutationobserver) Mutation Observer API, so there is no hacky DOM tree watching going on in the background.
 
 ### Child Parent Communication
 
