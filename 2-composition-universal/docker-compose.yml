@@ -1,0 +1,28 @@
+version: '2'
+services:
+  nginx:
+    image: nginx:1.13-alpine
+    volumes:
+     - ./nginx.conf:/etc/nginx/conf.d/nginx.conf
+    ports:
+     - "3000:3000"
+    logging:
+      driver: none
+  team_blue:
+    build: ./team-blue
+    ports:
+     - "3001:3001"
+    volumes:
+     - ./team-blue/src:/code/src
+  team_red:
+    build: ./team-red
+    ports:
+     - "3002:3002"
+    volumes:
+     - ./team-red/src:/code/src
+  team_green:
+    build: ./team-green
+    ports:
+     - "3003:3003"
+    volumes:
+     - ./team-green/src:/code/src

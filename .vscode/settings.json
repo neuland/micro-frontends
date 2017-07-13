@@ -2,5 +2,6 @@
 {
 	"spellchecker.checkInterval": 500,
 	"spellchecker.language": "en_GB-ise",
-  "spellchecker.ignoreWordsList": ["frontend"]
+	"spellchecker.ignoreWordsList": ["frontend"],
+	"editor.formatOnSave": false
 }

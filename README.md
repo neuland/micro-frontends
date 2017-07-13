@@ -189,6 +189,8 @@ With this approach the mini basket fragment adds a listener to a DOM element it 
 
 Imperatively calling DOM methods is quite uncommon, but is for examples used for [controlling the video element](https://developer.mozilla.org/de/docs/Web/HTML/Using_HTML5_audio_and_video#Controlling_media_playback). If possible using the declarative approve (attribute change) should be preferred.
 
+### Serverside Rendering / Universal Rendering
+
 ## Page Transition
 
 tba
