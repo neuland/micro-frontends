@@ -178,7 +178,7 @@ The mini basket can now subscribe to this event on `window` and get notified whe
       }
     }
 
-With this approach the mini basket add a listener to a DOM element it does not own (`window`). This should be ok for many applications, but if you are uncomfortable with this you could also implement an approach where the page itself (Team Product) listens to the event and notifies the mini basket by calling the `refresh()` method imperatively on the DOM element.
+With this approach the mini basket fragment adds a listener to a DOM element it does not own (`window`). This should be ok for many applications, but if you are uncomfortable with this you could also implement an approach where the page itself (Team Product) listens to the event and notifies the mini basket by calling `refresh()` on the DOM element.
 
     // page.js
     const $ = document.getElementsByTagName;
@@ -186,6 +186,8 @@ With this approach the mini basket add a listener to a DOM element it does not o
     $('blue-buy')[0].addEventListener('blue:basket:changed', function() {
       $('blue-basket')[0].refresh();
     });
+
+Imperatively calling DOM methods is quite uncommon, but is for examples used for [controlling the video element](https://developer.mozilla.org/de/docs/Web/HTML/Using_HTML5_audio_and_video#Controlling_media_playback). If possible using the declarative approve (attribute change) should be preferred.
 
 ## Page Transition
 
