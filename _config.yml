@@ -1,7 +1,7 @@
 theme: jekyll-theme-architect
 show_downloads: false
 title: Micro Frontends
-description: build a modern web app with multiple teams
+description: Build a Modern Web App with Multiple Teams
 github:
   is_project_page: true
   repository_url: https://github.com/neuland/micro-frontends
