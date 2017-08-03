@@ -17,6 +17,16 @@ header {
   font-weight: normal;
 }
 
+#main-content h2 {
+  font-size: 26px;
+  margin: 2em 0 0.5em;
+}
+
+#main-content h3 {
+  font-size: 22px;
+  margin: 2em 0 0.5em;
+}
+
 @media only screen and (min-width: 767px) {
   header a.button {
     background: none;

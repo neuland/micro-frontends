@@ -1,8 +1,6 @@
 
 **This site is a work in progress and will be extended on a regular basis. Please watch the repository to receive change notifications.**
 
-# Micro Frontends
-
 This repository ~~contains~~ <u>will contain</u> techniques, strategies and recipes for __building a modern web app with multiple independent teams__.
 
 ## What are Micro Frontends?
