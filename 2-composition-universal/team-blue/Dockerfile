@@ -11,6 +11,7 @@ COPY webpack.config.js /code/
 
 # Bundle app source
 COPY ./src /code/src
+COPY ./build /code/build
 
 EXPOSE 3001
 CMD [ "npm", "start" ]

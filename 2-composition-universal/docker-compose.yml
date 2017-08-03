@@ -1,9 +1,10 @@
 version: '2'
 services:
   nginx:
-    image: nginx:1.13-alpine
+    image: nginx:1-alpine
     volumes:
-     - ./nginx.conf:/etc/nginx/conf.d/nginx.conf
+     - ./nginx/nginx.conf:/etc/nginx/conf.d/nginx.conf
+     - ./nginx/common:/usr/share/nginx/html/common
     ports:
      - "3000:3000"
     logging:
@@ -14,15 +15,17 @@ services:
      - "3001:3001"
     volumes:
      - ./team-blue/src:/code/src
+
+#  team_green:
+#    build: ./team-green
+#    ports:
+#     - "3002:3002"
+#    volumes:
+#     - ./team-green/src:/code/src
+
   team_red:
     build: ./team-red
     ports:
-     - "3002:3002"
-    volumes:
-     - ./team-red/src:/code/src
-  team_green:
-    build: ./team-green
-    ports:
      - "3003:3003"
     volumes:
-     - ./team-green/src:/code/src
+     - ./team-red/src:/code/src

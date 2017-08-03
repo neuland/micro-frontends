@@ -1,7 +1,7 @@
 module.exports = {
   entry: './src/client.js',
   output: {
-    filename: './build/fragments.js',
+    filename: './build/page.js',
   },
   module: {
     rules: [
