@@ -1,0 +1,24 @@
+---
+---
+
+@import "{{ site.theme }}";
+@import url('https://fonts.googleapis.com/css?family=Handlee');
+
+header {
+  font-family: 'Handlee', cursive;
+  font-weight: normal;
+}
+
+#main-content h1,
+#main-content h2,
+#main-content h3,
+#main-content h4 {
+  font-family: 'Handlee', cursive;
+  font-weight: normal;
+}
+
+@media only screen and (min-width: 767px) {
+  header a.button {
+    background: none;
+  }
+}

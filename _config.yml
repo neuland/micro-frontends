@@ -6,3 +6,6 @@ github:
   is_project_page: true
   repository_url: https://github.com/neuland/micro-frontends
 google_analytics: UA-84095563-2
+exclude:
+  - 2-composition-universal
+  - node_modules
