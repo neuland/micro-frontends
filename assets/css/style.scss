@@ -2,11 +2,33 @@
 ---
 
 @import "{{ site.theme }}";
-@import url('https://fonts.googleapis.com/css?family=Handlee');
 
 header {
   font-family: 'Handlee', cursive;
   font-weight: normal;
+}
+
+header h1,
+header h2 {
+  width: auto;
+}
+
+header a.button {
+  padding-top: 5px;
+  font-family: 'Handlee', cursive;
+}
+
+#main-content,
+aside#sidebar {
+  float: none;
+  width: auto;
+}
+
+aside#sidebar {
+  background: none;
+  border-top: 1px solid #ccc;
+  margin-top: 3em;
+  padding-top: 3em;
 }
 
 #main-content h1,
