@@ -7,8 +7,7 @@ services:
      - ./nginx/common:/usr/share/nginx/html/common
     ports:
      - "3000:3000"
-    logging:
-      driver: none
+
   team_blue:
     build: ./team-blue
     ports:
@@ -16,12 +15,12 @@ services:
     volumes:
      - ./team-blue/src:/code/src
 
-#  team_green:
-#    build: ./team-green
-#    ports:
-#     - "3002:3002"
-#    volumes:
-#     - ./team-green/src:/code/src
+  team_green:
+    build: ./team-green
+    ports:
+     - "3002:3002"
+    volumes:
+     - ./team-green/src:/code/src
 
   team_red:
     build: ./team-red

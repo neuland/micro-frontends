@@ -188,7 +188,76 @@ With this approach the mini basket fragment adds a listener to a DOM element it 
 
 Imperatively calling DOM methods is quite uncommon, but is for examples used for [controlling the video element](https://developer.mozilla.org/de/docs/Web/HTML/Using_HTML5_audio_and_video#Controlling_media_playback). If possible using the declarative approve (attribute change) should be preferred.
 
-### Serverside Rendering / Universal Rendering
+## Serverside Rendering / Universal Rendering
+
+Custom Elements are a great for integrating components inside the browser. But when you are building a site that is accessible on the web, chances are that you care about the initial load performance and don't want to download an execute various js frameworks before your users can see anything. In addition to that it's good to think about what happens to your site if your JavaScript fails or is blocked. [Jeremy Keith](https://adactio.com/) explains the importance of that in his ebook/podcast [Resilient Web Design](https://resilientwebdesign.com/). Therefore being able to render you core content on the server is key. Sadly the web component spec does not talk about server rendering at all. No JavaScript, no Custom Elements :(
+
+### Custom Elements + Server Side Includes = ❤️
+
+To make server rendering work, we've refactored the example so that each team gets their own express server and the render method of each Custom Element is also accessible through a url.
+
+    $ curl http://127.0.0.1:3000/blue-buy?sku=t_porsche
+    <button type="button">buy for 66,00 €</button>
+
+We are using the Custom Element tag name as the path. Attributes become query parameters. Now he have a way to server render the content of every component. When we combine this with with the Custom Element we get something that is quite close to a __Universal Web Component__:
+
+    <blue-buy sku="t_porsche">
+      <!--#include virtual="/blue-buy?sku=t_porsche" -->
+    </blue-buy>
+
+The `#include` comment is part of [Server Side Includes](https://de.wikipedia.org/wiki/Server_Side_Includes), which is a feature that is available in most web servers. Yes, it's the same technique we used back in the days to show the current date on our web sites. The `#include` comment gets replaced with the response of `/blue-buy?sku=t_porsche` before the web server sends the complete page to the browser.
+
+Configuration in nginx looks something like this:
+
+    upstream team_blue {
+      server team_blue:3001;
+    }
+    upstream team_green {
+      server team_green:3002;
+    }
+    upstream team_red {
+      server team_red:3003;
+    }
+
+    server {
+      listen 3000;
+      ssi on;
+
+      location /blue {
+        proxy_pass  http://team_blue;
+      }
+      location /green {
+        proxy_pass  http://team_green;
+      }
+      location /red {
+        proxy_pass  http://team_red;
+      }
+      location / {
+        proxy_pass  http://team_red;
+      }
+    }
+
+The directive `ssi: on;` enables the SSI feature and a `upstream` and `location` block is added for every team to ensure that all urls that start with `/blue` will be routed to the correct application (`team_blue:3001`). In addition the `/` route is mapped to team red, which is controlling the homepage / product page.
+
+This animation show the tractor store in a browser which has __JavaScript disabled__.
+
+[![Serverside Rendering | Disabled JavaScript](./ressources/video/server-render.gif)](https://github.com/neuland/micro-frontends/tree/master/2-composition-universal)
+
+[inspect the code](https://github.com/neuland/micro-frontends/tree/master/2-composition-universal)
+
+The option buttons now are actual links and every click leads to a reload of the page. In the terminal on the right you can see how the request for the tractor model gets routed to team red, which controls the product page and after that the markup gets supplemented by the contents for the fragments from team blue and green.
+
+When you switch JavaScript back on, you would only see server log messages for the first request. All subsequent tractor changes are than handled client side, just like in our first example.
+
+You can easily play with this sample code on your local machine. The only thing you need to have installed is [Docker Compose](https://docs.docker.com/compose/install/).
+
+    git clone https://github.com/neuland/micro-frontends.git
+    cd micro-frontends/2-composition-universal
+    docker-compose up --build
+
+Docker than starts an nginx on port 3000 and builds the node.js image for each team. When you open [http://127.0.0.1:3000/](http://127.0.0.1:3000/) in your browser you should see a red tractor. The combined log of `docker-compose` is quite handy to see whats going on in the network. Sadly there is no way to control the output color, so you have to arrange with the fact that team blue might sometimes be highlighted in green :)
+
+The `src` files are mapped into the individual containers and the node application will restart when you make a code change. Changing the `nginx.conf` requires a restart of `docker-compose` in order to have an effect. So feel free to fiddle around and give feedback.
 
 ## Page Transition
 

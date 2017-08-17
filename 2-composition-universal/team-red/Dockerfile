@@ -12,7 +12,6 @@ COPY webpack.config.js /code/
 # Bundle app source
 COPY ./src /code/src
 COPY ./images /code/images
-COPY ./build /code/build
 
 EXPOSE 3003
-CMD [ "npm", "start" ]
+CMD [ "./node_modules/.bin/nodemon", "--watch", "./src", "--exec", "npm", "start" ]

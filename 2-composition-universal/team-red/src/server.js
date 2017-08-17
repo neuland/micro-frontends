@@ -13,8 +13,9 @@ app.set('view engine', 'ejs');
 app.use('/red/images', express.static('./images'));
 app.use('/red', express.static('./build'));
 
-app.get('/', (req, res) => {
-  const html = renderPage('t_porsche');
+app.get('/:sku?', (req, res) => {
+  const sku = req.params.sku;
+  const html = renderPage(sku);
   res.render('layout', { html });
 });
 
