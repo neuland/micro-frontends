@@ -127,7 +127,7 @@ To support this the Custom Element can implement the `attributeChangedCallback` 
     }
     window.customElements.define('blue-buy', BlueBuy);
 
-Do avoid duplication a `render()` method is introduced which is called from `constructor` and `attributeChangedCallback`. This method collects needed data and innerHTML's the new markup. When deciding to go with a more sophisticated templating engine or framework inside the Custom Element, this is the place where its initialisation code would go.
+To avoid duplication a `render()` method is introduced which is called from `constructor` and `attributeChangedCallback`. This method collects needed data and innerHTML's the new markup. When deciding to go with a more sophisticated templating engine or framework inside the Custom Element, this is the place where its initialisation code would go.
 
 ### Browser Support
 
