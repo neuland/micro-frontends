@@ -241,7 +241,7 @@ The directive `ssi: on;` enables the SSI feature and an `upstream` and `location
 
 This animation shows the tractor store in a browser which has __JavaScript disabled__.
 
-[![Serverside Rendering - Disabled JavaScript](./ressources/video/server-render.gif)](https://github.com/neuland/micro-frontends/tree/master/2-composition-universal)
+[![Serverside Rendering - Disabled JavaScript](./ressources/video/server-render.gif)](./ressources/video/server-render.mp4)
 
 [inspect the code](https://github.com/neuland/micro-frontends/tree/master/2-composition-universal)
 
@@ -249,7 +249,7 @@ The variant selection buttons now are actual links and every click leads to a re
 
 When switching JavaScript back on, only the server log messages for the first request will be visible. All subsequent tractor changes are handled client side, just like in the first example. In a later example the product data will be extracted from the JavaScript and loaded via a REST api as needed.
 
-You can play with this sample code on your local machine. Only [Docker Compose] (https://docs.docker.com/compose/install/) needs to be installed.
+You can play with this sample code on your local machine. Only [Docker Compose](https://docs.docker.com/compose/install/) needs to be installed.
 
     git clone https://github.com/neuland/micro-frontends.git
     cd micro-frontends/2-composition-universal
