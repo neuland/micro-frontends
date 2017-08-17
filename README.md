@@ -199,15 +199,15 @@ To make server rendering work, we've refactored the example so that each team ge
     $ curl http://127.0.0.1:3000/blue-buy?sku=t_porsche
     <button type="button">buy for 66,00 €</button>
 
-We are using the Custom Element tag name as the path. Attributes become query parameters. Now he have a way to server render the content of every component. When we combine this with with the Custom Element we get something that is quite close to a __Universal Web Component__:
+We are using the Custom Element tag name as the path name - attributes become query parameters. Now we have a way to server render the content of every component. When we combine this with the `<blue-buy>`-Custom Elements we get something that is quite close to a __Universal Web Component__:
 
     <blue-buy sku="t_porsche">
       <!--#include virtual="/blue-buy?sku=t_porsche" -->
     </blue-buy>
 
-The `#include` comment is part of [Server Side Includes](https://de.wikipedia.org/wiki/Server_Side_Includes), which is a feature that is available in most web servers. Yes, it's the same technique we used back in the days to show the current date on our web sites. The `#include` comment gets replaced with the response of `/blue-buy?sku=t_porsche` before the web server sends the complete page to the browser.
+The `#include` comment is part of [Server Side Includes](https://de.wikipedia.org/wiki/Server_Side_Includes), which is a feature that is available in most web servers. Yes, it's the same technique we used back in the days to embed the current date on our web sites. There are also a few alternative techniques like [ESI](https://de.wikipedia.org/wiki/Edge_Side_Includes), [nodesi](https://github.com/Schibsted-Tech-Polska/nodesi), [compoxure](https://github.com/tes/compoxure) and [tailor](https://github.com/zalando/tailor), but for our projects SSI has proven itself as a simple and incredibly stable solution.
 
-Configuration in nginx looks something like this:
+The `#include` comment gets replaced with the response of `/blue-buy?sku=t_porsche` before the web server sends the complete page to the browser. The configuration in nginx looks like this:
 
     upstream team_blue {
       server team_blue:3001;
@@ -237,17 +237,17 @@ Configuration in nginx looks something like this:
       }
     }
 
-The directive `ssi: on;` enables the SSI feature and a `upstream` and `location` block is added for every team to ensure that all urls that start with `/blue` will be routed to the correct application (`team_blue:3001`). In addition the `/` route is mapped to team red, which is controlling the homepage / product page.
+The directive `ssi: on;` enables the SSI feature and an `upstream` and `location` block is added for every team to ensure that all urls that start with `/blue` will be routed to the correct application (`team_blue:3001`). In addition the `/` route is mapped to team red, which is controlling the homepage / product page.
 
-This animation show the tractor store in a browser which has __JavaScript disabled__.
+This animation shows the tractor store in a browser which has __JavaScript disabled__.
 
 [![Serverside Rendering | Disabled JavaScript](./ressources/video/server-render.gif)](https://github.com/neuland/micro-frontends/tree/master/2-composition-universal)
 
 [inspect the code](https://github.com/neuland/micro-frontends/tree/master/2-composition-universal)
 
-The option buttons now are actual links and every click leads to a reload of the page. In the terminal on the right you can see how the request for the tractor model gets routed to team red, which controls the product page and after that the markup gets supplemented by the contents for the fragments from team blue and green.
+The variant selection buttons now are actual links and every click leads to a reload of the page. In the terminal on the right you can see how the request for a page gets routed to team red, which controls the product page and after that the markup gets supplemented by the contents for the fragments from team blue and green.
 
-When you switch JavaScript back on, you would only see server log messages for the first request. All subsequent tractor changes are than handled client side, just like in our first example.
+When you switch JavaScript back on, you would only see server log messages for the first request. All subsequent tractor changes are than handled client side, just like in our first example. In a later example we will extract the product data from the JavaScript and load it via a REST api as needed.
 
 You can easily play with this sample code on your local machine. The only thing you need to have installed is [Docker Compose](https://docs.docker.com/compose/install/).
 
@@ -259,9 +259,6 @@ Docker than starts an nginx on port 3000 and builds the node.js image for each t
 
 The `src` files are mapped into the individual containers and the node application will restart when you make a code change. Changing the `nginx.conf` requires a restart of `docker-compose` in order to have an effect. So feel free to fiddle around and give feedback.
 
-## Page Transition
-
-tba
 
 ## Additional Resources
 [Slides: Micro Frontends by Michael Geers | JSUnconf.eu 2017](https://speakerdeck.com/naltatis/micro-frontends-building-a-modern-webapp-with-multiple-teams)
@@ -273,22 +270,16 @@ tba
 Working code examples will be added here ...
 
 - Use Cases
-  - Composing a page
-    - client only
-    - universal render
-  - Communication
-    - parent-child
-    - child-parent
-    - siblings
   - Navigating between pages
     - soft vs. hard navigation
     - universal router
   - ...
 - Side Topics
-  - Coherent User Interface / Style Guides & Pattern Libraries
+  - Isolated CSS / Coherent User Interface / Style Guides & Pattern Libraries
   - Progressive Enhancement
   - Performance on initial load
   - Performance while using the site
+  - Data Fetching / Loading States
   - Loading CSS
   - Loading JS
   - ...
