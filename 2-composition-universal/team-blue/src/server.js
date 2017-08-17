@@ -1,5 +1,4 @@
 /* eslint-disable no-console */
-import 'isomorphic-fetch';
 import express from 'express';
 import morgan from 'morgan';
 import renderBasket from './blue-basket/render';

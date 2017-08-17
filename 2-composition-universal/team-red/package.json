@@ -14,7 +14,6 @@
   "dependencies": {
     "ejs": "^2.5.7",
     "express": "^4.15.3",
-    "isomorphic-fetch": "^2.2.1",
     "morgan": "^1.8.2"
   },
   "devDependencies": {
