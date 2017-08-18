@@ -266,7 +266,7 @@ __to be continued ...__
 
 ## Additional Resources
 - [Slides: Micro Frontends by Michael Geers - JSUnconf.eu 2017](https://speakerdeck.com/naltatis/micro-frontends-building-a-modern-webapp-with-multiple-teams)
-- Tractors are purchasable at [manufactum.com](https://www.manufactum.com/). The site is developed by two teams using the here described techniques.
+- Tractors are purchasable at [manufactum.com](https://www.manufactum.com/) :)<br>_This store is developed by two teams using the here described techniques._
 
 
 ---
