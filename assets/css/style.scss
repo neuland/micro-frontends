@@ -3,6 +3,12 @@
 
 @import "{{ site.theme }}";
 
+.inner {
+  max-width: 750px;
+  font-size: 1.2em;
+  line-height: 1.6em;
+}
+
 header {
   font-family: 'Handlee', cursive;
   font-weight: normal;
