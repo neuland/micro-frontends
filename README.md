@@ -1,7 +1,7 @@
 
-**This site is a work in progress and will be extended on a regular basis. Please watch the repository to receive change notifications.**
+**This site is a work in progress and will be extended on a regular basis. Please [watch the repository](https://github.com/neuland/micro-frontends) to receive change notifications.**
 
-This repository ~~contains~~ <u>will contain</u> techniques, strategies and recipes for __building a modern web app with multiple independent teams__.
+This repository contains techniques, strategies and recipes for __building a modern web app with multiple independent teams__.
 
 ## What are Micro Frontends?
 
@@ -133,6 +133,10 @@ To avoid duplication a `render()` method is introduced which is called from `con
 
 The above example uses the Custom Element V1 Spec which is currently [supported in Chrome, Safari and Opera](http://caniuse.com/#feat=custom-elementsv1). But with [document-register-element](https://github.com/WebReflection/document-register-element) a lightweight and battle-tested polyfill is available to make this work in all browsers. Under the hood, it uses the [widely supported](http://caniuse.com/#feat=mutationobserver) Mutation Observer API, so there is no hacky DOM tree watching going on in the background.
 
+### Framework Compatibility
+
+Because Custom Elements are a web standard, all major JavaScript frameworks like Angular, React, Preact, Vue or Hyperapp do support them. But when you get into details, there are still a few implementation problems in some frameworks. At [Custom Elements Everywhere](https://custom-elements-everywhere.com/) [Rob Dodson](https://twitter.com/rob_dodson) has put together a compatibility test suite that highlights unresolved issues.
+
 ### Child-Parent or Siblings Communication / DOM Events
 
 But passing down attributes is not sufficient for all interactions. In our example the __mini basket should refresh__ when the user performs a __click on the buy button__.
@@ -261,11 +265,16 @@ The `src` files are mapped into the individual containers and the node applicati
 
 ### Data Fetching & Loading States
 
-__to be continued ...__
+__to be continued soon...__
+
+watch the [Github Repo](https://github.com/neuland/micro-frontends) to get notified
+
 
 
 ## Additional Resources
 - [Slides: Micro Frontends by Michael Geers - JSUnconf.eu 2017](https://speakerdeck.com/naltatis/micro-frontends-building-a-modern-webapp-with-multiple-teams)
+- [Post: Micro frontends—a microservice approach to front-end web development](https://medium.com/@tomsoderlund/micro-frontends-a-microservice-approach-to-front-end-web-development-f325ebdadc16) Tom Söderlund explains the core concept and provides links on this topic
+- [Custom Elements Everywhere](https://custom-elements-everywhere.com/) Making sure frameworks and custom elements can be BFFs
 - Tractors are purchasable at [manufactum.com](https://www.manufactum.com/) :)<br>_This store is developed by two teams using the here described techniques._
 
 
