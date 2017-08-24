@@ -1,0 +1,26 @@
+{
+  "name": "team-green",
+  "version": "2.0.0",
+  "description": "",
+  "main": "src/server.js",
+  "scripts": {
+    "build": "webpack -p",
+    "server": "babel-node --presets env ./src/server.js",
+    "start": "npm run build; npm run server",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.15.3",
+    "morgan": "^1.8.2"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.24.1",
+    "babel-core": "^6.25.0",
+    "babel-loader": "^7.1.1",
+    "babel-preset-env": "^1.6.0",
+    "nodemon": "^1.11.0",
+    "webpack": "^3.2.0"
+  }
+}
