@@ -1,7 +1,4 @@
-
-**This site is a work in progress and will be extended on a regular basis. Please [watch the repository](https://github.com/neuland/micro-frontends) to receive change notifications.**
-
-This repository contains techniques, strategies and recipes for __building a modern web app with multiple independent teams__.
+This site contains techniques, strategies and recipes for __building a modern web app with multiple independent teams using different JavaScript frameworks__.
 
 ## What are Micro Frontends?
 
