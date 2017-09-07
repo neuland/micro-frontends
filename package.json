@@ -15,6 +15,7 @@
     "stylelint-order": "^0.4.3"
   },
   "scripts": {
+    "start": "bundle exec jekyll serve",
     "lint": "eslint . && stylelint **/*.css",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
