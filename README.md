@@ -32,7 +32,6 @@ When your user interface has to provide __instant feedback__, even on unreliable
 * __Establish Team Prefixes__<br>Agree on naming conventions where isolation is not possible yet (CSS, Events, Local Storage, Cookies, ...).
 * __Favor Native Browser Features over Custom Built APIs__<br>Use [Browser Events for communication](#parent-child-communication--dom-modification) instead of building a global PubSub system. If you really have to build a cross team api, try keeping it as simple as possible.
 * __Build a Resilient Site__<br>Your feature should be useful, even if JavaScript failed or hasn't executed yet. Use [Universal Rendering](#serverside-rendering--universal-rendering) and Progressive Enhancement to improve perceived performance.
-* __Use a Versioned Pattern Library__<br>Creating or use a central UI library with basic elements is helpful to provide a coherent user experience. Use versioning to allow teams to upgrade to newer versions of it on their own pace.
 
 ---
 
