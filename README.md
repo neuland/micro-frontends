@@ -1,5 +1,3 @@
-This site contains techniques, strategies and recipes for __building a modern web app with multiple independent teams using different JavaScript frameworks__.
-
 ## What are Micro Frontends?
 
 The term __Micro Frontends__ first came up in [ThoughtWorks Technology Radar](https://www.thoughtworks.com/radar/techniques/micro-frontends) at the end of 2016. It extends the concepts of micro services to the frontend world. The current trend is to build a feature-rich and powerful browser application, aka single page app, which sits on top of a micro service architecture. Over time the frontend layer, often developed by a separate team, grows and gets more difficult to maintain. That's what we call a [Frontend Monolith](https://www.youtube.com/watch?v=pU1gXA0rfwc).
@@ -24,6 +22,20 @@ To put this into a broader perspective, [Aral Balkan](https://ar.al/) has writte
 If you would position your project on the __left side of this spectrum__, an __integration on webserver level__ is a good fit. With this model a server collects and __concatenates HTML strings__ from all components that make up the page requested by the user. Updates are done by reloading the page from the server or replacing parts of it via ajax. [Gustaf Nilsson Kotte](https://twitter.com/gustaf_nk/) has written a [comprehensive article](https://gustafnk.github.io/microservice-websites/) on this topic.
 
 When your user interface has to provide __instant feedback__, even on unreliable connections, a pure server rendered site is not sufficient anymore. To implement techniques like [Optimistic UI](https://www.smashingmagazine.com/2016/11/true-lies-of-optimistic-user-interfaces/) or [Skeleton Screens](http://www.lukew.com/ff/entry.asp?1797) you need to be able to also __update__ your UI __on the device itself__. Google's term [Progressive Web Apps](https://developers.google.com/web/progressive-web-apps/) aptly describes the __balancing act__ of being a good citizen of the web (progressive enhancement) while also providing app-like performance. This kind of application is located somewhere __around the middle of the site-app-continuum__. Here a solely server based solution is not sufficient anymore. We have to move the __integration into the browser__ and this is the focus of this article.
+
+## Core Ideas behind Micro Frontends
+
+* __Be Technology Agnostic__<br>Each team should be able to choose, update or change their stack without having to coordinate with other teams. [Custom Elements](#the-dom-is-the-api) are a great way to hide implementation details while providing a neutral interface to others.
+* __Isolate Team Code__<br>Even if all teams use the same framework, don't share a runtime. Build smaller independent apps and don't rely on shared state or global variables.
+* __Establish Team Prefixes__<br>Agree on naming conventions where isolation is not possible yet (CSS, Local Storage, Cookies, ...).
+* __Avoid Shared Code__<br>Build features that are self contained. Large libraries can be loaded from a public CDN to avoid duplicate downloading and execution.
+* __Prefer Native Browser Features over Custom Built APIs__<br>Use [Browser Events for communication](#parent-child-communication--dom-modification) instead of building a global PubSub system. If you really have to build a cross team api, try keeping it as simple as possible.
+* __Build a Resilient Site__<br>Your feature should be useful, even if browser JavaScript failed or hasn't executed yet. Use [Universal Rendering](#serverside-rendering--universal-rendering) and Progressive Enhancement to provide good performance for the first request.
+* __Use a Versioned Pattern Library__<br>Creating or use a central UI library with basic elements is helpful to provide a coherent user experience. Use versioning to allow teams to upgrade to newer versions of it on their own pace.
+
+---
+
+This site contains techniques, strategies and recipes for __building a modern web app with multiple independent teams using different JavaScript frameworks__.
 
 ## The DOM is the API
 

@@ -9,6 +9,16 @@
   line-height: 1.6em;
 }
 
+@media only screen and (max-width: 767px) {
+  .inner {
+    font-size: 1.1em;
+  }
+}
+
+.inner hr {
+  margin: 3em 0;
+}
+
 header {
   font-family: 'Handlee', cursive;
   font-weight: normal;

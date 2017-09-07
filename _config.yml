@@ -8,4 +8,5 @@ github:
 google_analytics: UA-84095563-2
 exclude:
   - 2-composition-universal
+  - 3-data-fetching
   - node_modules
