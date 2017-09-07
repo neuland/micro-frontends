@@ -1,8 +1,10 @@
+Techniques, strategies and recipes for building a __modern web app__ with __multiple teams__ using __different JavaScript frameworks__.
+
 ## What are Micro Frontends?
 
 The term __Micro Frontends__ first came up in [ThoughtWorks Technology Radar](https://www.thoughtworks.com/radar/techniques/micro-frontends) at the end of 2016. It extends the concepts of micro services to the frontend world. The current trend is to build a feature-rich and powerful browser application, aka single page app, which sits on top of a micro service architecture. Over time the frontend layer, often developed by a separate team, grows and gets more difficult to maintain. That's what we call a [Frontend Monolith](https://www.youtube.com/watch?v=pU1gXA0rfwc).
 
-The idea behind Micro Frontends is to think about your __UI as a composition of components__ which are maintained by __independent teams__. These teams are cross functional and develop features __end-to-end__, from database to user interface.
+The idea behind Micro Frontends is to think about a website or web app as __a composition of features__ which are owned by __independent teams__. Each team has a __distinct area of business__ or __mission__ it cares about and specialises in. A team is __cross functional__ and develops its features __end-to-end__, from database to user interface.
 
 However, this idea is not new, in the past it went by the name of [Frontend Integration for Verticalised Systems](https://dev.otto.de/2014/07/29/scaling-with-microservices-and-vertical-decomposition/) or [Self contained Systems](https://www.innoq.com/de/podcast/025-scs-frontend-integration/). But Micro Frontends is clearly a more friendly and less bulky term.
 
@@ -34,8 +36,6 @@ When your user interface has to provide __instant feedback__, even on unreliable
 * __Use a Versioned Pattern Library__<br>Creating or use a central UI library with basic elements is helpful to provide a coherent user experience. Use versioning to allow teams to upgrade to newer versions of it on their own pace.
 
 ---
-
-This site contains techniques, strategies and recipes for __building a modern web app with multiple independent teams using different JavaScript frameworks__.
 
 ## The DOM is the API
 
@@ -69,7 +69,7 @@ In this example, the page is split into separate components/fragments owned by t
 
 [try in browser](./1-composition-client-only/) & [inspect the code](https://github.com/neuland/micro-frontends/tree/master/1-composition-client-only)
 
-This team decides what functionality is included and where it is positioned in the layout. The page contains information that can be provided by Team Product itself, like the product name, image and the available variants. But it also includes fragments (Custom Elements) from the other teams.
+__Team Product__ decides what functionality is included and where it is positioned in the layout. The page contains information that can be provided by Team Product itself, like the product name, image and the available variants. But it also includes fragments (Custom Elements) from the other teams.
 
 ### How to Create a Custom Elemente?
 
@@ -289,9 +289,7 @@ watch the [Github Repo](https://github.com/neuland/micro-frontends) to get notif
 
 ---
 
-## TODOs
-
-Working code examples will be added here ...
+## Things to come ...
 
 - Use Cases
   - Navigating between pages
