@@ -272,6 +272,62 @@ The `src` files are mapped into the individual containers and the node applicati
 
 ### Data Fetching & Loading States
 
+A downside of the SSI/ESI approach is, that the __slowest fragment determines the response time__ of the whole page.
+So it's good when the response of a fragment can be cached.
+For fragments that are expensive to produce and hard to cache it's often a good idea to exclude them from the initial render.
+They can be loaded asynchronously in the browser.
+In our example the `green-recos` fragment, that shows personalized recommendations is a candidate for this.
+
+One possible solution would be that team red just skips the SSI Include.
+
+**Before**
+
+    <green-recos sku="t_porsche">
+      <!--#include virtual="/green-recos?sku=t_porsche" -->
+    </green-recos>
+
+**After**
+
+    <green-recos sku="t_porsche"></green-recos>
+
+*Important Side-note: Custom Elements [cannot be self-closing](https://developers.google.com/web/fundamentals/architecture/building-components/customelements#jsapi), so writing `<green-recos sku="t_porsche" />` would not work correctly.*
+
+<img alt="Reflow" src="./ressources/video/data-fetching-reflow.gif" style="max-width: 500px" />
+
+The rendering only takes place in the browser.
+But, as can be seen in the animation, this change has now introduced a __substantial reflow__ of the page.
+The recommendation area is initially blank.
+Team greens JavaScript is loaded and executed.
+The API call for fetching the personalized recommendation is made.
+The recommendation markup is rendered and the associated images are requested.
+The fragment now needs more space and pushes the layout of the page.
+
+There are different options to avoid an annoying reflow like this.
+Team red, which controls the page, could __fixate the recommendation containers height__.
+On a responsive website its often tricky to determine the height, because it could differ for different screen sizes.
+But the more important issue is, that __this kind of inter-team agreement creates a tight coupling__ between team red and green.
+If team green wants to introduce an additional sub-headline in the reco element, it would have to coordinate with team red on the new height.
+Both teams would have to rollout their changes simultaneously to avoid a broken layout.
+
+A better way is to use a technique called [Skeleton Screens](https://blog.prototypr.io/luke-wroblewski-introduced-skeleton-screens-in-2013-through-his-work-on-the-polar-app-later-fd1d32a6a8e7).
+Team red leaves the `green-recos` SSI Include in the markup.
+In addition team green changes the __server-side render method__ of its fragment so that it produces a __schematic version of the content__.
+The __skeleton markup__ can reuse parts of the real content's layout styles.
+This way it __reserves the needed space__ and the fill-in of the actual content does not lead to a jump.
+
+<img alt="Skeleton Screen" src="./ressources/video/data-fetching-skeleton.gif" style="max-width: 500px" />
+
+Skeleton screens are also __very useful for client rendering__.
+When your custom element is inserted into the DOM due to a user action it could __instantly render the skeleton__ until the data it needs from the server has arrived.
+
+Even on an __attribute change__ like for the _variant select_ you can decide to switch to skeleton view until the new data arrives.
+This ways the user gets an indication that something is going on in the fragment.
+But when your endpoint responds quickly a short __skeleton flicker__ between the old and new data could also be annoying.
+Preserving the old data or using intelligent timeouts can help.
+So use this technique wisely and try to get user feedback.
+
+## Navigating Between Pages
+
 __to be continued soon...__
 
 watch the [Github Repo](https://github.com/neuland/micro-frontends) to get notified
