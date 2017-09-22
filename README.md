@@ -292,7 +292,7 @@ One possible solution would be that team red just skips the SSI Include.
 
 *Important Side-note: Custom Elements [cannot be self-closing](https://developers.google.com/web/fundamentals/architecture/building-components/customelements#jsapi), so writing `<green-recos sku="t_porsche" />` would not work correctly.*
 
-<img alt="Reflow" src="./ressources/video/data-fetching-reflow.gif" style="max-width: 500px" />
+<img alt="Reflow" src="./ressources/video/data-fetching-reflow.gif" style="width: 500px" />
 
 The rendering only takes place in the browser.
 But, as can be seen in the animation, this change has now introduced a __substantial reflow__ of the page.
@@ -315,7 +315,7 @@ In addition team green changes the __server-side render method__ of its fragment
 The __skeleton markup__ can reuse parts of the real content's layout styles.
 This way it __reserves the needed space__ and the fill-in of the actual content does not lead to a jump.
 
-<img alt="Skeleton Screen" src="./ressources/video/data-fetching-skeleton.gif" style="max-width: 500px" />
+<img alt="Skeleton Screen" src="./ressources/video/data-fetching-skeleton.gif" style="width: 500px" />
 
 Skeleton screens are also __very useful for client rendering__.
 When your custom element is inserted into the DOM due to a user action it could __instantly render the skeleton__ until the data it needs from the server has arrived.
@@ -352,10 +352,8 @@ watch the [Github Repo](https://github.com/neuland/micro-frontends) to get notif
   - ...
 - Side Topics
   - Isolated CSS / Coherent User Interface / Style Guides & Pattern Libraries
-  - Progressive Enhancement
   - Performance on initial load
   - Performance while using the site
-  - Data Fetching / Loading States
   - Loading CSS
   - Loading JS
   - ...
