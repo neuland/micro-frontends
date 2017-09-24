@@ -1,7 +1,7 @@
 # Micro Frontends
 **Extending the Microservice Paradigms to Web Development**
 
-The actual site can be found at [micro-frontends.org](https://github.com/neuland/micro-frontends).
+The actual site can be found at [micro-frontends.org](https://micro-frontends.org/).
 
 ## Author
 
