@@ -360,6 +360,7 @@ watch the [Github Repo](https://github.com/neuland/micro-frontends) to get notif
   - Performance while using the site
   - Loading CSS
   - Loading JS
+  - Integration Testing
   - ...
 
 ## Author
