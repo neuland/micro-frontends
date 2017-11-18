@@ -345,6 +345,14 @@ watch the [Github Repo](https://github.com/neuland/micro-frontends) to get notif
 - Tractors are purchasable at [manufactum.com](https://www.manufactum.com/) :)<br>_This store is developed by two teams using the here described techniques._
 
 
+## Libraries for building web components
+Many libraries already exist that make it easier to build web components. To dive in and create your own components, here are some you can try out:
+ * [Polymer](https://www.polymer-project.org) provides a set of features for creating custom elements.
+ * [Slim.js](http://slimjs.com) Slim.js is a fast & lightweight library for building web-components or web-components based applications
+ * [SkateJS](https://github.com/skatejs/skatejs) is a JavaScript library for writing web components with a small footprint.
+ * [X-Tag](https://x-tag.github.io/) is an open source JavaScript library that provides an interface for component development.
+ * [Bosonic](https://bosonic.github.io/) is a collection of components designed to meet the everyday needs of web developers.
+
 ---
 
 ## Things to come ...
