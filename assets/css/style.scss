@@ -30,9 +30,41 @@ header h2 {
 }
 
 header a.button {
-  padding-top: 5px;
+  padding-top: 0.75em;
   font-family: 'Handlee', cursive;
+  width: auto;
 }
+
+@media only screen and (min-width: 768px) and (max-width: 959px) {
+  header a.button {
+    padding-top: 0.55em;
+  }
+}
+
+.languages {
+  position: absolute;
+  right: -0.4em;
+  top: -2em;
+  font-size: 0.85em;
+  color: #fff;
+}
+
+.languages a,
+.languages strong {
+  display: inline-block;
+  padding: 0.2em 0.4em;
+}
+
+.languages a {
+  color: #9ddcff;
+}
+
+@media only screen and (max-width: 767px) {
+  header h1 {
+    margin-top: 0.25em;
+  }
+}
+
 
 #main-content,
 aside#sidebar {
