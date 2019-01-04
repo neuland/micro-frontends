@@ -7,6 +7,10 @@ services:
      - ./nginx/common:/usr/share/nginx/html/common
     ports:
      - "3000:3000"
+    depends_on:
+     - team_blue
+     - team_green
+     - team_red
 
   team_blue:
     build: ./team-blue
