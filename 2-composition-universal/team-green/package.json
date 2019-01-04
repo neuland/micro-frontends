@@ -12,15 +12,15 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.15.3",
-    "morgan": "^1.8.2"
+    "express": "^4.16.4",
+    "morgan": "^1.9.1"
   },
   "devDependencies": {
-    "babel-cli": "^6.24.1",
-    "babel-core": "^6.25.0",
-    "babel-loader": "^7.1.1",
-    "babel-preset-env": "^1.6.0",
-    "nodemon": "^1.11.0",
-    "webpack": "^3.2.0"
+    "babel-cli": "^6.26.0",
+    "babel-core": "^6.26.3",
+    "babel-loader": "^7.1.5",
+    "babel-preset-env": "^1.7.0",
+    "nodemon": "^1.18.9",
+    "webpack": "^3.12.0"
   }
 }
