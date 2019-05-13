@@ -344,6 +344,7 @@ watch the [Github Repo](https://github.com/neuland/micro-frontends) to get notif
 - [Awesome Micro Frontends](https://github.com/ChristianUlbrich/awesome-microfrontends) a curated list of links by Christian Ulbrich 🕶
 - [Custom Elements Everywhere](https://custom-elements-everywhere.com/) Making sure frameworks and custom elements can be BFFs
 - Tractors are purchasable at [manufactum.com](https://www.manufactum.com/) :)<br>_This store is developed by two teams using the here described techniques._
+- [Talk: Distributed Frontends with Tailor](https://www.youtube.com/watch?v=ipRyhwpYbn0) ([Slides](https://slides.com/armand1m/distributed-frontends))
 
 ## Related Techniques
 - [Posts: Cookie Cutter Scaling](https://paulhammant.com/categories.html#Cookie_Cutter_Scaling) David Hammet wrote a series of blog posts on this topic.
