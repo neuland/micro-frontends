@@ -3,16 +3,18 @@
   "version": "1.0.0",
   "description": "**This site is a work in progress and will be extended on a regular basis. Please watch the repository to recieve change notifications.**",
   "main": "index.js",
-  "dependencies": {},
+  "dependencies": {
+    "eslint-config-standard": "^13.0.1"
+  },
   "devDependencies": {
-    "eslint": "^3.19.0",
-    "eslint-config-airbnb": "^14.1.0",
-    "eslint-plugin-import": "^2.2.0",
-    "eslint-plugin-jsx-a11y": "^4.0.0",
-    "eslint-plugin-react": "^6.10.3",
-    "stylelint": "^7.10.1",
-    "stylelint-config-standard": "^16.0.0",
-    "stylelint-order": "^0.4.3"
+    "eslint": "^4.19.1",
+    "eslint-config-airbnb": "^17.1.1",
+    "eslint-plugin-import": "^2.18.2",
+    "eslint-plugin-jsx-a11y": "^6.2.3",
+    "eslint-plugin-react": "^7.14.3",
+    "stylelint": "^10.1.0",
+    "stylelint-config-standard": "^18.3.0",
+    "stylelint-order": "^3.0.1"
   },
   "scripts": {
     "start": "bundle exec jekyll serve",

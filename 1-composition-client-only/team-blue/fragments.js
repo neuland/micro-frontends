@@ -18,20 +18,24 @@
       this.render();
       window.addEventListener('blue:basket:changed', this.refresh);
     }
+
     refresh() {
       this.log('event recieved "blue:basket:changed"');
       this.render();
     }
+
     render() {
       const classname = state.count === 0 ? 'empty' : 'filled';
       this.innerHTML = `
         <div class="${classname}">basket: ${state.count} item(s)</div>
       `;
     }
+
     disconnectedCallback() {
       window.removeEventListener('blue:basket:changed', this.refresh);
       this.log('disconnected');
     }
+
     log(...args) {
       console.log('🛒 blue-basket', ...args);
     }
@@ -43,6 +47,7 @@
     static get observedAttributes() {
       return ['sku'];
     }
+
     connectedCallback() {
       this.addToCart = this.addToCart.bind(this);
       const sku = this.getAttribute('sku');
@@ -50,6 +55,7 @@
       this.render();
       this.firstChild.addEventListener('click', this.addToCart);
     }
+
     addToCart() {
       state.count += 1;
       this.log('event sent "blue:basket:changed"');
@@ -57,20 +63,24 @@
         bubbles: true,
       }));
     }
+
     render() {
       const sku = this.getAttribute('sku');
       const price = prices[sku];
       this.innerHTML = `<button type="button">buy for ${price}</button>`;
     }
+
     attributeChangedCallback(attr, oldValue, newValue) {
       this.log('attributeChanged', attr, oldValue, newValue);
       this.render();
     }
+
     disconnectedCallback() {
       this.firstChild.removeEventListener('click', this.addToCart);
       const sku = this.getAttribute('sku');
       this.log('disconnected', sku);
     }
+
     log(...args) {
       console.log('🔘 blue-buy', ...args);
     }

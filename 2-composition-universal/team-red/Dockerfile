@@ -6,6 +6,7 @@ WORKDIR /code
 
 # Install app dependencies
 COPY package.json /code/
+COPY package-lock.json /code/
 RUN npm install
 COPY webpack.config.js /code/
 

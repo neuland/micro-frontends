@@ -14,7 +14,7 @@ app.use('/red/images', express.static('./images'));
 app.use('/red', express.static('./build'));
 
 app.get('/:sku?', (req, res) => {
-  const sku = req.params.sku;
+  const { sku } = req.params;
   const html = renderPage(sku);
   res.render('layout', { html });
 });

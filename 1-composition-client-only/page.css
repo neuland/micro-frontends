@@ -31,6 +31,8 @@ dd {
   grid-row-gap: 10px;
   margin: 20px auto;
   min-width: 500px;
+  outline: 3px dashed orangered;
+  padding: 15px;
 }
 
 @media only screen and (max-width: 999px) {
@@ -197,11 +199,6 @@ dd {
   display: inline-block;
   height: 180px;
   width: 180px;
-}
-
-#app {
-  outline: 3px dashed orangered;
-  padding: 15px;
 }
 
 green-recos {

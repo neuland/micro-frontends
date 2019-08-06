@@ -74,14 +74,14 @@ function handleClickOption(e) {
 function addListeners() {
   const $btns = document.querySelectorAll('#options button');
   Array.prototype.forEach.call($btns, $btn => (
-     $btn.addEventListener('click', handleClickOption)
+    $btn.addEventListener('click', handleClickOption)
   ));
 }
 
 function removeListeners() {
   const $btns = document.querySelectorAll('#options button');
   Array.prototype.forEach.call($btns, $btn => (
-     $btn.removeEventListener('click', handleClickOption)
+    $btn.removeEventListener('click', handleClickOption)
   ));
 }
 

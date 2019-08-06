@@ -6,11 +6,12 @@
   "rules": {
     "string-quotes": "single",
     "indentation": 2,
-    "order/declaration-block-properties-alphabetical-order": true,
     "selector-pseudo-class-no-unknown": null,
     "selector-type-no-unknown": null,
     "at-rule-no-unknown": null,
     "color-hex-length": "long",
-    "color-hex-case": "lower"
+    "color-hex-case": "lower",
+    declaration-block-no-shorthand-property-overrides: null,
+    no-descending-specificity: null
   }
 }

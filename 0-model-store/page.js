@@ -91,7 +91,7 @@ function handleClickBuy() {
 function addListeners() {
   const $btns = document.querySelectorAll('#options button');
   Array.prototype.forEach.call($btns, $btn => (
-     $btn.addEventListener('click', handleClickOption)
+    $btn.addEventListener('click', handleClickOption)
   ));
   document.getElementById('buy').addEventListener('click', handleClickBuy);
 }
@@ -99,7 +99,7 @@ function addListeners() {
 function removeListeners() {
   const $btns = document.querySelectorAll('#options button');
   Array.prototype.forEach.call($btns, $btn => (
-     $btn.removeEventListener('click', handleClickOption)
+    $btn.removeEventListener('click', handleClickOption)
   ));
   document.getElementById('buy').removeEventListener('click', handleClickBuy);
 }
