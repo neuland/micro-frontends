@@ -6,7 +6,7 @@ The term __Micro Frontends__ first came up in [ThoughtWorks Technology Radar](ht
 
 The idea behind Micro Frontends is to think about a website or web app as __a composition of features__ which are owned by __independent teams__. Each team has a __distinct area of business__ or __mission__ it cares about and specialises in. A team is __cross functional__ and develops its features __end-to-end__, from database to user interface.
 
-However, this idea is not new, in the past it went by the name of [Frontend Integration for Verticalised Systems](https://dev.otto.de/2014/07/29/scaling-with-microservices-and-vertical-decomposition/) or [Self-contained Systems](http://scs-architecture.org/). But Micro Frontends is clearly a more friendly and less bulky term.
+However, this idea is not new. It has a lot in common with the [Self-contained Systems](http://scs-architecture.org/) concept. In the past approaches like this went by the name of [Frontend Integration for Verticalised Systems](https://dev.otto.de/2014/07/29/scaling-with-microservices-and-vertical-decomposition/). But Micro Frontends is clearly a more friendly and less bulky term.
 
 __Monolithic Frontends__
 ![Monolithic Frontends](./ressources/diagrams/organisational/monolith-frontback-microservices.png)
