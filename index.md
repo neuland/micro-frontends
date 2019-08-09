@@ -1,4 +1,4 @@
-Techniques, strategies and recipes for building a __modern web app__ with __multiple teams__ using __different JavaScript frameworks__.
+Techniques, strategies and recipes for building a __modern web app__ with __multiple teams__ that can __ship features independently__.
 
 ## What are Micro Frontends?
 
