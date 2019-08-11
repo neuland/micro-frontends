@@ -3,6 +3,15 @@
 
 @import "{{ site.theme }}";
 
+@font-face {
+  font-family: 'Handlee';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Handlee Regular'), local('Handlee-Regular'),
+       url('/ressources/fonts/handlee-v8-latin-regular.woff2') format('woff2'), /* Chrome 26+, Opera 23+, Firefox 39+ */
+       url('/ressources/fonts/handlee-v8-latin-regular.woff') format('woff'); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+}
+
 .inner {
   line-height: 1.6em;
 }
