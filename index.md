@@ -370,9 +370,6 @@ watch the [Github Repo](https://github.com/neuland/micro-frontends) to get notif
   - Integration Testing
   - ...
 
-## Author
-**Michael Geers** ([@naltatis](https://twitter.com/naltatis)) is a software engineer at [neuland Büro für Informatik](https://www.neuland-bfi.de/) and works on building nice frontends for e-commerce.
-
 ## Contributors
 - [Koike Takayuki](https://github.com/koiketakayuki) who translated the site to [Japanese](https://micro-frontends-japanese.org/).
 

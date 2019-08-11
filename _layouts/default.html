@@ -4,7 +4,7 @@
     <meta charset='utf-8'>
     <meta http-equiv="X-UA-Compatible" content="chrome=1">
     <title>{{ site.title }} - {{ site.description }}</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="viewport" content="width=device-width">
     <link rel="canonical" href="https://micro-frontends.org/" />
     <link rel="alternate" hreflang="ja" href="https://micro-frontends-japanese.org/" />
     <meta name="google-site-verification" content="c7SiEYdpLXi4umYrM7Ey3HXm3AkK8vlsmc9X4ThnYSA" />
@@ -48,7 +48,7 @@
         }
       }
     </script>
-    <link href='https://fonts.googleapis.com/css?family=Handlee' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Handlee&font-display=swap' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="{{ '/assets/css/style.css?v=' | append: site.github.build_revision | relative_url }}" media="screen" type="text/css">
     <link rel="stylesheet" href="{{ '/assets/css/print.css' | relative_url }}" media="print" type="text/css">
   </head>
@@ -80,16 +80,24 @@
         </section>
 
         <aside id="sidebar">
-          {% if site.show_downloads %}
-            <a href="{{ site.github.zip_url }}" class="button">
-              <small>Download</small>
-              .zip file
-            </a>
-            <a href="{{ site.github.tar_url }}" class="button">
-              <small>Download</small>
-              .tar.gz file
-            </a>
-          {% endif %}
+          <div class="author">
+            <h2>The Author</h2>
+            <img src="/ressources/images/michael-geers-75.jpg" srcset="/ressources/images/michael-geers-75.jpg 1x, /ressources/images/michael-geers-150.jpg 2x" alt="Author Michael Geers">
+            <a href="http://geers.tv"><strong>Michael Geers</strong></a> is a software engineer at <a href="https://www.neuland-bfi.de/">neuland Büro für Informatik</a>.<br>He worked on multiple large e-commerce projects over the last ten years.<br>He loves the frontend and is passionate about design systems and web-performance.<br>
+            Follow on <a href="https://twitter.com/naltatis">Twitter</a> or <a href="https://github.com/naltatis">GitHub</a>.
+          </div>
+          <div class="book">
+            <div class="book__inner">
+              <h2>🚜 The Book</h2>
+              <a href="https://www.manning.com/books/micro-frontends-in-action?a_aid=mfia&a_bid=5f09fdeb">
+                <img src="/ressources/images/micro-frontends-in-action-book-200.png" srcset="/ressources/images/micro-frontends-in-action-book-200.png 1x, /ressources/images/micro-frontends-in-action-book-400.png 2x" alt="book cover Micro Frontends in Action">
+                <span>
+                    <strong>Micro Frontends in Action</strong>
+                    available in Manning Early Access Program (MEAP)
+                </span>
+              </a>
+            </div>
+          </div>
         </aside>
       </div>
     </div>

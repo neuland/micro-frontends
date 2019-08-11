@@ -4,8 +4,6 @@
 @import "{{ site.theme }}";
 
 .inner {
-  max-width: 750px;
-  font-size: 1.2em;
   line-height: 1.6em;
 }
 
@@ -14,6 +12,17 @@
     font-size: 1.1em;
   }
 }
+
+@media only screen and (min-width: 766px) {
+  .inner {
+    font-size: 1.2em;
+  }
+
+  #content-wrapper .inner {
+    display: flex;
+  }
+}
+
 
 .inner hr {
   margin: 3em 0;
@@ -69,25 +78,132 @@ header a.button {
 #main-content,
 aside#sidebar {
   float: none;
-  width: auto;
 }
 
 aside#sidebar {
+  width: 280px;
   background: none;
-  border-top: 1px solid #ccc;
-  margin-top: 3em;
-  padding-top: 3em;
+  border: none;
+  margin-top: 0;
+  padding-top: 0;
+  padding-left: 3em;
 }
+
+aside#sidebar h2 {
+  margin-top: 0;
+  text-align: center;
+}
+
+aside#sidebar > * {
+  box-sizing: border-box;
+  margin-bottom: 2rem;
+  font-size: 1rem;
+  padding: 0;
+}
+
+aside#sidebar .author {
+  padding: 0 1em;
+  margin-bottom: 33vh;
+}
+
+aside#sidebar .author img {
+  display: block;
+  border-radius: 50%;
+  width: 75px;
+  height: 75px;
+  float: right;
+  margin: 0 0 0.5em 0.5em;
+}
+
+aside#sidebar .author {
+  margin-bottom: 33vh;
+}
+
+aside#sidebar .book {
+  padding: 0 1.5em;
+  height: 300vh;
+  box-sizing: border-box;
+}
+
+aside#sidebar .book__inner {
+  position: -webkit-sticky;
+  position: sticky;
+  top: 1em;
+  bottom: 1em;
+  display: block;
+  text-align: center;
+}
+
+aside#sidebar .book img {
+  margin: .5em auto;
+  padding: 0;
+  border: 1px solid #4F4A44;
+  box-sizing: border-box;
+  display: block;
+  width: 200px;
+  height: 250px;
+}
+
+
+@media only screen and (max-width: 767px) {
+  aside#sidebar {
+    margin: 0;
+    padding: 0;
+  }
+
+  aside#sidebar h2 {
+    text-align: left;
+  }
+
+  aside#sidebar .author,
+  aside#sidebar .book {
+    margin: 0 0 3em 0;
+    padding: 0;
+  }
+
+  aside#sidebar .author img {
+    float: left;
+    margin: 0 1em 0.5em 0;
+  }
+
+  aside#sidebar .book {
+    text-align: left;
+    height: auto;
+    max-width: 400px;
+  }
+
+  aside#sidebar .book__inner {
+    text-align: left;
+  }
+
+  aside#sidebar .book__inner a {
+    display: flex;
+  }
+
+  aside#sidebar .book__inner .claim {
+    display: none;
+  }
+
+  aside#sidebar .book__inner img {
+    margin: 0 1em 0.5em 0;
+    width: 160px;
+    height: 200px;
+  }
+}
+
+
 
 #main-content h1,
 #main-content h2,
+#sidebar h2,
 #main-content h3,
 #main-content h4 {
   font-family: 'Handlee', cursive;
   font-weight: normal;
 }
 
-#main-content h2 {
+#main-content h2,
+#sidebar h2 {
   font-size: 26px;
   margin: 2em 0 0.5em;
 }
@@ -101,4 +217,8 @@ aside#sidebar {
   header a.button {
     background: none;
   }
+}
+
+pre code {
+  color: #245798;
 }
