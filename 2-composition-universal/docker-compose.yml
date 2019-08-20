@@ -16,19 +16,13 @@ services:
     build: ./team-blue
     ports:
      - "3001:3001"
-    volumes:
-     - ./team-blue/src:/code/src
 
   team_green:
     build: ./team-green
     ports:
      - "3002:3002"
-    volumes:
-     - ./team-green/src:/code/src
 
   team_red:
     build: ./team-red
     ports:
      - "3003:3003"
-    volumes:
-     - ./team-red/src:/code/src

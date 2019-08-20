@@ -1,7 +1,7 @@
 /* eslint-disable no-console */
 import express from 'express';
 import morgan from 'morgan';
-import renderRecos from './green-recos/render';
+import renderRecos from './green-recos/render.js';
 
 const app = express();
 app.use(morgan('dev'));
