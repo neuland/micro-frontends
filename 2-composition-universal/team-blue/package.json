@@ -1,5 +1,5 @@
 {
-  "name": "team-red",
+  "name": "team-blue",
   "version": "1.0.0",
   "description": "",
   "main": "src/server.js",
@@ -12,7 +12,6 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "ejs": "^2.6.2",
     "express": "^4.17.1",
     "morgan": "^1.9.1"
   },

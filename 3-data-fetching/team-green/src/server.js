@@ -1,8 +1,8 @@
 /* eslint-disable no-console */
 import express from 'express';
 import morgan from 'morgan';
-import recoApi from './api.js';
-import renderRecos from './green-recos/render.js';
+import recoApi from './api';
+import renderRecos from './green-recos/render';
 
 const app = express();
 app.use(morgan('dev'));

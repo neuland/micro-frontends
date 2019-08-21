@@ -1,4 +1,4 @@
-FROM node:12
+FROM node:11
 
 # Create app directory
 RUN mkdir -p /code
@@ -8,10 +8,11 @@ WORKDIR /code
 COPY package.json /code/
 COPY package-lock.json /code/
 RUN npm install
+COPY webpack.config.js /code/
 
 # Bundle app source
 COPY ./src /code/src
 COPY ./images /code/images
 
 EXPOSE 3002
-CMD [ "npm", "start" ]
+CMD [ "./node_modules/.bin/nodemon", "--watch", "./src", "--exec", "npm", "start" ]
