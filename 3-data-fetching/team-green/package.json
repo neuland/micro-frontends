@@ -3,9 +3,10 @@
   "version": "2.0.0",
   "description": "",
   "main": "src/server.js",
+  "type": "module",
   "scripts": {
-    "build": "webpack -p",
-    "server": "babel-node --presets env ./src/server.js",
+    "build": "rollup src/client.js --file build/fragments.js --format iife",
+    "server": "node --experimental-modules ./src/server.js",
     "start": "npm run build; npm run server",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -16,11 +17,6 @@
     "morgan": "^1.9.1"
   },
   "devDependencies": {
-    "babel-cli": "^6.26.0",
-    "babel-core": "^6.26.3",
-    "babel-loader": "^7.1.5",
-    "babel-preset-env": "^1.7.0",
-    "nodemon": "^1.19.1",
-    "webpack": "^3.12.0"
+    "rollup": "^1.19.4"
   }
 }

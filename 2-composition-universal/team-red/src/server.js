@@ -1,13 +1,12 @@
 /* eslint-disable no-console */
 import express from 'express';
 import morgan from 'morgan';
-import path from 'path';
-import renderPage from './page/render';
+import renderPage from './page/render.js';
 
 const app = express();
 app.use(morgan('dev'));
 
-app.set('views', path.join(__dirname, 'views'));
+app.set('views', './src/views');
 app.set('view engine', 'ejs');
 
 app.use('/red/images', express.static('./images'));
