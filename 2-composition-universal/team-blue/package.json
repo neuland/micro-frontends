@@ -1,11 +1,11 @@
 {
-  "name": "team-red",
+  "name": "team-blue",
   "version": "1.0.0",
   "description": "",
   "main": "src/server.js",
   "type": "module",
   "scripts": {
-    "build": "rollup src/client.js --file build/page.js --format iife",
+    "build": "rollup src/client.js --file build/fragments.js --format iife",
     "server": "node --experimental-modules ./src/server.js",
     "start": "npm run build; npm run server",
     "test": "echo \"Error: no test specified\" && exit 1"
