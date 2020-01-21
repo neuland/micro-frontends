@@ -74,19 +74,15 @@ __Team Product__ decides which functionality is included and where it is positio
 Lets take the __buy button__ as an example. Team Product includes the button simply adding `<blue-buy sku="t_porsche"></blue-buy>` to the desired position in the markup. For this to work, Team Checkout has to register the element `blue-buy` on the page.
 
     class BlueBuy extends HTMLElement {
-      constructor() {
-        super();
-      }
-      
       connectedCallback() {
         this.innerHTML = `<button type="button">buy for 66,00 €</button>`;
       }
-      
+
       disconnectedCallback() { ... }
     }
     window.customElements.define('blue-buy', BlueBuy);
 
-Now every time the browser comes across a new `blue-buy` tag, the constructor is called. `this` is the reference to the root DOM node of the custom element. All properties and methods of a standard DOM element like `innerHTML` or `getAttribute()` can be used.
+Now every time the browser comes across a new `blue-buy` tag, the `connectedCallback` is called. `this` is the reference to the root DOM node of the custom element. All properties and methods of a standard DOM element like `innerHTML` or `getAttribute()` can be used.
 
 ![Custom Element in Action](./ressources/video/custom-element.gif)
 
@@ -100,7 +96,7 @@ When the user selects another tractor in the __variant selector__, the __buy but
     // => <blue-buy sku="t_porsche">...</blue-buy>
     container.innerHTML = '<blue-buy sku="t_fendt"></blue-buy>';
 
-The `disconnectedCallback` of the old element gets invoked synchronously to provide the element with the chance to clean up things like event listeners. After that the `constructor` of the newly created `t_fendt` element is called.
+The `disconnectedCallback` of the old element gets invoked synchronously to provide the element with the chance to clean up things like event listeners. After that the `connectedCallback` of the newly created `t_fendt` element is called.
 
 Another more performant option is to just update the `sku` attribute on the existing element.
 
@@ -122,9 +118,6 @@ To support this the Custom Element can implement the `attributeChangedCallback` 
       static get observedAttributes() {
         return ['sku'];
       }
-      constructor() {
-        super();        
-      }
       connectedCallback() {
         this.render();
       }
@@ -140,7 +133,7 @@ To support this the Custom Element can implement the `attributeChangedCallback` 
     }
     window.customElements.define('blue-buy', BlueBuy);
 
-To avoid duplication a `render()` method is introduced which is called from `constructor` and `attributeChangedCallback`. This method collects needed data and innerHTML's the new markup. When deciding to go with a more sophisticated templating engine or framework inside the Custom Element, this is the place where its initialisation code would go.
+To avoid duplication a `render()` method is introduced which is called from `connectedCallback` and `attributeChangedCallback`. This method collects needed data and innerHTML's the new markup. When deciding to go with a more sophisticated templating engine or framework inside the Custom Element, this is the place where its initialisation code would go.
 
 ### Browser Support
 
