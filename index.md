@@ -76,8 +76,12 @@ Lets take the __buy button__ as an example. Team Product includes the button sim
     class BlueBuy extends HTMLElement {
       constructor() {
         super();
+      }
+      
+      connectedCallback() {
         this.innerHTML = `<button type="button">buy for 66,00 €</button>`;
       }
+      
       disconnectedCallback() { ... }
     }
     window.customElements.define('blue-buy', BlueBuy);
@@ -119,7 +123,9 @@ To support this the Custom Element can implement the `attributeChangedCallback` 
         return ['sku'];
       }
       constructor() {
-        super();
+        super();        
+      }
+      connectedCallback() {
         this.render();
       }
       render() {
