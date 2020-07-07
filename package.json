@@ -3,10 +3,8 @@
   "version": "1.0.0",
   "description": "**This site is a work in progress and will be extended on a regular basis. Please watch the repository to recieve change notifications.**",
   "main": "index.js",
-  "dependencies": {
-    "eslint-config-standard": "^13.0.1"
-  },
   "devDependencies": {
+    "eslint-config-standard": "^13.0.1",
     "eslint": "^4.19.1",
     "eslint-config-airbnb": "^17.1.1",
     "eslint-plugin-import": "^2.18.2",
