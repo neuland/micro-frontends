@@ -9,12 +9,12 @@
   "devDependencies": {
     "eslint": "^4.19.1",
     "eslint-config-airbnb": "^17.1.1",
-    "eslint-plugin-import": "^2.18.2",
-    "eslint-plugin-jsx-a11y": "^6.2.3",
-    "eslint-plugin-react": "^7.14.3",
-    "stylelint": "^10.1.0",
+    "eslint-plugin-import": "^2.22.1",
+    "eslint-plugin-jsx-a11y": "^6.3.1",
+    "eslint-plugin-react": "^7.21.5",
+    "stylelint": "^13.7.2",
     "stylelint-config-standard": "^18.3.0",
-    "stylelint-order": "^3.0.1"
+    "stylelint-order": "^3.1.1"
   },
   "scripts": {
     "start": "bundle exec jekyll serve",
