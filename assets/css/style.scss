@@ -100,7 +100,7 @@ aside#sidebar {
 
 aside#sidebar h2 {
   margin-top: 0;
-  text-align: center;
+  text-align: left;
 }
 
 aside#sidebar > * {
@@ -140,17 +140,33 @@ aside#sidebar .book__inner {
   top: 1em;
   bottom: 1em;
   display: block;
-  text-align: center;
+  text-align: left;
 }
 
 aside#sidebar .book img {
-  margin: .5em auto;
+  margin: 0.75em 0;
   padding: 0;
   border: 1px solid #4F4A44;
   box-sizing: border-box;
   display: block;
   width: 200px;
   height: 250px;
+}
+
+aside#sidebar .book p {
+  margin: 0.75em 0;
+}
+
+aside#sidebar .book small {
+  opacity: 0.9;
+  display: block;
+  transition: opacity 250ms ease-in;
+  font-size: 0.9em;
+  margin: 0.75em 0;
+}
+
+aside#sidebar .book .hidden {
+  opacity: 0;
 }
 
 
@@ -176,27 +192,19 @@ aside#sidebar .book img {
   }
 
   aside#sidebar .book {
-    text-align: left;
     height: auto;
-    max-width: 400px;
+    position: relative;
   }
 
-  aside#sidebar .book__inner {
-    text-align: left;
-  }
-
-  aside#sidebar .book__inner a {
+  aside#sidebar .book__details {
     display: flex;
-  }
-
-  aside#sidebar .book__inner .claim {
-    display: none;
   }
 
   aside#sidebar .book__inner img {
     margin: 0 1em 0.5em 0;
     width: 160px;
-    height: 200px;
+    height: auto;
+    max-width: 33vw;
   }
 }
 

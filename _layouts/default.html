@@ -92,18 +92,30 @@
           </div>
           <div class="book">
             <div class="book__inner">
-              <h2>🚜 The Book</h2>
-              <a href="https://www.manning.com/books/micro-frontends-in-action?a_aid=mfia&a_bid=5f09fdeb">
-                <img src="/ressources/images/micro-frontends-in-action-book-200.png" srcset="/ressources/images/micro-frontends-in-action-book-200.png 1x, /ressources/images/micro-frontends-in-action-book-400.png 2x" alt="book cover Micro Frontends in Action">
-                <span>
-                    <strong>Micro Frontends in Action</strong>
-                    available in Manning Early Access Program (MEAP)
-                </span>
-              </a>
+              <h2>The Book 🚜</h2>
+              <div class="book__details">
+                <a href="https://www.manning.com/books/micro-frontends-in-action?a_aid=mfia&a_bid=5f09fdeb">
+                  <img src="/ressources/images/micro-frontends-in-action-book-200.png" srcset="/ressources/images/micro-frontends-in-action-book-200.png 1x, /ressources/images/micro-frontends-in-action-book-400.png 2x" alt="book cover Micro Frontends in Action">
+                </a>
+                <div class="book__text">
+                  <strong>Micro Frontends in Action</strong>
+                  <p>find the interactive examples at <a href="https://the-tractor.store/">the-tractor.store</a>.</p>
+                  <p>buy it as print or ebook
+                    from <a href="https://www.manning.com/books/micro-frontends-in-action?a_aid=mfia&a_bid=5f09fdeb">Manning Publications</a>, <a href="https://amzn.to/3mmULsY">Amazon</a> or your <a href="https://en.wikipedia.org/wiki/Special:BookSources?isbn=1617296872" class="favorite-link">favorite book store</a>.
+                    <small class="favorite-note hidden">💚 Support your local bookseller!<br>The ISBN is <a href="https://en.wikipedia.org/wiki/Special:BookSources?isbn=1617296872">1617296872</a>.<br>Every print book comes with a free code for the kindle, ebook, PDF and online version.</small>
+                  </p>
+                </div>
+              </div>
             </div>
           </div>
         </aside>
       </div>
     </div>
+    <script>
+      document.querySelector('.favorite-link').addEventListener('click', function(e) {
+        e.preventDefault();
+        var note = document.querySelector('.favorite-note').classList.toggle('hidden')
+      });
+    </script>
   </body>
 </html>
