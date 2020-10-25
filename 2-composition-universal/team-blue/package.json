@@ -13,11 +13,11 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "ejs": "^2.6.2",
+    "ejs": "^2.7.4",
     "express": "^4.17.1",
-    "morgan": "^1.9.1"
+    "morgan": "^1.10.0"
   },
   "devDependencies": {
-    "rollup": "^1.19.4"
+    "rollup": "^1.32.1"
   }
 }
