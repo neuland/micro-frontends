@@ -1,47 +1,82 @@
+本文介绍可以用来构建能够让__多个团队__ 独立交付项目代码的__现代web app__ 技术，策略以及实践方法
+
 Techniques, strategies and recipes for building a __modern web app__ with __multiple teams__ that can __ship features independently__.
 
-## What are Micro Frontends?
+## What are Micro Frontends? 什么是微前端
 
 The term __Micro Frontends__ first came up in [ThoughtWorks Technology Radar](https://www.thoughtworks.com/radar/techniques/micro-frontends) at the end of 2016. It extends the concepts of micro services to the frontend world. The current trend is to build a feature-rich and powerful browser application, aka single page app, which sits on top of a micro service architecture. Over time the frontend layer, often developed by a separate team, grows and gets more difficult to maintain. That's what we call a [Frontend Monolith](https://www.youtube.com/watch?v=pU1gXA0rfwc).
 
+__微前端__这个名词，第一次被提出还是在2016年底，那是这个名词首次出现在 [ThoughtWorks Technology Radar](https://www.thoughtworks.com/radar/techniques/micro-frontends)。这个概念将微服务这个被广泛应用于服务端技术范式扩展到前端领域。想一想，现代的前端应用，是否变得越来越富功能化，富交互化，而在业界，这样的前端形态被称为SPA 也就是单页面应用；这样越来越复杂的前端应用，其所立足的后端服务，则是建立在分治思想应用的非常成熟的微服务架构的基础上。于是在这样一种现状之下，前端应用反而通常都是有一个完整的团队来进行维护，随着时间更迭，前端应用就会变得越来越庞大，越来越难以维护。所以我们会称这种应用为[巨石单体应用](https://www.youtube.com/watch?v=pU1gXA0rfwc)。
+
 The idea behind Micro Frontends is to think about a website or web app as __a composition of features__ which are owned by __independent teams__. Each team has a __distinct area of business__ or __mission__ it cares about and specialises in. A team is __cross functional__ and develops its features __end-to-end__, from database to user interface.
+
+至于存在于微前端这个概念背后的思想，则是立足于这样一个前提：现代复杂的web app或者网站，通常由很多__相对独立的功能组合构成__，而在这些相对独立的功能组合背后，更是__相互独立的多个团队__进行应用的维护。而这些独立的团队，也都根据其团队自身的定位，负责__特定的业务逻辑实现__，以及完成__特定的开发任务__，这些特性也是由于各个团队的专业性定位所决定的。这样的团队，通常在人员组成方面囊括了从前端开发到服务端开发，从UI实现到数据库设计这样__端到端__的__大跨度的跨职能__构成。
 
 However, this idea is not new. It has a lot in common with the [Self-contained Systems](http://scs-architecture.org/) concept. In the past approaches like this went by the name of [Frontend Integration for Verticalised Systems](https://dev.otto.de/2014/07/29/scaling-with-microservices-and-vertical-decomposition/). But Micro Frontends is clearly a more friendly and less bulky term.
 
-__Monolithic Frontends__
+即便说微前端这个概念听上去很新，但实际上它仍然与所谓的 [自包含系统](http://scs-architecture.org/) 概念一脉相承。在过去，面临同样场景的解决方案，会被称为 [面向垂直划分系统的前端集成](https://dev.otto.de/2014/07/29/scaling-with-microservices-and-vertical-decomposition/)。但很显然，微前端这个概念，对于前端开发人员来说更加易于理解，况且这个名词里也没有那么多不容易理解的大词。
+
+__Monolithic Frontends__ __单体巨石前端应用__
 ![Monolithic Frontends](./ressources/diagrams/organisational/monolith-frontback-microservices.png)
 
-
-__Organisation in Verticals__
+__Organisation in Verticals__ __面向垂直划分系统的前端架构__
 ![End-To-End Teams with Micro Frontends](./ressources/diagrams/organisational/verticals-headline.png)
 
-## What's a Modern Web App?
+## What's a Modern Web App? 到底什么才是现代的Web App？
 
 In the introduction I've used the phrase "building a modern web app". Let's define the assumptions that are connected with this term.
 
+在最前面的介绍部分，我曾经使用过构建 “现代web app” 这个名词。接下来让我们一起来来讨论一下，究竟什么样的边界才能够定义这个概念。
+
 To put this into a broader perspective, [Aral Balkan](https://ar.al/) has written a blog post about what he calls the [Documents‐to‐Applications Continuum](https://ar.al/notes/the-documents-to-applications-continuum/). He comes up with the concept of a sliding scale where a site, built out of __static documents__, connected via links, is __on the left__ end and a pure behaviour driven, __contentless application__ like an online photo editor is __on the right__.
+
+如果我们从更加宽泛的角度来看待这个“现代”的定义，那么可以借鉴[Aral Balkan](https://ar.al/) 曾经在一篇blog中提及关于 [联机文档与网络应用的边界](https://ar.al/notes/the-documents-to-applications-continuum/) 的看法。他说到如果在联机文档与网络应用之间有一个清晰的边界的话，那么通过超链接的形式组成的一堆__静态文档__就应该属于__边界的左边__，也即联机文档这一侧；而另外一端，则应该属于通过行为驱动的与内容无关的UI应用，比如在线相册(它提供的是一个功能，内容只是功能所提供的的价值)。
 
 If you would position your project on the __left side of this spectrum__, an __integration on webserver level__ is a good fit. With this model a server collects and __concatenates HTML strings__ from all components that make up the page requested by the user. Updates are done by reloading the page from the server or replacing parts of it via ajax. [Gustaf Nilsson Kotte](https://twitter.com/gustaf_nk/) has written a [comprehensive article](https://gustafnk.github.io/microservice-websites/) on this topic.
 
+如果你认为你的项目在__这个序列中__应该位列左侧，那么一个简单的web服务器的集成就已经足够了。在这种网络架构上来说，一个web服务器把__散落于组件中的HTML标签__集成起来，之后把集成好的HTML文档传输给请求的用户即可。页面的更新无非是通过刷新浏览器，或者通过ajax请求更新页面中部分的静态内容而已。关于这个话题， [Gustaf Nilsson Kotte](https://twitter.com/gustaf_nk/) 也曾经专门写过一篇文章 [comprehensive article](https://gustafnk.github.io/microservice-websites/) 。
+
 When your user interface has to provide __instant feedback__, even on unreliable connections, a pure server rendered site is not sufficient anymore. To implement techniques like [Optimistic UI](https://www.smashingmagazine.com/2016/11/true-lies-of-optimistic-user-interfaces/) or [Skeleton Screens](http://www.lukew.com/ff/entry.asp?1797) you need to be able to also __update__ your UI __on the device itself__. Google's term [Progressive Web Apps](https://developers.google.com/web/progressive-web-apps/) aptly describes the __balancing act__ of being a good citizen of the web (progressive enhancement) while also providing app-like performance. This kind of application is located somewhere __around the middle of the site-app-continuum__. Here a solely server based solution is not sufficient anymore. We have to move the __integration into the browser__, and this is the focus of this article.
 
-## Core Ideas behind Micro Frontends
+但是当你的应用需要根据交互或者数据的变化发生即时的UI更新，甚至是在不怎么好的网络环境之下，那么一个纯粹的服务端渲染的架构就显然力不从心了。为了追求更加优秀的用户体验，如果要实现类似于__积极的UI__或者__骨架屏__之类的技术，甚至需要在终端设备自身(不依赖服务端)进行UI的__更新操作__。比如Google发明的名词 [Progressive Web Apps](https://developers.google.com/web/progressive-web-apps/) （PWA）就更倾向于将这种看上去 __平衡的哲学__ 描述为：具备良好的web 公民素质(符合W3C标准，也具备激进的用户体验增强)的同时，仍需要类提供原生APP的性能表现。像这样的web app 就比较适合放在上边所说的__那个图谱的中间部分__。前端应用发展至今，单个web服务器的架构已经不足以满足业务的需求，所以我们必须向更深远的方向考虑，一个web应用应该如何更加深入的与浏览器进行结合，而这，就是这篇文章关注的焦点。
 
-* __Be Technology Agnostic__<br>Each team should be able to choose and upgrade their stack without having to coordinate with other teams. [Custom Elements](#the-dom-is-the-api) are a great way to hide implementation details while providing a neutral interface to others.
-* __Isolate Team Code__<br>Don’t share a runtime, even if all teams use the same framework. Build independent apps that are self contained. Don't rely on shared state or global variables.
-* __Establish Team Prefixes__<br>Agree on naming conventions where isolation is not possible yet. Namespace CSS, Events, Local Storage and Cookies to avoid collisions and clarify ownership.
-* __Favor Native Browser Features over Custom APIs__<br>Use [Browser Events for communication](#parent-child-communication--dom-modification) instead of building a global PubSub system. If you really have to build a cross team API, try keeping it as simple as possible.
-* __Build a Resilient Site__<br>Your feature should be useful, even if JavaScript failed or hasn't executed yet. Use [Universal Rendering](#serverside-rendering--universal-rendering) and Progressive Enhancement to improve perceived performance.
+## Core Ideas behind Micro Frontends 微前端架构背后的核心思维
+
+* __Be Technology Agnostic__ __技术不可知主义__<br>Each team should be able to choose and upgrade their stack without having to coordinate with other teams. [Custom Elements](#the-dom-is-the-api) are a great way to hide implementation details while providing a neutral interface to others.
+
+  每个团队应该选择自己的技术栈以及技术进化路线，而不是与其他团队步调一致。[Custom Elements](#the-dom-is-the-api)：对于向外界提供中立的编程边界的同时隐藏内部实现的细节这个方法论来说，Custom Element 就是一个非常不错的解决方案。也许在微前端的语境之下，框架将不是未来架构师主要考虑的问题，提供原生的WebComponent 就成了未来前端代码架构的核心。
+
+* __Isolate Team Code__ __隔离团队之间的代码__<br>Don’t share a runtime, even if all teams use the same framework. Build independent apps that are self contained. Don't rely on shared state or global variables.
+
+  即便所有团队都使用同样的框架，也不要共享一个运行时环境。构建自包含的Apps。不要依赖共享的状态或者全局变量。
+
+* __Establish Team Prefixes __ __简历团队自己的前缀__<br>Agree on naming conventions where isolation is not possible yet. Namespace CSS, Events, Local Storage and Cookies to avoid collisions and clarify ownership.
+
+  如果微前端的大环境还不允许环境隔离，那么各个团队要能够在所有层面指定自己的命名空间。具有命名空间的CSS， 事件，Local Storage 以及 Cookies，通过命名空间进行的隔离可以避免冲突，以及更加明确的职责。
+
+* __Favor Native Browser Features over Custom APIs__ __原生浏览器标准由于框架封装的API__<br>Use [Browser Events for communication](#parent-child-communication--dom-modification) instead of building a global PubSub system. If you really have to build a cross team API, try keeping it as simple as possible.
+
+  如果需要团队模块之间的通信机制，我建议你们使用 [用于通信的原生浏览器事件机制](#parent-child-communication--dom-modification) ，而不是自己构建一个PubSub系统。如果确实需要设计一个跨团队的通信API，那么也尽量让设计简单为好。
+
+* __Build a Resilient Site__ __构建适应度高的网络应用__<br>Your feature should be useful, even if JavaScript failed or hasn't executed yet. Use [Universal Rendering](#serverside-rendering--universal-rendering) and Progressive Enhancement to improve perceived performance.
+
+  所有开发的功能应该能够被使用，即便Javascript 执行失败的情况下。使用 [通用渲染](#serverside-rendering--universal-rendering) 策略以及渐进增强的设计来改进可感知的体验和性能。
 
 ---
 
-## The DOM is the API
+## The DOM is the API DOM 就是 API
 
 [Custom Elements](https://developers.google.com/web/fundamentals/getting-started/primers/customelements), the interoperability aspect from the Web Components Spec, are a good primitive for integration in the browser. Each team builds their component __using their web technology of choice__ and __wraps it inside a Custom Element__ (e.g. `<order-minicart></order-minicart>`). The DOM specification of this particular element (tag-name, attributes & events) acts as the contract or public API for other teams. The advantage is that they can use the component and its functionality without having to know the implementation. They just have to be able to interact with the DOM.
 
+[Custom Elements](https://developers.google.com/web/fundamentals/getting-started/primers/customelements) 所代表的来自于Web Component的可操作性，也是发端于可以直接集成到浏览器的强大原生能力。每一个独立的团队可以通过他们__自行选择的web 技术__ 把功能__封装到Custom Element组件中去__(e.g. `<order-minicart></order-minicart>`)。 而由于这些封装之后的原生组件所具有的原生DOM属性(tag-name, attributes & events)，就可以成为事实上的对外公开API协议。这种实现方式的优势在于，其他团队完全不需要了解组件构建团队所使用的技术栈或者具体的技术实现，只需要明白组件的通信接口，就可以与使用这个UI组件。而花去的精力不过是了解这个组件在DOM层留给使用者的API。
+
 But Custom Elements alone are not the solution to all our needs. To address progressive enhancement, universal rendering or routing we need additional pieces of software.
 
+但是只是组件级别的Custom Element并不能解决我们所有的问题。为了能够实现渐进增强，通用渲染机制和路由机制则是整个拼图剩下的部分。
+
 This page is divided into two main areas. First we will discuss [Page Composition](#page-composition) - how to assemble a page out of components owned by different teams. After that we'll show examples for implementing clientside [Page Transition](#page-transition).
+
+以下段落我们会分为两大部分。首先我们要讨论[页面构成](#page-composition) - 如何把各个团队开发的组件组装到一起，最终能够形成一个完整的页面。 在那之后我们就开战第二个话题，如果进行[页面间转换](#page-transition)。
 
 ## Page Composition
 
@@ -77,7 +112,7 @@ Lets take the __buy button__ as an example. Team Product includes the button sim
       connectedCallback() {
         this.innerHTML = `<button type="button">buy for 66,00 €</button>`;
       }
-
+    
       disconnectedCallback() { ... }
     }
     window.customElements.define('blue-buy', BlueBuy);
@@ -113,7 +148,7 @@ To support this the Custom Element can implement the `attributeChangedCallback` 
       t_fendt: '54,00 €',
       t_eicher: '58,00 €',
     };
-
+    
     class BlueBuy extends HTMLElement {
       static get observedAttributes() {
         return ['sku'];
@@ -191,7 +226,7 @@ With this approach the mini basket fragment adds a listener to a DOM element whi
 
     // page.js
     const $ = document.getElementsByTagName;
-
+    
     $('blue-buy')[0].addEventListener('blue:basket:changed', function() {
       $('blue-basket')[0].refresh();
     });
@@ -228,11 +263,11 @@ The `#include` comment is replaced with the response of `/blue-buy?sku=t_porsche
     upstream team_red {
       server team_red:3003;
     }
-
+    
     server {
       listen 3000;
       ssi on;
-
+    
       location /blue {
         proxy_pass  http://team_blue;
       }
