@@ -76,37 +76,51 @@ But Custom Elements alone are not the solution to all our needs. To address prog
 
 This page is divided into two main areas. First we will discuss [Page Composition](#page-composition) - how to assemble a page out of components owned by different teams. After that we'll show examples for implementing clientside [Page Transition](#page-transition).
 
-以下段落我们会分为两大部分。首先我们要讨论[页面构成](#page-composition) - 如何把各个团队开发的组件组装到一起，最终能够形成一个完整的页面。 在那之后我们就开战第二个话题，如果进行[页面间转换](#page-transition)。
+以下段落我们会分为两大部分。首先我们要讨论[页面组成](#page-composition) - 如何把各个团队开发的组件组装到一起，最终能够形成一个完整的页面。 在那之后我们就开战第二个话题，如果进行[页面间转换](#page-transition)。
 
-## Page Composition
+## Page Composition 页面组成
 
 Beside the __client-__ and __serverside__ integration of code written in __different frameworks__ itself, there are a lot of side topics that should be discussed: mechanisms to __isolate js__, __avoid css conflicts__, __load resources__ as needed, __share common resources__ between teams, handle __data fetching__ and think about good __loading states__ for the user. We'll go into these topics one step at a time.
 
-### The Base Prototype
+抛开__前后端__如何集成来自于__不同开发框架__的代码这个问题本身，还有很多其他值得讨论的话题：用来__隔离js作用域__的机制，避免__css样式冲突__，按需__加载资源__，团队之间__共用资源的共享__，__处理获取数据的流程__以及因此产生的如何通过__更好的加载状态管理__来为用户带来更好的体验。关于这些话题，我们接下来会一步一步的深入剖析。
+
+### The Base Prototype 基础的原型
 
 The product page of this model tractor store will serve as the basis for the following examples.
 
+我们会把下面这个展示各种拖拉机型号的店铺页面作为演示整个深入步骤的样本。
+
 It features a __variant selector__ to switch between the three different tractor models. On change product image, name, price and recommendations are updated. There is also a __buy button__, which adds the selected variant to the basket and a __mini basket__ at the top that updates accordingly.
+
+这个页面的主要功能是提供一个__型号选择器__，用来切换三种不同型号的拖拉机。一旦切换了不同的拖拉机图片，那么与之相关的型号名称，价格和推荐商品也会一并切换。页面上还有一个__购买的按键__，用来将选定好的型号放入购物框中，此外页面顶端也有一个__小的购物框组件__用来显示已经加入购物框中的商品。
 
 [![Example 0 - Product Page - Plain JS](./ressources/video/model-store-0.gif)](./0-model-store/)
 
-[try in browser](./0-model-store/) & [inspect the code](https://github.com/neuland/micro-frontends/tree/master/0-model-store)
+[在浏览器中打开](./0-model-store/) & [查看代码](https://github.com/neuland/micro-frontends/tree/master/0-model-store)
 
 All HTML is generated client side using __plain JavaScript__ and ES6 Template Strings with __no dependencies__. The code uses a simple state/markup separation and re-renders the entire HTML client side on every change - no fancy DOM diffing and __no universal rendering__ for now. Also __no team separation__ - [the code](https://github.com/neuland/micro-frontends/tree/master/0-model-store) is written in one js/css file.
 
-### Clientside Integration
+所有的HTML都是通过原生Javascript和ES6的字符串模板能力在客户端生成的，没有其他的第三方依赖了。前端代码通过数据状态和标记语言分离的方式，一旦有任何状态变更都会在客户端对整个HTML进行重新渲染。截至目前位置，整个过程中没有什么高级的DOM diff算法，也没有__通用渲染__技术的使用。也没有__不同团队__这个问题 - [所有代码](https://github.com/neuland/micro-frontends/tree/master/0-model-store)都是写在一个 js/css 文件之内的
+
+### Clientside Integration 客户端集成
 
 In this example, the page is split into separate components/fragments owned by three teams. __Team Checkout__ (blue) is now responsible for everything regarding the purchasing process - namely the __buy button__ and __mini basket__. __Team Inspire__ (green) manages the __product recommendations__ on this page. The page itself is owned by __Team Product__ (red).
 
+同一个页面，但是我们将它作为这个段落的例子，于是我们需要这个页面被分割成独立的组件/片段，而这些组件分别归属三个不同的团队。__下单团队__ (蓝色框标注) 负责开发所有跟下单相关的流程 - 也就是__购买按钮__和__小购物框组件__。__用户启发团队__ (绿色框标注) 负责页面中__推荐商品的模块__。而整个页面的布局和页面内剩下的部分则归属于__产品模块团队__ (红色框标注)。
+
 [![Example 1 - Product Page - Composition](./ressources/screen/three-teams.png)](./1-composition-client-only/)
 
-[try in browser](./1-composition-client-only/) & [inspect the code](https://github.com/neuland/micro-frontends/tree/master/1-composition-client-only)
+[在浏览器中打开](./1-composition-client-only/) & [查看代码](https://github.com/neuland/micro-frontends/tree/master/1-composition-client-only)
 
 __Team Product__ decides which functionality is included and where it is positioned in the layout. The page contains information that can be provided by Team Product itself, like the product name, image and the available variants. But it also includes fragments (Custom Elements) from the other teams.
 
-### How to Create a Custom Element?
+__产品模块团队__ 决定整个页面中需要包含哪些功能，以及这些功能对应的页面组件置于布局中的什么位置。页面中包含产品模块团队自己就可以提供的信息，比如产品名称，图片和型号变体。但这个页面仍然也包含由其他团队提供的片段(Custom Elements)。
+
+### How to Create a Custom Element? 如何创建一个Custom Elements
 
 Lets take the __buy button__ as an example. Team Product includes the button simply adding `<blue-buy sku="t_porsche"></blue-buy>` to the desired position in the markup. For this to work, Team Checkout has to register the element `blue-buy` on the page.
+
+那__购买按钮__来作为例子。产品模块团队只需要简单的把`<blue-buy sku="t_porsche"></blue-buy>`这段代码引入到页面内就可以了。在这背后，则需要下单团队在页面上注册blue-buy这个Custom Elements。
 
     class BlueBuy extends HTMLElement {
       connectedCallback() {
@@ -119,13 +133,19 @@ Lets take the __buy button__ as an example. Team Product includes the button sim
 
 Now every time the browser comes across a new `blue-buy` tag, the `connectedCallback` is called. `this` is the reference to the root DOM node of the custom element. All properties and methods of a standard DOM element like `innerHTML` or `getAttribute()` can be used.
 
+注册之后每次浏览器发现`blue-buy` 标签，`connectedCallback` 方法就会被调用。其中`this` 指向的是custom element的父级元素。所有标准DOM元素的属性和方法都可以被应用在自定义元素上，比如innerHTML或者`getAttribute()` 方法。
+
 ![Custom Element in Action](./ressources/video/custom-element.gif)
 
 When naming your element the only requirement the spec defines is that the name must __include a dash (-)__ to maintain compatibility with upcoming new HTML tags. In the upcoming examples the naming convention `[team_color]-[feature]` is used. The team namespace guards against collisions and this way the ownership of a feature becomes obvious, simply by looking at the DOM.
 
-### Parent-Child Communication / DOM Modification
+为你的自定义元素进行命名时，需要满足自定义元素的标准中定义的一个条件，那就是自定义元素的名称中需要__包含一个（-）__。这是为了保持与新增加的HTML标签的兼容性。在下面的例子中可以看到采用了`[团队颜色]-[功能]` 这种命名规约。使用团队相关的命名空间保证了自定义元素不会与其他团队的自定义元素发生冲突，并且组件的维护者也会一目了然，只需要看一下DOM的命名就知道是哪个团队在维护了。
+
+### Parent-Child Communication / DOM Modification 父子通信 / DOM 修改
 
 When the user selects another tractor in the __variant selector__, the __buy button has to be updated__ accordingly. To achieve this Team Product can simply __remove__ the existing element from the DOM __and insert__ a new one.
+
+当用户通过__变体选择器__ 选择了其他型号的拖拉机，__购买按钮应该相应的作出改变__。产品模块团队可以通过简单的替换页面上的`blue-buy`元素即可。
 
     container.innerHTML;
     // => <blue-buy sku="t_porsche">...</blue-buy>
@@ -133,15 +153,23 @@ When the user selects another tractor in the __variant selector__, the __buy but
 
 The `disconnectedCallback` of the old element gets invoked synchronously to provide the element with the chance to clean up things like event listeners. After that the `connectedCallback` of the newly created `t_fendt` element is called.
 
+当摘除原先的购买按钮时，`disconnectedCallback` 方法会被同步执行，以便组件的使用者进行其他清理工作，比如清除事件监听。之后当新的带有`sku="t_fendt"` 属性的购买按钮被加入到页面上的同时，会调用新组件的`connectedCallback`方法。
+
 Another more performant option is to just update the `sku` attribute on the existing element.
+
+另外一种更加高效的操作方式则是直接改变当前元素的`sku` 属性。
 
     document.querySelector('blue-buy').setAttribute('sku', 't_fendt');
 
 If Team Product used a templating engine that features DOM diffing, like React, this would be done by the algorithm automatically.
 
+如果产品模块团队使用带有DOM diff的模板引擎进行开发，比如React，这个操作将会通过框架内部的算法自动执行。
+
 ![Custom Element Attribute Change](./ressources/video/custom-element-attribute.gif)
 
 To support this the Custom Element can implement the `attributeChangedCallback` and specify a list of `observedAttributes` for which this callback should be triggered.
+
+对于自定义元素来说，则可以通过实现`attributeChangedCallback` 方法达到同样的效果。在BlueBuy 类中可以通过声明`observedAttributes`以便对应的属性改变后自动触发`attributeChangedCallback` 回调方法。
 
     const prices = {
       t_porsche: '66,00 €',
@@ -170,21 +198,33 @@ To support this the Custom Element can implement the `attributeChangedCallback` 
 
 To avoid duplication a `render()` method is introduced which is called from `connectedCallback` and `attributeChangedCallback`. This method collects needed data and innerHTML's the new markup. When deciding to go with a more sophisticated templating engine or framework inside the Custom Element, this is the place where its initialisation code would go.
 
-### Browser Support
+为了避免代码重复，我们抽象了一个`render()` 方法，用来在`connectedCallback`方法和`attributeChangedCallback`方法中进行调用。这个渲染方法负责进行对DOM所需的数据的处理，以及最终的HTML片段的插入。所以哪天你决定要在自定义元素内部使用一些更加复杂的模板引擎或者框架，他们的初始化代码放到这里就比较合适。
+
+### Browser Support 浏览器支持
 
 The above example uses the Custom Element V1 Spec which is currently [supported in Chrome, Safari and Opera](http://caniuse.com/#feat=custom-elementsv1). But with [document-register-element](https://github.com/WebReflection/document-register-element) a lightweight and battle-tested polyfill is available to make this work in all browsers. Under the hood, it uses the [widely supported](http://caniuse.com/#feat=mutationobserver) Mutation Observer API, so there is no hacky DOM tree watching going on in the background.
 
-### Framework Compatibility
+上面的示例代码使用了自定义元素的V1版本的标准，这个标准当前[被Chrome, Safari和Opera支持](http://caniuse.com/#feat=custom-elementsv1)。但是如果有[document-register-element](https://github.com/WebReflection/document-register-element) 这个轻量级实战检验过的polyfill 加持的话，以上代码就可以运行在所有浏览器中了。其底层实际上是使用了被[广泛支持的](http://caniuse.com/#feat=mutationobserver) MutationObserver 这个API，所以并没有在幕后藏着什么DOM tree 检查之类的hack技巧。 
+
+### Framework Compatibility 框架兼容性
 
 Because Custom Elements are a web standard, all major JavaScript frameworks like Angular, React, Preact, Vue or Hyperapp support them. But when you get into the details, there are still a few implementation problems in some frameworks. At [Custom Elements Everywhere](https://custom-elements-everywhere.com/) [Rob Dodson](https://twitter.com/rob_dodson) has put together a compatibility test suite that highlights unresolved issues.
 
-### Child-Parent or Siblings Communication / DOM Events
+由于自定义元素是就是web标准，所有主流的JavaScript框架诸如Angular, React, Preact, Vue以及Hyperapp 都支持。不过在一些细节上，某些框架仍然有一些具体实现方面的问题。关于这些问题[Rob Dodson](https://twitter.com/rob_dodson) 在这篇文章中[Custom Elements Everywhere](https://custom-elements-everywhere.com/) 汇编了不兼容性测试套件中未通过的具体问题。
+
+### Child-Parent or Siblings Communication / DOM Events 子父，同级通信 / DOM 事件
 
 But passing down attributes is not sufficient for all interactions. In our example the __mini basket should refresh__ when the user performs a __click on the buy button__.
 
+但是，通过从外向内传递DOM元素的属性并不能解决所有场景的通信问题。在例子中__小购物框__ 组件应该在用户__点击了购买按钮__之后也即时进行改变。
+
 Both fragments are owned by Team Checkout (blue), so they could build some kind of internal JavaScript API that lets the mini basket know when the button was pressed. But this would require the component instances to know each other and would also be an isolation violation.
 
+这两个组件都属于下单团队 (蓝色)，所以想当然的他们可以自己设计某种用于通信的Javascript API，以便可以让购物框知道购买按钮被点击了。但这样的设计就需要两个组件实例知晓对方的存在，况且这也是一种违反隔离原则的设计。
+
 A cleaner way is to use a PubSub mechanism, where a component can publish a message and other components can subscribe to specific topics. Luckily browsers have this feature built-in. This is exactly how browser events like `click`, `select` or `mouseover` work. In addition to native events there is also the possibility to create higher level events with `new CustomEvent(...)`. Events are always tied to the DOM node they were created/dispatched on. Most native events also feature bubbling. This makes it possible to listen for all events on a specific sub-tree of the DOM. If you want to listen to all events on the page, attach the event listener to the window element. Here is how the creation of the `blue:basket:changed`-event looks in the example:
+
+更优化的解决方案是应用PubSub机制，这样以来组件可以发布信息，而其他组件可以根据自身的需要来选择订阅某些特定的话题。幸运的是，浏览器本身就内置了这样的特性。实际上这也就是`click`，`select` 或者 `mouseover` 这些浏览器事件能够工作的幕后英雄。除了浏览器定义的原生事件以外，我们也可以通过调用`new CustomEvent()` 来创建上层的自定义事件。浏览器事件总是与创建/分发这些事件的DOM节点绑定在一起。大多数原生的事件也都具有冒泡的特性。由于具有冒泡的特性，所以我们可以在DOM树中的某个特定子节点就能够监听到所有的事件。如果你一定要监听到整个页面上的所有事件，那就把事件监听的处理句柄直接绑定到window元素上。关于原理我们就讲这么多，下面的代码展示了如何创建一个形如`blue:basket:changed` 的自定义事件：
 
     class BlueBuy extends HTMLElement {
       [...]
@@ -209,6 +249,8 @@ A cleaner way is to use a PubSub mechanism, where a component can publish a mess
 
 The mini basket can now subscribe to this event on `window` and get notified when it should refresh its data.
 
+小购物框组件就可以使用下面的代码来订阅__window__元素上发生的这个特定事件，一旦在购买按钮上触发了这个事件，购物框组件内部就会收到事件发生的通知，并且执行`refresh()` 方法。
+
     class BlueBasket extends HTMLElement {
       connectedCallback() {
         [...]
@@ -224,6 +266,8 @@ The mini basket can now subscribe to this event on `window` and get notified whe
 
 With this approach the mini basket fragment adds a listener to a DOM element which is outside its scope (`window`). This should be ok for many applications, but if you are uncomfortable with this you could also implement an approach where the page itself (Team Product) listens to the event and notifies the mini basket by calling `refresh()` on the DOM element.
 
+通过这种方式小购物框组件就具备了能够监听到在它自身范围之外的DOM节点上发生的事件(在这个示例中就是发生在`window` 上)。对于很多场景来说，这么做应该没什么问题，但是如果你觉得挂在全局变量的方式让你感到不妥，那么你仍然可以实现其他方法来达到同样的目的。比如在页面组件上(由产品模块团队维护) 监听购买按钮按下的事件，同样的，仍然由页面组件负责主动调用购物框组件的`refresh()` 方法来达到通知购物框组件的目的。
+
     // page.js
     const $ = document.getElementsByTagName;
     
@@ -233,18 +277,26 @@ With this approach the mini basket fragment adds a listener to a DOM element whi
 
 Imperatively calling DOM methods is quite uncommon, but can be found in [video element api](https://developer.mozilla.org/de/docs/Web/HTML/Using_HTML5_audio_and_video#Controlling_media_playback) for example. If possible the use of the declarative approach (attribute change) should be preferred.
 
-## Serverside Rendering / Universal Rendering
+直接调用DOM元素的方法并不常见，但也可以在[video element api](https://developer.mozilla.org/de/docs/Web/HTML/Using_HTML5_audio_and_video#Controlling_media_playback) 中找到例子。不过如果可以的话，还是应该优先采用声明式的方式(改变子组件的attribute)进行通信。
+
+## Serverside Rendering / Universal Rendering 服务端渲染 / 通用渲染
 
 Custom Elements are great for integrating components inside the browser. But when building a site that is accessible on the web, chances are that initial load performance matters and users will see a white screen until all js frameworks are downloaded and executed. Additionally, it's good to think about what happens to the site if the JavaScript fails or is blocked. [Jeremy Keith](https://adactio.com/) explains the importance in his ebook/podcast [Resilient Web Design](https://resilientwebdesign.com/). Therefore the ability to render the core content on the server is key. Sadly the web component spec does not talk about server rendering at all. No JavaScript, no Custom Elements :(
 
-### Custom Elements + Server Side Includes = ❤️
+自定义元素对于在浏览器环境下集成组件来说是非常棒的。但是当构建一个web网站时，大概率我们会考虑加载效率的问题，毕竟在所有静态资源加载完成之前，用户能看到的只有一个白屏。另外也还得额外考虑如果JavaScript脚本执行失败或者被阻断的时候，我们的网站应该如何显示。[Jeremy Keith](https://adactio.com/) 在他的电子书/podcast 节目中[Resilient Web Design](https://resilientwebdesign.com/) 诠释了这个问题的重要性。因此能够在服务端就把页面的核心部分渲染出来就成了页面加载效率的关键点。可惜的是web component的标准中根本没有涉及到服务端渲染这件事情。没有JavaScript，没有自定义元素 :(
+
+### Custom Elements + Server Side Includes = ❤️ 自定义元素 + 服务端引用 = ❤️
 
 To make server rendering work, the previous example is refactored. Each team has their own express server and the `render()` method of the Custom Element is also accessible via url.
+
+为了让自定义元素在服务端渲染环境下也能适用，之前的例子就需要做一些重构。每个团队都部署他们自己的express服务器，并且自定义元素的`render()` 方法也可以通过url进行调用。
 
     $ curl http://127.0.0.1:3000/blue-buy?sku=t_porsche
     <button type="button">buy for 66,00 €</button>
 
 The Custom Element tag name is used as the path name - attributes become query parameters. Now there is a way to server-render the content of every component. In combination with the `<blue-buy>`-Custom Elements something that is quite close to a __Universal Web Component__ is achieved:
+
+把自定义元素的标签名称作为请求的路径 - attributes作为url参数。这样的话就可以让服务器把每一种组件相对应的HTML返回出来。这个方法再加上基于浏览器的自定义组件能力，这个奇妙的组合产生了一种类似__通用Web Component__ 的东西。
 
     <blue-buy sku="t_porsche">
       <!--#include virtual="/blue-buy?sku=t_porsche" -->
@@ -252,7 +304,11 @@ The Custom Element tag name is used as the path name - attributes become query p
 
 The `#include` comment is part of [Server Side Includes](https://en.wikipedia.org/wiki/Server_Side_Includes), which is a feature that is available in most web servers. Yes, it's the same technique used back in the days to embed the current date on our web sites. There are also a few alternative techniques like [ESI](https://en.wikipedia.org/wiki/Edge_Side_Includes), [nodesi](https://github.com/Schibsted-Tech-Polska/nodesi), [compoxure](https://github.com/tes/compoxure) and [tailor](https://github.com/zalando/tailor), but for our projects SSI has proven itself as a simple and incredibly stable solution.
 
+`#include` 注释是一种 [服务端引用](https://en.wikipedia.org/wiki/Server_Side_Includes) 方式，大多数web server都支持这个特性。没错这玩意就是很久以前我们用来在网站上显示一个嵌入在网页中的当前时间的技术。还有一些其他可以替代的技术比如[ESI](https://en.wikipedia.org/wiki/Edge_Side_Includes), [nodesi](https://github.com/Schibsted-Tech-Polska/nodesi), [compoxure](https://github.com/tes/compoxure) 以及 [tailor](https://github.com/zalando/tailor)，不过对于我们这个项目来说，SSI已经被证明是一个非常简单而且可靠的解决方案了。
+
 The `#include` comment is replaced with the response of `/blue-buy?sku=t_porsche` before the web server sends the complete page to the browser. The configuration in nginx looks like this:
+
+`#include` 注释会在web server将整个页面发送给浏览器之前，被替换为`/blue-buy?sku=t_porsche` 这个请求的响应。下面是响应的nginx配置：
 
     upstream team_blue {
       server team_blue:3001;
@@ -284,11 +340,15 @@ The `#include` comment is replaced with the response of `/blue-buy?sku=t_porsche
 
 The directive `ssi: on;` enables the SSI feature and an `upstream` and `location` block is added for every team to ensure that all urls which start with `/blue` will be routed to the correct application (`team_blue:3001`). In addition the `/` route is mapped to team red, which is controlling the homepage / product page.
 
+Nginx 指令 `ssi: on;` 开启SSI特性。另外 `upstream` 和 `location` 的配置，分别给三个团队设置了对应的路由。比如url以 `/blue` 开头的请求被路由到正确的应用上(`team_blue:3001`) 上。另外 `/` 也被路由到红色团队(产品模块团队)，这是为了把根路径，也就是产品页面本身路由到产品模块团队的web server上。
+
 This animation shows the tractor store in a browser which has __JavaScript disabled__.
+
+下面的动画展示了这个拖拉机商店在一个关闭了JavaScript 能力的浏览器上是什么样的表现。
 
 [![Serverside Rendering - Disabled JavaScript](./ressources/video/server-render.gif)](./ressources/video/server-render.mp4)
 
-[inspect the code](https://github.com/neuland/micro-frontends/tree/master/2-composition-universal)
+[查看代码](https://github.com/neuland/micro-frontends/tree/master/2-composition-universal)
 
 The variant selection buttons now are actual links and every click leads to a reload of the page. The terminal on the right illustrates the process of how a request for a page is routed to team red, which controls the product page and after that the markup is supplemented by the fragments from team blue and green.
 
