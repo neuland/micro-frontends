@@ -9,10 +9,10 @@
 Однако эта идея не нова. Он имеет много общего с [автономными системами](http://scs-architecture.org/) концепция. В прошлом подобные подходы назывались [Frontend Integration for Verticalized Systems](https://dev.otto.de/2014/07/29/scaling-with-microservices-and-vertical-decomposition), но микро-фронтенды - это явно более дружелюбный и менее громоздкий термин.
 
 __Monolithic Frontends__
-![Monolithic Frontends](../ressources/diagrams/organisational/monolith-frontback-microservices.png)
+![Monolithic Frontends](./ressources/diagrams/organisational/monolith-frontback-microservices.png)
 
 __Organisation in Verticals__
-![End-To-End Teams with Micro Frontends](../ressources/diagrams/organisational/verticals-headline.png)
+![End-To-End Teams with Micro Frontends](./ressources/diagrams/organisational/verticals-headline.png)
 
 ## Что такое современное веб-приложение?
 
@@ -52,7 +52,7 @@ __Organisation in Verticals__
 
 Он оснащен __элементом выбора__ для переключения между тремя различными моделями тракторов. При изменении имиджа продукта обновляются название, цена и рекомендации. Существует также кнопка __buy__, которая добавляет выбранный вариант в корзину, и __мини-корзина__ вверху, которая соответственно обновляется.
 
-[![Пример 0 - страница продукта-обычный JS](../ressources/video/model-store-0.gif)](../0-модель-магазин/)
+[![Пример 0 - страница продукта-обычный JS](./ressources/video/model-store-0.gif)](../0-модель-магазин/)
 
 [попробуйте в браузере](../0-model-store/) & [посмотреть код](https://github.com/serzn1/micro-frontends/tree/master/0-model-store)
 
@@ -62,7 +62,7 @@ __Organisation in Verticals__
 
 В этом примере страница разделена на отдельные компоненты/фрагменты, принадлежащие трем командам. __Команда Checkout__ (синий) теперь отвечает за все, что касается процесса покупки, а именно за кнопку __buy__ и мини - корзину__. __Команда Inspire__ (зеленый) управляет рекомендациями __продукта__ на этой странице. Сама страница является собственностью __команды__ (Красный).
 
-[![Пример 1 - Страница Продукта-Композиция](../ressources/screen/three-teams.png)](../1-композиция-только для клиента/)
+[![Пример 1 - Страница Продукта-Композиция](./ressources/screen/three-teams.png)](../1-композиция-только для клиента/)
 
 [попробуйте в браузере](../1-composition-client-only/) & [посмотреть код](https://github.com/serzn1/micro-frontends/tree/master/1-composition-client-only)
 
@@ -83,7 +83,7 @@ __Команда Product__ решает, какая функциональнос
 
 Теперь каждое время когда браузер находит тег `blue-buy`, вызывается `connectedCallback`. `this` является ссылкой на корневой DOM элемент этого пользовательского элемента. Для работы с этими элементами могут быть использованы все свойства и методы как для работы со стандартным DOM элементом, например `innerHTML` или `getAttribute()`.
 
-![Пользовательские элементы в действии](../ressources/video/custom-element.gif)
+![Пользовательские элементы в действии](./ressources/video/custom-element.gif)
 
 Есть единственное требование присвоении имени вашему элементу, которое определяет спецификация, заключается в том, что имя должно __включать тире (-)__ для поддержания совместимости с предстоящими новыми HTML-тегами. В следующих примерах используется соглашение об именовании `[team_color]-[feature]`. Пространство имен `team` защищает от коллизий, и таким образом право собственности на элемиент становится очевидным, просто взглянув на DOM.
 
@@ -103,7 +103,7 @@ __Команда Product__ решает, какая функциональнос
 
 Если __команда Product__ использует шаблонизатор, который сравниваете дом, как React, это будет сделано автоматически алгоритмом.
 
-![Изменение аттрибута пользовательского элемента](../ressources/video/custom-element-attribute.gif)
+![Изменение аттрибута пользовательского элемента](./ressources/video/custom-element-attribute.gif)
 
 Чтобы поддержать это, вы можете реализовать `attributeChangedCallback` и указать список `observedAttributes`, для которых этот метод должен быть вызван.
 
@@ -252,7 +252,7 @@ The directive `ssi: on;` enables the SSI feature and an `upstream` and `location
 
 Эта анимация показывает магазин тракторов в браузере, с __отключенным JavaScript__.
 
-[![Serverside Rendering - Disabled JavaScript](../ressources/video/server-render.gif)](../ressources/video/server-render.mp4)
+[![Serverside Rendering - Disabled JavaScript](./ressources/video/server-render.gif)](./ressources/video/server-render.mp4)
 
 [inspect the code](https://github.com/serzn1/micro-frontends/tree/master/2-composition-universal)
 
@@ -292,7 +292,7 @@ The directive `ssi: on;` enables the SSI feature and an `upstream` and `location
 
 *Важно знать: Пользовательские элементы [не могут быть самозакрывающимися тегами](https://developers.google.com/web/fundamentals/architecture/building-components/customelements#jsapi), поэтому версия `<green-recos sku="t_porsche" />` не будет работать корректно.*
 
-<img alt="Reflow" src="../ressources/video/data-fetching-reflow.gif" style="width: 500px" />
+<img alt="Reflow" src="./ressources/video/data-fetching-reflow.gif" style="width: 500px" />
 
 Отрисовка происходит только в браузере.
 Но, как видно из анимации, это изменение теперь привело к __существенному reflow__ страницы.
@@ -315,7 +315,7 @@ The directive `ssi: on;` enables the SSI feature and an `upstream` and `location
 Разметка __плейсхолдера__ может повторно использовать части стилей макета реального контента.
 Таким образом, плейсхолдер __резервирует необходимое пространство__ на сайте и заполнение фактического содержимого не приводит к скачку.
 
-<img alt="Skeleton Screen" src="../ressources/video/data-fetching-skeleton.gif" style="width: 500px" />
+<img alt="Skeleton Screen" src="./ressources/video/data-fetching-skeleton.gif" style="width: 500px" />
 
 Техника экрана-плейсхолдера (Skeleton Screen) также __очень полезна на клиенте__.
 В момент появления пользовательских элементов в DOMе они могут быть __показаны мгновенно__, задолго до момента загрузки реальных данных с сервера.
