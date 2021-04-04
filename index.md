@@ -60,7 +60,7 @@ __Organisation in Verticals__
 
 ### Интеграция На Стороне Клиента
 
-В этом примере страница разделена на отдельные компоненты/фрагменты, принадлежащие трем командам. __Команда Checkout__ (синий) теперь отвечает за все, что касается процесса покупки, а именно за кнопку __buy__ и мини - корзину__. __Команда Inspire__ (зеленый) управляет рекомендациями __продукта__ на этой странице. Сама страница является собственностью __команды__ (Красный).
+В этом примере страница разделена на отдельные компоненты/фрагменты, принадлежащие трем командам. __Команда Checkout__ (blue) теперь отвечает за все, что касается процесса покупки, а именно за кнопку __buy__ и мини - корзину__. __Команда Inspire__ (green) управляет рекомендациями __продукта__ на этой странице. Сама страница является собственностью __команды__ (red).
 
 [![Пример 1 - Страница Продукта-Композиция](./ressources/screen/three-teams.png)](../1-композиция-только для клиента/)
 
@@ -70,16 +70,18 @@ __Команда Product__ решает, какая функциональнос
 
 ### Как создать пользовательский элемент?
 
-Возьмем в качестве примера кнопку __buy__. Группа продукции включает в себя кнопку, просто добавив `<синий-купить СКУ="t_porsche"></синий-покупайте> в нужное место в разметке. Для работы этой команды кассу должен зарегистрировать элемент `синий-купить на странице.
+Возьмем в качестве примера кнопку __buy__. Группа продукции включает в себя кнопку, просто добавив `<blue-buy sku="t_porsche"></blue-buy>` в нужное место в разметке. Для работы этой команды кассу должен зарегистрировать элемент `blue-buy` на странице.
 
-    class BlueBuy extends HTMLElement {
-      connectedCallback() {
+```javascript
+class BlueBuy extends HTMLElement {
+    connectedCallback() {
         this.innerHTML = `<button type="button">buy for 66,00 €</button>`;
-      }
-
-      disconnectedCallback() { ... }
     }
-    window.customElements.define('blue-buy', BlueBuy);
+
+    disconnectedCallback() { ... }
+}
+window.customElements.define('blue-buy', BlueBuy);
+```
 
 Теперь каждое время когда браузер находит тег `blue-buy`, вызывается `connectedCallback`. `this` является ссылкой на корневой DOM элемент этого пользовательского элемента. Для работы с этими элементами могут быть использованы все свойства и методы как для работы со стандартным DOM элементом, например `innerHTML` или `getAttribute()`.
 
@@ -91,9 +93,11 @@ __Команда Product__ решает, какая функциональнос
 
 Когда пользователь выбирает другой трактор в __селекторе вариантов__, кнопка __buy должна быть обновлена__ соответствующим образом. Для достижения этой цели командный продукт может просто __удалить__ существующий элемент из DOM __и вставить__ новый.
 
-    container.innerHTML;
-    // => <blue-buy sku="t_porsche">...</blue-buy>
-    container.innerHTML = '<blue-buy sku="t_fendt"></blue-buy>';
+```javascript
+container.innerHTML;
+// => <blue-buy sku="t_porsche">...</blue-buy>
+container.innerHTML = '<blue-buy sku="t_fendt"></blue-buy>';
+```
 
 Метод `disconnectedCallback` старого элемента будет вызван синхронно, чтобы дать элементу шанс сделать все необходимые операции, например, удалить обработчики событий. После этого будет вызван `connectedCallback` только что созданного элемента `t_fendt`.
 
@@ -107,30 +111,32 @@ __Команда Product__ решает, какая функциональнос
 
 Чтобы поддержать это, вы можете реализовать `attributeChangedCallback` и указать список `observedAttributes`, для которых этот метод должен быть вызван.
 
-    const prices = {
-      t_porsche: '66,00 €',
-      t_fendt: '54,00 €',
-      t_eicher: '58,00 €',
-    };
+```javascript
+const prices = {
+    t_porsche: '66,00 €',
+    t_fendt: '54,00 €',
+    t_eicher: '58,00 €',
+};
 
-    class BlueBuy extends HTMLElement {
-      static get observedAttributes() {
+class BlueBuy extends HTMLElement {
+    static get observedAttributes() {
         return ['sku'];
-      }
-      connectedCallback() {
+    }
+    connectedCallback() {
         this.render();
-      }
-      render() {
+    }
+    render() {
         const sku = this.getAttribute('sku');
         const price = prices[sku];
         this.innerHTML = `<button type="button">buy for ${price}</button>`;
-      }
-      attributeChangedCallback(attr, oldValue, newValue) {
-        this.render();
-      }
-      disconnectedCallback() {...}
     }
-    window.customElements.define('blue-buy', BlueBuy);
+    attributeChangedCallback(attr, oldValue, newValue) {
+        this.render();
+    }
+    disconnectedCallback() {...}
+}
+window.customElements.define('blue-buy', BlueBuy);
+```
 
 Чтобы избежать повторения кода, используется метод `render()`, который вызывается из `connectedCallback` и `attributeChangedCallback`. Этот метод объединяет необходимые данные в новую разметку innerHTML. Если вы решите использовать более сложный механизм шаблонов или фреймворк внутри пользовательского элемента, то именно здесь необходимо сделать его инициализацию.
 
@@ -150,50 +156,56 @@ The above example uses the Custom Element V1 Spec which is currently [supported 
 
 Более чистый способ-использовать механизм PubSub, где компонент может публиковать сообщение, а другие компоненты могут подписываться на определенные темы. К счастью, браузеры имеют эту встроенную функцию. Именно так работают события браузера, такие как `click`, `select` или `mouseover`. В дополнение к собственным событиям существует также возможность создавать события более высокого уровня с помощью `new CustomEvent(...)`. События всегда привязаны к узлу DOM, на котором они были созданы/отправлены. Большинство местных событий также используют всплытие событий (bubbling). Это позволяет прослушивать все события в определенном поддереве DOM. Если вы хотите прослушать все события на странице, прикрепите прослушиватель событий к элементу window. Вот как выглядит создание события `blue:basket:changed` на примере:
 
-    class BlueBuy extends HTMLElement {
-      [...]
-      connectedCallback() {
+```javascript
+class BlueBuy extends HTMLElement {
+    [...]
+    connectedCallback() {
         [...]
         this.render();
         this.firstChild.addEventListener('click', this.addToCart);
-      }
-      addToCart() {
+    }
+    addToCart() {
         // maybe talk to an api
         this.dispatchEvent(new CustomEvent('blue:basket:changed', {
-          bubbles: true,
+            bubbles: true,
         }));
-      }
-      render() {
-        this.innerHTML = `<button type="button">buy</button>`;
-      }
-      disconnectedCallback() {
-        this.firstChild.removeEventListener('click', this.addToCart);
-      }
     }
+    render() {
+        this.innerHTML = `<button type="button">buy</button>`;
+    }
+    disconnectedCallback() {
+        this.firstChild.removeEventListener('click', this.addToCart);
+    }
+}
+```
 
 Теперь мини-корзина может подписаться на это событие в `window` и получать уведомления, когда она должна обновить свои данные.
 
-    class BlueBasket extends HTMLElement {
-      connectedCallback() {
+```javascript
+class BlueBasket extends HTMLElement {
+    connectedCallback() {
         [...]
         window.addEventListener('blue:basket:changed', this.refresh);
-      }
-      refresh() {
-        // fetch new data and render it
-      }
-      disconnectedCallback() {
-        window.removeEventListener('blue:basket:changed', this.refresh);
-      }
     }
+    refresh() {
+        // fetch new data and render it
+    }
+    disconnectedCallback() {
+        window.removeEventListener('blue:basket:changed', this.refresh);
+    }
+}
+```
 
 При таком подходе фрагмент мини-корзины добавляет прослушиватель к элементу DOM, который находится вне его области видимости (`window`). Это должно быть нормально для многих приложений, но если вам это не нравится, вы также можете реализовать подход, при котором сама страница (команда Product) прослушивает событие и уведомляет мини-корзину, вызывая `refresh()` на элементе DOM.
 
-    // page.js
-    const $ = document.getElementsByTagName;
+```javascript
+// page.js
+const $ = document.getElementsByTagName;
 
-    $('blue-buy')[0].addEventListener('blue:basket:changed', function() {
-      $('blue-basket')[0].refresh();
-    });
+$('blue-buy')[0].addEventListener('blue:basket:changed', function() {
+    $('blue-basket')[0].refresh();
+});
+```
 
 Явный вызыв метода DOM довольно редко используется, но их можно найти, например, в [API Video элемента](https://developer.mozilla.org/de/docs/Web/HTML/Using_HTML5_audio_and_video#Controlling_media_playback). По возможности следует предпочесть использование декларативного подхода (изменение атрибутов).
 
@@ -205,46 +217,52 @@ The above example uses the Custom Element V1 Spec which is currently [supported 
 
 Чтобы сделать серверную отрисовку рабочей, давайте отрефакторим предыдущий пример. Каждая команда имеет свой собственный `express` сервер, и метод `render()` пользовательского элемента также доступен по url-адресу.
 
-    $ curl http://127.0.0.1:3000/blue-buy?sku=t_porsche
-    <button type="button">buy for 66,00 €</button>
+```javascript
+$ curl http://127.0.0.1:3000/blue-buy?sku=t_porsche
+<button type="button">buy for 66,00 €</button>
+```
 
 Имя тега пользовательского элемента используется в качестве URL, а атрибуты становятся параметрами запроса. Теперь есть способ серверного рендеринга содержимого каждого компонента. В сочетании с пользовательским элементом `<blue-buy>`, достигается что-то совсем близкое к __универсальному веб-компоненту__:
 
-    <blue-buy sku="t_porsche">
-      <!--#include virtual="/blue-buy?sku=t_porsche" -->
-    </blue-buy>
+```html
+<blue-buy sku="t_porsche">
+    <!--#include virtual="/blue-buy?sku=t_porsche" -->
+</blue-buy>
+```
 
 Комментарий `#include` является частью [SSI](https://en.wikipedia.org/wiki/Server_Side_Includes), которая является функцией, доступной на большинстве веб-серверов. Да, это тот же самый метод, который использовался в те далекие дни, чтобы встроить текущую дату на наши статичные веб-сайты. Есть также несколько альтернативных методов, таких как [ESI](https://en.wikipedia.org/wiki/Edge_Side_Includes), [nodesi](https://github.com/Schibsted-Tech-Polska/nodesi), [compoxure](https://github.com/tes/compoxure) и [tailor](https://github.com/zalando/tailor), но для наших проектов SSI зарекомендовала себя как простое и невероятно стабильное решение.
 
 Комментарий `#include` заменяется ответом от `/blue-buy?sku=t_porsche` перед тем, как веб-сервер отправит полную страницу в браузер. Конфигурация в nginx выглядит следующим образом:
 
-    upstream team_blue {
-      server team_blue:3001;
-    }
-    upstream team_green {
-      server team_green:3002;
-    }
-    upstream team_red {
-      server team_red:3003;
-    }
+```javascript
+upstream team_blue {
+    server team_blue:3001;
+}
+upstream team_green {
+    server team_green:3002;
+}
+upstream team_red {
+    server team_red:3003;
+}
 
-    server {
-      listen 3000;
-      ssi on;
+server {
+    listen 3000;
+    ssi on;
 
-      location /blue {
+    location /blue {
         proxy_pass  http://team_blue;
-      }
-      location /green {
-        proxy_pass  http://team_green;
-      }
-      location /red {
-        proxy_pass  http://team_red;
-      }
-      location / {
-        proxy_pass  http://team_red;
-      }
     }
+    location /green {
+        proxy_pass  http://team_green;
+    }
+    location /red {
+        proxy_pass  http://team_red;
+    }
+    location / {
+        proxy_pass  http://team_red;
+    }
+}
+```
 
 The directive `ssi: on;` enables the SSI feature and an `upstream` and `location` block is added for every team to ensure that all urls which start with `/blue` will be routed to the correct application (`team_blue:3001`). In addition the `/` route is mapped to team red, which is controlling the homepage / product page.
 
@@ -262,9 +280,11 @@ The directive `ssi: on;` enables the SSI feature and an `upstream` and `location
 
 Вы можете обкатать этот код в вашем локальном окружении. Необходимо только установить [Docker Compose](https://docs.docker.com/compose/install/).
 
-    git clone https://github.com/serzn1/micro-frontends.git
-    cd micro-frontends/2-composition-universal
-    docker-compose up --build
+```javascript
+git clone https://github.com/serzn1/micro-frontends.git
+cd micro-frontends/2-composition-universal
+docker-compose up --build
+```
 
 Затем Docker запескает nginx на 3000 порту и собирает ораз nodejs приложениядля каждой команды. Когда вы открываете [http://127.0.0.1:3000/](http://127.0.0.1:3000/) в браузере, вы должны увидеть красный трактор. Комбинированные логи `docker-compose` позволяет легко видеть, что происходит в сети. К сожалению, нет никакого способа контролировать цвета в логах, поэтому вам придется смириться с тем, что команда `blue` может быть выделена зеленым цветом :)
 
@@ -282,13 +302,17 @@ The directive `ssi: on;` enables the SSI feature and an `upstream` and `location
 
 **До**
 
-    <green-recos sku="t_porsche">
-      <!--#include virtual="/green-recos?sku=t_porsche" -->
-    </green-recos>
+```html
+<green-recos sku="t_porsche">
+    <!--#include virtual="/green-recos?sku=t_porsche" -->
+</green-recos>
+```
 
 **После**
 
-    <green-recos sku="t_porsche"></green-recos>
+```html
+<green-recos sku="t_porsche"></green-recos>
+```
 
 *Важно знать: Пользовательские элементы [не могут быть самозакрывающимися тегами](https://developers.google.com/web/fundamentals/architecture/building-components/customelements#jsapi), поэтому версия `<green-recos sku="t_porsche" />` не будет работать корректно.*
 

@@ -236,6 +236,10 @@ aside#sidebar .book .hidden {
   }
 }
 
-pre code {
+.language-plaintext code {
   color: #245798;
+}
+
+pre code {
+    background-color: transparent;
 }
