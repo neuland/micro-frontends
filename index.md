@@ -9,10 +9,12 @@
 Однако эта идея не нова. Он имеет много общего с [автономными системами](http://scs-architecture.org/) концепция. В прошлом подобные подходы назывались [Frontend Integration for Verticalized Systems](https://dev.otto.de/2014/07/29/scaling-with-microservices-and-vertical-decomposition), но микро-фронтенды - это явно более дружелюбный и менее громоздкий термин.
 
 __Monolithic Frontends__
-![Monolithic Frontends](./ressources/diagrams/organisational/monolith-frontback-microservices.png)
+
+<img alt="Monolithic Frontends" src="./ressources/diagrams/organisational/monolith-frontback-microservices.png" loading="lazy" />
 
 __Organisation in Verticals__
-![End-To-End Teams with Micro Frontends](./ressources/diagrams/organisational/verticals-headline.png)
+
+<img alt="End-To-End Teams with Micro Frontends" src="./ressources/diagrams/organisational/verticals-headline.png" loading="lazy" />
 
 ## Что такое современное веб-приложение?
 
@@ -52,9 +54,9 @@ __Organisation in Verticals__
 
 Он оснащен __элементом выбора__ для переключения между тремя различными моделями тракторов. При изменении имиджа продукта обновляются название, цена и рекомендации. Существует также кнопка __buy__, которая добавляет выбранный вариант в корзину, и __мини-корзина__ вверху, которая соответственно обновляется.
 
-[![Пример 0 - страница продукта-обычный JS](./ressources/video/model-store-0.gif){ loading=lazy }](../0-модель-магазин/)
+[<img alt="Пример 0 - страница продукта-обычный JS" src="./ressources/video/model-store-0.gif" loading="lazy" />](./0-модель-магазин/)
 
-[попробуйте в браузере](../0-model-store/) & [посмотреть код](https://github.com/serzn1/micro-frontends/tree/master/0-model-store)
+[попробуйте в браузере](./0-model-store/) & [посмотреть код](https://github.com/serzn1/micro-frontends/tree/master/0-model-store)
 
 Весь HTML генерируется на стороне клиента с использованием __чистого JavaScript__ и строк шаблона ES6 без __дополнительных зависимостей__. Код использует простое разделение состояния / разметки и повторно визуализирует всю клиентскую часть HTML при каждом изменении - никакого причудливого DOM диффинга и __никакого универсального рендеринга__ на данный момент. Также __нет разделения команд__ - [код](https://github.com/serzn1/micro-frontends/tree/master/0-model-store) записывается в один файл js / css.
 
@@ -62,9 +64,9 @@ __Organisation in Verticals__
 
 В этом примере страница разделена на отдельные компоненты/фрагменты, принадлежащие трем командам. __Команда Checkout__ (blue) теперь отвечает за все, что касается процесса покупки, а именно за кнопку __buy__ и мини - корзину__. __Команда Inspire__ (green) управляет рекомендациями __продукта__ на этой странице. Сама страница является собственностью __команды__ (red).
 
-[![Пример 1 - Страница Продукта-Композиция](./ressources/screen/three-teams.png){ loading=lazy }](../1-композиция-только для клиента/)
+[![Пример 1 - Страница Продукта-Композиция](./ressources/screen/three-teams.png)](./1-композиция-только для клиента/)
 
-[попробуйте в браузере](../1-composition-client-only/) & [посмотреть код](https://github.com/serzn1/micro-frontends/tree/master/1-composition-client-only)
+[попробуйте в браузере](./1-composition-client-only/) & [посмотреть код](https://github.com/serzn1/micro-frontends/tree/master/1-composition-client-only)
 
 __Команда Product__ решает, какая функциональность включена и где она расположена в макете. Страница содержит информацию, которая может быть предоставлена самим продуктом Team, например название продукта, изображение и доступные варианты. Но он также включает в себя фрагменты (пользовательские элементы) из других команд.
 
@@ -85,7 +87,7 @@ window.customElements.define('blue-buy', BlueBuy);
 
 Теперь каждое время когда браузер находит тег `blue-buy`, вызывается `connectedCallback`. `this` является ссылкой на корневой DOM элемент этого пользовательского элемента. Для работы с этими элементами могут быть использованы все свойства и методы как для работы со стандартным DOM элементом, например `innerHTML` или `getAttribute()`.
 
-![Пользовательские элементы в действии](./ressources/video/custom-element.gif){ loading=lazy }
+<img alt="Пользовательские элементы в действии" src="./ressources/video/custom-element.gif" loading="lazy" />
 
 Есть единственное требование присвоении имени вашему элементу, которое определяет спецификация, заключается в том, что имя должно __включать тире (-)__ для поддержания совместимости с предстоящими новыми HTML-тегами. В следующих примерах используется соглашение об именовании `[team_color]-[feature]`. Пространство имен `team` защищает от коллизий, и таким образом право собственности на элемиент становится очевидным, просто взглянув на DOM.
 
@@ -107,7 +109,7 @@ container.innerHTML = '<blue-buy sku="t_fendt"></blue-buy>';
 
 Если __команда Product__ использует шаблонизатор, который сравниваете дом, как React, это будет сделано автоматически алгоритмом.
 
-![Изменение аттрибута пользовательского элемента](./ressources/video/custom-element-attribute.gif){ loading=lazy }
+<img alt="Изменение аттрибута пользовательского элемента" src="./ressources/video/custom-element-attribute.gif" loading="lazy" />
 
 Чтобы поддержать это, вы можете реализовать `attributeChangedCallback` и указать список `observedAttributes`, для которых этот метод должен быть вызван.
 
@@ -270,7 +272,7 @@ The directive `ssi: on;` enables the SSI feature and an `upstream` and `location
 
 Эта анимация показывает магазин тракторов в браузере, с __отключенным JavaScript__.
 
-[![Serverside Rendering - Disabled JavaScript](./ressources/video/server-render.gif){ loading=lazy }](./ressources/video/server-render.mp4)
+[<img alt="Serverside Rendering - Disabled JavaScript" src="./ressources/video/server-render.gif" loading="lazy" />](./ressources/video/server-render.mp4)
 
 [inspect the code](https://github.com/serzn1/micro-frontends/tree/master/2-composition-universal)
 
