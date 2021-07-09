@@ -8,6 +8,6 @@ export default function renderRecos(sku = 't_porsche') {
   const reco = recos[sku] || [];
   return `
     <h3>Related Products</h3>
-    ${reco.map(id => `<img src="./green/images/reco_${id}.jpg" alt="Reco ${id}" />`).join('')}
+    ${reco.map((id) => `<img src="./green/images/reco_${id}.jpg" alt="Reco ${id}" />`).join('')}
   `;
 }

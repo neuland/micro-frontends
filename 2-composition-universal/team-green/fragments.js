@@ -28,7 +28,7 @@
       const reco = recos[sku] || [];
       this.innerHTML = `
         <h3>Related Products</h3>
-        ${reco.map(id => `<img src="./team-green/images/reco_${id}.jpg" alt="Reco ${id}" />`).join('')}
+        ${reco.map((id) => `<img src="./team-green/images/reco_${id}.jpg" alt="Reco ${id}" />`).join('')}
       `;
     }
 

@@ -1,4 +1,4 @@
-/* eslint-disable no-use-before-define, no-console, class-methods-use-this */
+/* eslint-disable max-classes-per-file, no-use-before-define, no-console, class-methods-use-this */
 /* globals HTMLElement, window, CustomEvent */
 (function fragments() {
   const prices = {
@@ -41,7 +41,6 @@
     }
   }
   window.customElements.define('blue-basket', BlueBasket);
-
 
   class BlueBuy extends HTMLElement {
     static get observedAttributes() {
