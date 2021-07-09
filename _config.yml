@@ -4,7 +4,7 @@ title: Micro Frontends
 description: extending the microservice idea to frontend development
 github:
   is_project_page: true
-  repository_url: https://github.com/neuland/micro-frontends
+  repository_url: https://github.com/swearer23/micro-frontends
 exclude:
   - 2-composition-universal
   - 3-data-fetching
