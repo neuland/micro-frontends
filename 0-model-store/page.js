@@ -58,7 +58,7 @@ function renderReco(id) {
 }
 
 function renderPage() {
-  const variant = product.variants.find(v => state.variant === v.sku);
+  const variant = product.variants.find((v) => state.variant === v.sku);
   const reco = recos[variant.sku];
   $app.innerHTML = `
     <h1 id="store">The Model Store</h1>
@@ -90,7 +90,7 @@ function handleClickBuy() {
 
 function addListeners() {
   const $btns = document.querySelectorAll('#options button');
-  Array.prototype.forEach.call($btns, $btn => (
+  Array.prototype.forEach.call($btns, ($btn) => (
     $btn.addEventListener('click', handleClickOption)
   ));
   document.getElementById('buy').addEventListener('click', handleClickBuy);
@@ -98,7 +98,7 @@ function addListeners() {
 
 function removeListeners() {
   const $btns = document.querySelectorAll('#options button');
-  Array.prototype.forEach.call($btns, $btn => (
+  Array.prototype.forEach.call($btns, ($btn) => (
     $btn.removeEventListener('click', handleClickOption)
   ));
   document.getElementById('buy').removeEventListener('click', handleClickBuy);

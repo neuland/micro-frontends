@@ -17,14 +17,14 @@ function handleClickOption(e) {
 
 function addListeners() {
   const $btns = $app.querySelectorAll('#options a');
-  Array.prototype.forEach.call($btns, $btn => (
+  Array.prototype.forEach.call($btns, ($btn) => (
     $btn.addEventListener('click', handleClickOption)
   ));
 }
 
 function removeListeners() {
   const $btns = $app.querySelectorAll('#options a');
-  Array.prototype.forEach.call($btns, $btn => (
+  Array.prototype.forEach.call($btns, ($btn) => (
     $btn.removeEventListener('click', handleClickOption)
   ));
 }

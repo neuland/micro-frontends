@@ -4,7 +4,7 @@ export default function renderRecos(reco) {
   let content = '';
 
   if (reco) {
-    content = reco.map(id => `<img src="./green/images/reco_${id}.jpg" alt="Reco ${id}" />`).join('');
+    content = reco.map((id) => `<img src="./green/images/reco_${id}.jpg" alt="Reco ${id}" />`).join('');
   } else {
     // return '';
     content = [1, 2, 3].map(() => `<img src="${placeholder}" role="presentation" />`).join('');

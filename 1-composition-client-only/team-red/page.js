@@ -47,7 +47,7 @@ function renderOption(variant) {
 }
 
 function renderPage() {
-  const variant = product.variants.find(v => state.variant === v.sku);
+  const variant = product.variants.find((v) => state.variant === v.sku);
   $app.innerHTML = `
     <h1 id="store">The Model Store</h1>
     <blue-basket id="basket"></blue-basket>
@@ -73,14 +73,14 @@ function handleClickOption(e) {
 
 function addListeners() {
   const $btns = document.querySelectorAll('#options button');
-  Array.prototype.forEach.call($btns, $btn => (
+  Array.prototype.forEach.call($btns, ($btn) => (
     $btn.addEventListener('click', handleClickOption)
   ));
 }
 
 function removeListeners() {
   const $btns = document.querySelectorAll('#options button');
-  Array.prototype.forEach.call($btns, $btn => (
+  Array.prototype.forEach.call($btns, ($btn) => (
     $btn.removeEventListener('click', handleClickOption)
   ));
 }
