@@ -67,6 +67,8 @@ In this example, the page is split into separate components/fragments owned by t
 
 [try in browser](./1-composition-client-only/) & [inspect the code](https://github.com/neuland/micro-frontends/tree/master/1-composition-client-only)
 
+Each team
+
 __Team Product__ decides which functionality is included and where it is positioned in the layout. The page contains information that can be provided by Team Product itself, like the product name, image and the available variants. But it also includes fragments (Custom Elements) from the other teams.
 
 ### How to Create a Custom Element?
@@ -142,6 +144,11 @@ The above example uses the Custom Element V1 Spec which is currently [supported 
 ### Framework Compatibility
 
 Because Custom Elements are a web standard, all major JavaScript frameworks like Angular, React, Preact, Vue or Hyperapp support them. But when you get into the details, there are still a few implementation problems in some frameworks. At [Custom Elements Everywhere](https://custom-elements-everywhere.com/) [Rob Dodson](https://twitter.com/rob_dodson) has put together a compatibility test suite that highlights unresolved issues.
+
+### Avoid Framework Anarchy
+
+Using Custom Elements is a great way to achieve a high amount of decoupling between the fragments of the individual teams. This way, each team is free to pick the frontend framework of their choice. But just because you can does not mean that it's a wise idea to mix different technologies. Try to avoid [Micro Frontends Anarchy](https://www.thoughtworks.com/radar/techniques/micro-frontend-anarchy) and create a reasonable level of alignment between the various teams. This way, teams can share learning and best practices with each other. It will also make your life easier when you want to establish a central pattern library.
+That said, the capability of mixing technologies can be handy when you're working with a legacy application and want to migrate to a new tech stack.
 
 ### Child-Parent or Siblings Communication / DOM Events
 
