@@ -1,4 +1,4 @@
-Tecniche, strategie e ricette per sviluppare un'__applicazione web moderna__ con __team multipli__ che possano __rilasciare funzionalità in maniera indipendente__.
+Tecniche, strategie e ricette per sviluppare un'__applicazione web moderna__ con __team diversi che possano __rilasciare funzionalità in maniera indipendente__.
 
 ## Cosa sono i Micro Frontend?
 
@@ -25,14 +25,13 @@ Se posizioni il tuo progetto alla __sinistra dello spettro__, è adatta un'__int
 
 Quando la tua interfaccia utente deve mostrare un __feedback immediato__, anche in caso di cattiva connessione, non è più sufficiente un sito costruito interamente sul server. Per implementare tecniche come [UI ottimistica](https://www.smashingmagazine.com/2016/11/true-lies-of-optimistic-user-interfaces/) o [Skeleton Screens](http://www.lukew.com/ff/entry.asp?1797) devi poter __aggiornare__ la UI __sul device stesso__. Il termine di Google [Progressive Web Apps](https://developers.google.com/web/progressive-web-apps/) descrive giustamente l'__atto di bilanciamento__ di essere un bravo cittadino del web (progressive enhancement) fornendo allo stesso momento performance simili a quelle di un'app. Questo tipo d'applicazione è posta da quale parte __più o meno in mezzo al continuum sito-app__. Qui non basta più una soluzione basata solo sul server- Dobbiamo spostare l'__integrazione nel browser__, e questo è il focus di quest'articolo.
 
-## Core Ideas behind Micro Frontends
+## Idee fondamentali alla base dei Micro Frontend
 
-* __Be Technology Agnostic__<br>Each team should be able to choose and upgrade their stack without having to coordinate with other teams. [Custom Elements](#the-dom-is-the-api) are a great way to hide implementation details while providing a neutral interface to others.
-* __Isolate Team Code__<br>Don’t share a runtime, even if all teams use the same framework. Build independent apps that are self contained. Don't rely on shared state or global variables.
-* __Establish Team Prefixes__<br>Agree on naming conventions where isolation is not possible yet. Namespace CSS, Events, Local Storage and Cookies to avoid collisions and clarify ownership.
-* __Favor Native Browser Features over Custom APIs__<br>Use [Browser Events for communication](#parent-child-communication--dom-modification) instead of building a global PubSub system. If you really have to build a cross team API, try keeping it as simple as possible.
-* __Build a Resilient Site__<br>Your feature should be useful, even if JavaScript failed or hasn't executed yet. Use [Universal Rendering](#serverside-rendering--universal-rendering) and Progressive Enhancement to improve perceived performance.
-
+* __Sii Agnostico sulla Tecnologia__<br>Ogni team dovrebbe poter scegliere e upgradare il suo stack senza doversi coordinare con altri team. I [Custom Elements](#the-dom-is-the-api) sono un modo ottimo per nascondere i dettagli implementativi dando al contempo agli altri un'interfaccia neutrale.
+* __Isola il Codice del Team__ Isolate Team Code__<br>Non condividere il runtime, anche se tutti i team condividono lo stesso framework. Costruisci applicazioni indipendenti e auto-contenute. Non fare affidamento su uno stato condiviso o variabili globali.
+* __Stabilisci Prefissi per i Team__<br>Condividi una naming convention dove non sia ancora possibile l'isolamento. Dai un namespace a CSS, Eventi, Local Storage e Cookies per evitare collisioni e per chiarificare chi è l'owner.
+* __Privilegia le Feature Native del Browser rispetto alle API Custom__ Usa [Gli Eventi del Browser per la comunicazione](#parent-child-communication--dom-modification) invece di costruire un sistema globale PubSub. Se proprie devi creare un'API cross-team, cerca di tenerla la più semplice possibile.
+* __Costruisci un Sito Resiliente__<br>Una feature dovrebbe essere utile anche se JavaScript fallisce o non si è ancora eseguito. Usa l'[Universal Rendering](#serverside-rendering--universal-rendering) e l'Enhancemente Progressivo per migliorare le performance percepite.
 ---
 
 ## The DOM is the API
