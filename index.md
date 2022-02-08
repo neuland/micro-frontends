@@ -17,9 +17,9 @@ __Organizzazione in verticali__
 
 ##Cos'è un'applicazione web moderna?
 
-Nell'introduzione ho usato la frase "costruire un'applicazione web moderan". Definiamo le assunzioni collegate a questi termini.
+Nell'introduzione ho usato la frase "costruire un'applicazione web moderna". Definiamo le assunzioni collegate a questi termini.
 
-Per metterla in una prospettiva più ampia, [Aral Balkan](https://ar.al/) ha scritto un articolo su quello che chiama il [Continuum documenti-applicazioni](https://ar.al/notes/the-documents-to-applications-continuum/). Presenta il concetto di bilancia scorrevole alla cui sinistra c'è un sito, costruito da __documenti statici__, connessi via link,  mentre alla destra c'è un'__applicazione senza contenuti__, guidata puramente da comportamenti (behaviour driven), come un editor di foto.
+Per metterla in una prospettiva più ampia, [Aral Balkan](https://ar.al/) ha scritto un articolo su quello che chiama il [Continuum documenti-applicazioni](https://ar.al/notes/the-documents-to-applications-continuum/). Presenta il concetto di bilancia scorrevole, alla cui sinistra c'è un sito, costruito da __documenti statici__, connessi via link, mentre alla destra c'è un'__applicazione senza contenuti__, guidata puramente da comportamenti (behaviour driven), come un editor di foto.
 
 Se posizioni il tuo progetto alla __sinistra dello spettro__, è adatta un'__integrazione a livello di webserver__. In questo modello, un server raccoglie e concatena __stringhe HTML__ da tutti i componenti che costituiscono la pagina richiesta dall'utente. Gli update sono fatti ricaricando la pagina dal server o sostituendone parti con Ajax. [Gustaf Nilsson Kotte](https://twitter.com/gustaf_nk/) ha scritto un [articolo esaustivo](https://gustafnk.github.io/microservice-websites/) su quest'argomento.
 
@@ -34,13 +34,13 @@ Quando la tua interfaccia utente deve mostrare un __feedback immediato__, anche 
 * __Costruisci un Sito Resiliente__<br>Una feature dovrebbe essere utile anche se JavaScript fallisce o non si è ancora eseguito. Usa l'[Universal Rendering](#serverside-rendering--universal-rendering) e l'Enhancemente Progressivo per migliorare le performance percepite.
 ---
 
-## The DOM is the API
+## Il DOM è l'API 
 
-[Custom Elements](https://developers.google.com/web/fundamentals/getting-started/primers/customelements), the interoperability aspect from the Web Components Spec, are a good primitive for integration in the browser. Each team builds their component __using their web technology of choice__ and __wraps it inside a Custom Element__ (e.g. `<order-minicart></order-minicart>`). The DOM specification of this particular element (tag-name, attributes & events) acts as the contract or public API for other teams. The advantage is that they can use the component and its functionality without having to know the implementation. They just have to be able to interact with the DOM.
+I [Custom Elements](https://developers.google.com/web/fundamentals/getting-started/primers/customelements), l'aspetto d'interoperabilità delle Specifiche Web Components, sono una buona primitiva per l'integrazione nel browser. Ogni team costruisce il suo componente __usando la tecnologia che sceglie__ e __la wrappa in un Custom Element__ (esempio: `<order-minicart></order-minicart>`). La specifica DOM di questo particolare elemento (tag-name, attributi ed eventi) fa da contratto o API pubblica per gli altri team. Il vantaggio è che possono usare il componente e le sue funzionalità senza conoscere l'implementazione. Devono solo interagire col DOM.
 
-But Custom Elements alone are not the solution to all our needs. To address progressive enhancement, universal rendering or routing we need additional pieces of software.
+Ma i Custom Element da soli non sono la soluzione a tutti i nostri problemi. Per indirizzare l'enhancement progressivo, il rendering universali o il routing abbiamo bisogno di software aggiuntivo.
 
-This page is divided into two main areas. First we will discuss [Page Composition](#page-composition) - how to assemble a page out of components owned by different teams. After that we'll show examples for implementing clientside [Page Transition](#page-transition).
+Questa pagina è divisa in due aree principali. Prima dobbiamo discutere della [Page Composition](#page-composition) - come assemblare una pagina da più componenti fatti da team diversi. Dopo, mostreremo esempi per implementare le [Transizioni di Pagina](#page-transition) lato client.
 
 ## Page Composition
 
