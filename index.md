@@ -2,11 +2,11 @@ Tecniche, strategie e ricette per sviluppare un'__applicazione web moderna__ con
 
 ## Cosa sono i Micro Frontend?
 
-Il temine __Micro Frontends__ è apparso per la prima volta nel [ThoughtWorks Technology Radar](https://www.thoughtworks.com/radar/techniques/micro-frontends) alla fine del 2016. Estende i concetti di microservizi al mondo del frontend. Il trend attuale è quello di costruire un'applicazione browser potente e ricca di funzionalità - nota come single page application - in cima a un'architettura a microservizi. Con il tempo, lo strato di frontend, sviluppato spesso da un team separato, cresce e diventa difficile da manutenere. Questo lo chiamiamo [Frontend a Monolite](https://www.youtube.com/watch?v=pU1gXA0rfwc).
+Il temine __Micro Frontends__ è apparso per la prima volta su [ThoughtWorks Technology Radar](https://www.thoughtworks.com/radar/techniques/micro-frontends) alla fine del 2016. Estende i concetti di microservizi al mondo del frontend. Il trend, adesso, è di costruire un'applicazione browser potente e ricca di funzionalità - nota come single page application - in cima a un'architettura a microservizi. Con il tempo, lo strato di frontend, sviluppato spesso da un team separato, cresce e diventa difficile da manutenere. Questo lo chiamiamo [Frontend a Monolite](https://www.youtube.com/watch?v=pU1gXA0rfwc).
 
-L'idea dieto i Micro Frontend è invece di pensare al sito web o alla web app come una __composizione di funzionalità__ in capo a __team indipendenti__. Ogni team ha una __area di business, o missione, diversa__, di cui si prende cura e in cui si specializza. Un team è __cross funzionale__ e sviluppa le sue funzionalità __end-to-end__, dal database all'interfaccia utente.
+L'idea dietro i Micro Frontend è - invece - di pensare al sito web o alla web app come una __composizione di funzionalità__ facenti capo a __team indipendenti__. Ogni team ha una __area di business, o missione, diversa__, di cui si prende cura e in cui si specializza. Un team è __cross funzionale__ e sviluppa le sue funzionalità __end-to-end__, dal database all'interfaccia utente.
 
-A ogni modo, quest'idea non è nuova. Ha molto in comune con il concetto di [Sistemi auto-contenuti](http://scs-architecture.org/).
+Comunque, quest'idea non è nuova. Ha molto in comune con il concetto di [Sistemi auto-contenuti](http://scs-architecture.org/).
 In passato, approcci simili a questo venivano chiamati [Integrazione del Frontend per Sistemi Verticalizzati](https://dev.otto.de/2014/07/29/scaling-with-microservices-and-vertical-decomposition/). Ma, chiaramente, Micro Frontends è un termine più comodo e snello.
 
 __Frontend monolitici__
@@ -17,21 +17,21 @@ __Organizzazione in verticali__
 
 ##Cos'è un'applicazione web moderna?
 
-Nell'introduzione ho usato la frase "costruire un'applicazione web moderna". Definiamo le assunzioni collegate a questi termini.
+Nell'introduzione ho usato la frase "costruire un'applicazione web moderna". Definiamo le assunzioni collegate a questa definizione.
 
-Per metterla in una prospettiva più ampia, [Aral Balkan](https://ar.al/) ha scritto un articolo su quello che chiama il [Continuum documenti-applicazioni](https://ar.al/notes/the-documents-to-applications-continuum/). Presenta il concetto di bilancia scorrevole, alla cui sinistra c'è un sito, costruito da __documenti statici__, connessi via link, mentre alla destra c'è un'__applicazione senza contenuti__, guidata puramente da comportamenti (behaviour driven), come un editor di foto.
+Per metterla in una prospettiva più ampia, [Aral Balkan](https://ar.al/) ha scritto un articolo su quello che chiama il [Continuum documenti-applicazioni](https://ar.al/notes/the-documents-to-applications-continuum/). Espone il concetto di bilancia scorrevole, alla cui sinistra c'è un sito, costruito da __documenti statici__, connessi via link, mentre alla destra c'è un'__applicazione senza contenuti__, guidata puramente da comportamenti (behaviour driven), come un editor di foto.
 
-Se posizioni il tuo progetto alla __sinistra dello spettro__, è adatta un'__integrazione a livello di webserver__. In questo modello, un server raccoglie e concatena __stringhe HTML__ da tutti i componenti che costituiscono la pagina richiesta dall'utente. Gli update sono fatti ricaricando la pagina dal server o sostituendone parti con Ajax. [Gustaf Nilsson Kotte](https://twitter.com/gustaf_nk/) ha scritto un [articolo esaustivo](https://gustafnk.github.io/microservice-websites/) su quest'argomento.
+Se il tuo progetto si posiziona alla __sinistra dello spettro__, è più adatta un'__integrazione a livello di webserver__. In questo modello, un server raccoglie e concatena __stringhe HTML__ da tutti i componenti che costituiscono la pagina richiesta dall'utente. Gli update sono fatti ricaricando la pagina dal server o sostituendone parti con Ajax. [Gustaf Nilsson Kotte](https://twitter.com/gustaf_nk/) ha scritto un [articolo esaustivo](https://gustafnk.github.io/microservice-websites/) su quest'argomento.
 
-Quando la tua interfaccia utente deve mostrare un __feedback immediato__, anche in caso di cattiva connessione, non è più sufficiente un sito costruito interamente sul server. Per implementare tecniche come [UI ottimistica](https://www.smashingmagazine.com/2016/11/true-lies-of-optimistic-user-interfaces/) o [Skeleton Screens](http://www.lukew.com/ff/entry.asp?1797) devi poter __aggiornare__ la UI __sul device stesso__. Il termine di Google [Progressive Web Apps](https://developers.google.com/web/progressive-web-apps/) descrive giustamente l'__atto di bilanciamento__ di essere un bravo cittadino del web (progressive enhancement) fornendo allo stesso momento performance simili a quelle di un'app. Questo tipo d'applicazione è posta da quale parte __più o meno in mezzo al continuum sito-app__. Qui non basta più una soluzione basata solo sul server- Dobbiamo spostare l'__integrazione nel browser__, e questo è il focus di quest'articolo.
+Quando la tua interfaccia utente deve mostrare un __feedback immediato__, anche in caso di cattiva connessione, non basta più un sito costruito interamente sul server. Per implementare tecniche come [UI ottimistica](https://www.smashingmagazine.com/2016/11/true-lies-of-optimistic-user-interfaces/) o [Skeleton Screens](http://www.lukew.com/ff/entry.asp?1797) devi poter __aggiornare__ la UI __sul device stesso__. Il termine di Google [Progressive Web Apps](https://developers.google.com/web/progressive-web-apps/) descrive giustamente l'__atto di bilanciamento__ di essere un bravo cittadino del web (progressive enhancement) fornendo allo stesso momento performance simili a quelle di un'app. Questo tipo d'applicazione si pone __più o meno in mezzo al continuum sito-app__. Qui non basta più una soluzione basata solo sul server. Dobbiamo spostare l'__integrazione nel browser__, e questo è il focus di quest'articolo.
 
 ## Idee fondamentali alla base dei Micro Frontend
 
 * __Sii Agnostico sulla Tecnologia__<br>Ogni team dovrebbe poter scegliere e upgradare il suo stack senza doversi coordinare con altri team. I [Custom Elements](#the-dom-is-the-api) sono un modo ottimo per nascondere i dettagli implementativi dando al contempo agli altri un'interfaccia neutrale.
-* __Isola il Codice del Team__ Isolate Team Code__<br>Non condividere il runtime, anche se tutti i team condividono lo stesso framework. Costruisci applicazioni indipendenti e auto-contenute. Non fare affidamento su uno stato condiviso o variabili globali.
-* __Stabilisci Prefissi per i Team__<br>Condividi una naming convention dove non sia ancora possibile l'isolamento. Dai un namespace a CSS, Eventi, Local Storage e Cookies per evitare collisioni e per chiarificare chi è l'owner.
-* __Privilegia le Feature Native del Browser rispetto alle API Custom__ Usa [Gli Eventi del Browser per la comunicazione](#parent-child-communication--dom-modification) invece di costruire un sistema globale PubSub. Se proprie devi creare un'API cross-team, cerca di tenerla la più semplice possibile.
-* __Costruisci un Sito Resiliente__<br>Una feature dovrebbe essere utile anche se JavaScript fallisce o non si è ancora eseguito. Usa l'[Universal Rendering](#serverside-rendering--universal-rendering) e l'Enhancemente Progressivo per migliorare le performance percepite.
+* __Isola il Codice del Team__<br>Non condividere il runtime, anche se tutti i team condividono lo stesso framework. Costruisci applicazioni indipendenti e auto-contenute. Non fare affidamento su uno stato condiviso o variabili globali.
+* __Stabilisci Prefissi per i Team__<br>Condividi una naming convention dove non sia ancora possibile l'isolamento. Dai un namespace a CSS, Eventi, Local Storage e Cookies per evitare collisioni e per chiarire chi è l'owner.
+* __Privilegia le Feature Native del Browser rispetto alle API Custom__ Usa [Gli Eventi del Browser per la comunicazione](#parent-child-communication--dom-modification) invece di costruire un sistema globale PubSub. Se proprio devi creare un'API cross-team, cerca di tenerla la più semplice possibile.
+* __Costruisci un Sito Resiliente__<br>Le feature dovrebbero rimanere utili anche se JavaScript fallisce o non è ancora stato eseguito. Usa lo [Universal Rendering](#serverside-rendering--universal-rendering) e l'Enhancement Progressivo per migliorare le performance percepite.
 ---
 
 ## Il DOM è l'API 
@@ -42,37 +42,39 @@ Ma i Custom Element da soli non sono la soluzione a tutti i nostri problemi. Per
 
 Questa pagina è divisa in due aree principali. Prima dobbiamo discutere della [Page Composition](#page-composition) - come assemblare una pagina da più componenti fatti da team diversi. Dopo, mostreremo esempi per implementare le [Transizioni di Pagina](#page-transition) lato client.
 
-## Page Composition
 
-Beside the __client-__ and __serverside__ integration of code written in __different frameworks__ itself, there are a lot of side topics that should be discussed: mechanisms to __isolate js__, __avoid css conflicts__, __load resources__ as needed, __share common resources__ between teams, handle __data fetching__ and think about good __loading states__ for the user. We'll go into these topics one step at a time.
+## Composizione della Pagina
 
-### The Base Prototype
+Oltre proprio all'integrazione del codice lato __client__ e __server__ scritto con __framework diversi__, ci sono un sacco di argomenti a lato da discutere: i meccanismi per __isolare il javascript__, __evitare i conflitti css__, __caricare le risorse__ quando serve, __condividere le risorse comuni__ fra i team, gestire __il fetch dei dati__ e pensare a una giusta __gestione degli stati__ per l'utente. Affronteremo questi argomenti un passo alla volta.
 
-The product page of this model tractor store will serve as the basis for the following examples.
+### Il Prototipo Base
 
-It features a __variant selector__ to switch between the three different tractor models. On change product image, name, price and recommendations are updated. There is also a __buy button__, which adds the selected variant to the basket and a __mini basket__ at the top that updates accordingly.
+La pagina prodotto di questo negozio di modelli di trattori ci servirà come base degli esempi seguenti.
 
-[![Example 0 - Product Page - Plain JS](./ressources/video/model-store-0.gif)](./0-model-store/)
+Presenta un __selettore delle varianti__ per scegliere fra i tre diversi modelli di trattore. Quando il selettore cambia, si aggiornano l'immagine, il nome, il prezzo e le raccomandazioni del prodotto. C'è pure un __pulsante d'acquisto__, che aggiunge la variante selezionata al cestino e un __mini carrello__ in cima alla pagina, che si aggiorna di conseguenza.
 
-[try in browser](./0-model-store/) & [inspect the code](https://github.com/neuland/micro-frontends/tree/master/0-model-store)
+[![Esempio 1 - Pagina Prodotto - JS Puro](./ressources/video/model-store-0.gif)](./0-model-store/)
 
-All HTML is generated client side using __plain JavaScript__ and ES6 Template Strings with __no dependencies__. The code uses a simple state/markup separation and re-renders the entire HTML client side on every change - no fancy DOM diffing and __no universal rendering__ for now. Also __no team separation__ - [the code](https://github.com/neuland/micro-frontends/tree/master/0-model-store) is written in one js/css file.
+[provalo nel browser](./0-model-store/) & [mostra il codice](https://github.com/neuland/micro-frontends/tree/master/0-model-store)
 
-### Clientside Integration
+Tutto l'HTML è generato usando __JavaScript puro__ e stringhe template ES6 senza __nessuna dipendenza__. Il codice usa una semplice separazione stato/markup e ri-renderizza tutto l'HTML lato client a ogni cambiamento - non c'è nessun DOM diffing strano e nessun __rendering universale__ per ora. Inoltre, non c'è __separazione fra team__. - [il codice](https://github.com/neuland/micro-frontends/tree/master/0-model-store) è scritto in un file js/css.
 
-In this example, the page is split into separate components/fragments owned by three teams. __Team Checkout__ (blue) is now responsible for everything regarding the purchasing process - namely the __buy button__ and __mini basket__. __Team Inspire__ (green) manages the __product recommendations__ on this page. The page itself is owned by __Team Product__ (red).
+### Integrazione lato Client
 
-[![Example 1 - Product Page - Composition](./ressources/screen/three-teams.png)](./1-composition-client-only/)
 
-[try in browser](./1-composition-client-only/) & [inspect the code](https://github.com/neuland/micro-frontends/tree/master/1-composition-client-only)
+In quest'esempio, la pagina è divisa in componenti/frammenti separati, gestiti da tre team. __Team Checkout__ (blu) è adesso responsabile di tutto quello che riguarda il processo d'acquisto - nello specifico, il __pulsante d'acquisto__ e il __mini carrello__. Il __Team Inspire__ (verde) gestisce i __prodotti raccomandati__ su questa pagina. La pagina stessa è gestita dal __Team Product__ (rosso).
 
-Each team
+[![Esempio 1 - Pagina Prodotto - Composizione](./ressources/screen/three-teams.png)](./1-composition-client-only/)
 
-__Team Product__ decides which functionality is included and where it is positioned in the layout. The page contains information that can be provided by Team Product itself, like the product name, image and the available variants. But it also includes fragments (Custom Elements) from the other teams.
+[prova nel browser](./1-composition-client-only/) & [mostra il codice](https://github.com/neuland/micro-frontends/tree/master/1-composition-client-only)
 
-### How to Create a Custom Element?
+Ciascun team
 
-Lets take the __buy button__ as an example. Team Product includes the button simply adding `<blue-buy sku="t_porsche"></blue-buy>` to the desired position in the markup. For this to work, Team Checkout has to register the element `blue-buy` on the page.
+Il __Team Product__ decide che funzionalità è inclusa e dove deve essere posizionata nel layout. La pagina contiene informazioni che possono essere fornite dallo stesso Team Product, come il nome del prodotto, l'immagine e le varianti disponibili. La pagina include anche frammenti (elementi custom) dagli altri team.
+
+### Come creare un Elemento Custom?
+
+Prendiamo per esempio il __pulsante d'acquisto__. Il Team Product include il pulsante aggiungendo semplicemente `<blue-buy sku="t_porsche"></blue-buy>` alla posizione desiderata nel markup. Per farlo funzionare, il Team Checkout deve registrare l'elemento `blue-buy` sulla pagina.
 
     class BlueBuy extends HTMLElement {
       connectedCallback() {
@@ -83,13 +85,14 @@ Lets take the __buy button__ as an example. Team Product includes the button sim
     }
     window.customElements.define('blue-buy', BlueBuy);
 
-Now every time the browser comes across a new `blue-buy` tag, the `connectedCallback` is called. `this` is the reference to the root DOM node of the custom element. All properties and methods of a standard DOM element like `innerHTML` or `getAttribute()` can be used.
+Adesso, ogni volta che il browser trova un nuovo tag `blue-buy`, viene chiamata la `connectedCallback`. `this` è un riferimento al nodo DOM root dell'elemento custom. Si possono usare tutte le proprietà e i metodi di un elemento DOM standard, come `innerHTML` or `getAttribute()`.
 
 <img alt="Custom Element in Action" src="./ressources/video/custom-element.gif" loading="lazy" />
 
-When naming your element the only requirement the spec defines is that the name must __include a dash (-)__ to maintain compatibility with upcoming new HTML tags. In the upcoming examples the naming convention `[team_color]-[feature]` is used. The team namespace guards against collisions and this way the ownership of a feature becomes obvious, simply by looking at the DOM.
+Quando dai un nome all'elemento, l'unico requisito definito dalla specifica è che il nome deve __includere un trattino (-)__ per mantenere la compatiblità con i futuri tag HTML. Nei prossimi esempi, useremo la convenzione `[team_color]-[feature]`. Il namespace del team ci protegge da collisioni e, in questo modo, diventa ovvio chi detiene una feature, guardando semplicemente il DOM.
 
-### Parent-Child Communication / DOM Modification
+### Comunicazione Padre-Figlio / Modifica del DOM
+
 
 When the user selects another tractor in the __variant selector__, the __buy button has to be updated__ accordingly. To achieve this Team Product can simply __remove__ the existing element from the DOM __and insert__ a new one.
 
