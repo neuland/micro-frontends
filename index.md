@@ -1,4 +1,4 @@
-Tecniche, strategie e ricette per sviluppare un'__applicazione web moderna__ con __team diversi che possano __rilasciare funzionalità in maniera indipendente__.
+Tecniche, strategie e ricette per sviluppare un'__applicazione web moderna__ con __team diversi__ che possano __rilasciare funzionalità in maniera indipendente__.
 
 ## Cosa sono i Micro Frontend?
 
