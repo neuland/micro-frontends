@@ -1,15 +1,15 @@
-Tecniche, strategie e ricette per sviluppare un'__applicazione web moderna__ con contributo di __team diversificati__ che possano __rilasciare le funzionalità in maniera indipendente__.
+Tecniche, strategie e ricette per sviluppare un'__applicazione web moderna__ con contributo di __team diversificati__ che possano __rilasciare funzionalità in maniera indipendente__.
 
 ## Cosa sono i Micro Frontend?
 
-Il temine __Micro Frontend__ è apparso per la prima volta su [ThoughtWorks Technology Radar](https://www.thoughtworks.com/radar/techniques/micro-frontends) alla fine del 2016. Estende al mondo del frontend i concetti dei microservizi. Il trend, in quel momento, era di costruire applicazioni browser potenti e ricche di funzionalità - note come single page application - sopra architetture a microservizi. Con il tempo, lo strato di frontend, sviluppato il più delle volte da un team a parte, cresce e diventa difficile da manutenere. Questo lo chiamiamo [Frontend Monolitico](https://www.youtube.com/watch?v=pU1gXA0rfwc).
+Il temine __Micro Frontend__ è apparso per la prima volta su [ThoughtWorks Technology Radar](https://www.thoughtworks.com/radar/techniques/micro-frontends) alla fine del 2016. Estende al mondo del frontend i concetti dei microservizi. Il trend corrente era di costruire applicazioni browser potenti e ricche di funzionalità - note come single page application - messe sopra ad architetture a microservizi. Con il tempo, questo strato di frontend, sviluppato il più delle volte da un team a sé stante, cresce e diventa difficile da manutenere. Questo lo chiamiamo [Frontend Monolitico](https://www.youtube.com/watch?v=pU1gXA0rfwc).
 
 L'idea alla base dei Micro Frontend è - invece - di pensare al sito web o alla web app come a una __composizione di funzionalità__ che fanno capo a __team indipendenti__. Ogni team ha una sua __area di business, o missione, diversa__, di cui si prende cura e in cui si specializza. Ogni team è __cross funzionale__ e sviluppa le sue funzionalità __end-to-end__, dal database all'interfaccia utente.
 
-C'è da dire che quest'idea non è nuova... ha molti punti in comune con il concetto di [Sistemi auto-contenuti](http://scs-architecture.org/).
-In passato, approcci simili venivano chiamati [Integrazione del Frontend per Sistemi Verticalizzati](https://dev.otto.de/2014/07/29/scaling-with-microservices-and-vertical-decomposition/). Ma, chiaramente, Micro Frontends è un termine più breve e comodo.
+C'è da dire che quest'idea non è nuova. Ha molti punti in comune con il concetto di [Sistemi auto-contenuti](http://scs-architecture.org/).
+In passato, approcci simili venivano chiamati [Integrazione del Frontend per Sistemi Verticalizzati](https://dev.otto.de/2014/07/29/scaling-with-microservices-and-vertical-decomposition/). Ma, chiaramente, Micro Frontends è un termine più comodo e meno corposo.
 
-__Frontend monolitici__
+__Frontend Monolitici__
 <img alt="Frontend Monolitici" src="./ressources/diagrams/organisational/monolith-frontback-microservices.png" loading="lazy" />
 
 __Organizzazione in verticali__
@@ -19,45 +19,45 @@ __Organizzazione in verticali__
 
 Nell'introduzione, ho usato l'espressione "costruire un'applicazione web moderna". Definiamo le assunzioni collegate a questa definizione.
 
-In una prospettiva più generale, [Aral Balkan](https://ar.al/) ha scritto un articolo su quello che chiama il [Continuum documenti-applicazioni](https://ar.al/notes/the-documents-to-applications-continuum/). Fa u paragone con una bilancia scorrevole, alla cui sinistra c'è un sito costruito da __documenti statici__, connessi via link, mentre alla destra c'è un'__applicazione senza contenuti__, guidata puramente da comportamenti (behaviour driven), come un editor di foto.
+Più in generale, [Aral Balkan](https://ar.al/) ha scritto un articolo su quello che chiama il [Continuum documenti-applicazioni](https://ar.al/notes/the-documents-to-applications-continuum/). Si è inventato l'idea di una bilancia scorrevole, alla cui sinistra c'è un sito costruito da __documenti statici__, connessi via link, mentre alla destra c'è un'__applicazione senza contenuti__, guidata puramente da comportamenti (behaviour driven), come un editor di foto.
 
-Se il tuo progetto si posiziona alla __sinistra dello spettro__, è più adatta un'__integrazione a livello di webserver__. In tale modello, un server raccoglie e concatena __stringhe HTML__ da tutti i componenti che costituiscono la pagina richiesta dall'utente. Gli aggiornamenti sono fatti ricaricando la pagina dal server o sostituendone alcune parti con Ajax. [Gustaf Nilsson Kotte](https://twitter.com/gustaf_nk/) ha scritto un [articolo esaustivo](https://gustafnk.github.io/microservice-websites/) su quest'argomento.
+Se il tuo progetto si posiziona alla __sinistra dello spettro__, è adatta un'__integrazione a livello di webserver__. In tale modello, un server raccoglie e concatena __stringhe HTML__ provenienti da tutti i componenti che costituiscono la pagina richiesta dall'utente. Gli aggiornamenti sono fatti ricaricando la pagina dal server o sostituendone alcune parti con Ajax. [Gustaf Nilsson Kotte](https://twitter.com/gustaf_nk/) ha scritto un [articolo esaustivo](https://gustafnk.github.io/microservice-websites/) su quest'argomento.
 
-Quando la tua interfaccia utente deve mostrare un __feedback immediato__, anche in caso di cattiva connessione, non basta più un sito costruito interamente sul server. Per implementare tecniche come [UI ottimistica](https://www.smashingmagazine.com/2016/11/true-lies-of-optimistic-user-interfaces/) o [Skeleton Screens](http://www.lukew.com/ff/entry.asp?1797) devi poter __aggiornare__ la UI __sul device stesso__. Il termine di Google [Progressive Web Apps](https://developers.google.com/web/progressive-web-apps/) descrive giustamente l'__atto di bilanciamento__ insito nell'essere un bravo cittadino del web (progressive enhancement), fornendo al contempo performance simili a quelle di un'app. Questo tipo d'applicazione si pone __più o meno in mezzo al continuum sito-app__. Qui non basta più una soluzione basata solo sul server. Dobbiamo spostare l'__integrazione nel browser__, e questo è il focus di quest'articolo.
+Quando la tua interfaccia utente deve mostrare un __feedback immediato__, anche in caso di cattiva connessione, non basta più un sito costruito interamente sul server. Per implementare tecniche come [UI ottimistica](https://www.smashingmagazine.com/2016/11/true-lies-of-optimistic-user-interfaces/) o [Skeleton Screens](http://www.lukew.com/ff/entry.asp?1797) devi poter __aggiornare__ la UI __sul device stesso__. La definizione di Google [Progressive Web Apps](https://developers.google.com/web/progressive-web-apps/) descrive abilmente l'__atto di bilanciamento__ insito nell'essere un bravo cittadino del web (enhancement progressivo), garantendo nello stesso tempo performance simili a quelle di un'app. Questo tipo d'applicazione si pone __più o meno a metà del continuum sito-app__. Qui non basta più una soluzione basata solo sul server. Dobbiamo spostare l'__integrazione nel browser__, e questo è il focus di quest'articolo.
 
 ## Idee fondamentali alla base dei Micro Frontend
 
 * __Sii Agnostico sulla Tecnologia__<br>Ogni team dovrebbe poter scegliere e aggiornare il suo stack senza doversi coordinare con gli altri team. Gli [Elementi Custom](#the-dom-is-the-api) sono un modo ottimo per nascondere i dettagli implementativi, fornendo al contempo un'interfaccia neutrale agli altri.
-* __Isola il Codice del Team__<br>Non condividere il runtime, anche se tutti i team usano lo stesso framework. Costruisci applicazioni indipendenti e auto-contenute. Non fare affidamento su uno stato condiviso o variabili globali.
+* __Isola il Codice del Team__<br>Non condividere il runtime, anche se tutti i team usano lo stesso framework. Costruisci applicazioni indipendenti e auto-contenute. Non fare affidamento sullo stato condiviso o su variabili globali.
 * __Stabilisci Prefissi per i Team__<br>Condividi una naming convention laddove non sia ancora possibile l'isolamento. Dai un namespace a CSS, Eventi, Local Storage e Cookies per evitare collisioni e per chiarire chi è l'owner.
-* __Privilegia le Feature Native del Browser rispetto alle API Custom__ Usa [Gli Eventi del Browser per la comunicazione](#parent-child-communication--dom-modification) invece di mettere su un sistema globale PubSub. Se proprio devi creare un'API cross-team, cerca di tenerla la più semplice possibile.
-* __Costruisci un Sito Resiliente__<br>Le feature dovrebbero rimanere utili anche se JavaScript fallisce o non è ancora stato eseguito. Usa il [Rendering Universale](#serverside-rendering--universal-rendering) e l'Enhancement Progressivo per migliorare le performance percepite.
+* __Privilegia le Funzionalità Native del Browser rispetto alle API Custom__ Usa [Gli Eventi del Browser per la comunicazione](#parent-child-communication--dom-modification) invece di mettere su un sistema globale PubSub. Se proprio devi creare un'API cross-team, cerca di tenerla la più semplice possibile.
+* __Costruisci un Sito Resiliente__<br>Le feature del sito dovrebbero rimanere utili anche se JavaScript fallisce o non è ancora stato eseguito. Usa il [Rendering Universale](#serverside-rendering--universal-rendering) e l'Enhancement Progressivo per migliorare le performance percepite.
 ---
 
 ## Il DOM è l'API 
 
-Gli [Elementi Custom](https://developers.google.com/web/fundamentals/getting-started/primers/customelements), che rappresentano l'aspetto d'interoperabilità delle specifiche Web Components, sono una buona primitiva per realizzare un'integrazione a livello di browser. Ogni team costruisce il suo componente __usando la tecnologia che preferisce__ e __la wrappa in un Elemento Custom__ (esempio: `<order-minicart></order-minicart>`). La specifica DOM di questo particolare elemento (tag-name, attributi ed eventi) fa da contratto o API pubblica per gli altri team. Il vantaggio è che questi ultimi possono usare il componente e le sue funzionalità senza conoscere l'implementazione: devono solo interagire col DOM.
+Gli [Elementi Custom](https://developers.google.com/web/fundamentals/getting-started/primers/customelements), che rappresentano l'aspetto d'interoperabilità della specifica Web Components, sono una buona primitiva per realizzare un'integrazione nel browser. Ogni team costruisce il suo componente __usando la tecnologia che preferisce__ e __la wrappa in un Elemento Custom__ (esempio: `<order-minicart></order-minicart>`). La specifica DOM di questo particolare elemento (tag-name, attributi ed eventi) fa da contratto o API pubblica per gli altri team. Il vantaggio è che questi ultimi possono usare il componente e le sue funzionalità senza conoscerne l'implementazione: devono solo interagire col DOM.
 
 Ma gli Elementi Custom, da soli, non sono la soluzione a tutti i nostri problemi. Per indirizzare l'enhancement progressivo, il rendering universale e il routing abbiamo bisogno di software aggiuntivo.
 
-Questa pagina è divisa in due aree principali. Prima dobbiamo discutere della [Composizione della Pagina](#page-composition) - ovvero assemblare una pagina da più componenti fatti da team diversi. Dopo, mostreremo esempi per implementare le [Transizioni di Pagina](#page-transition) lato client.
+Questa pagina è divisa in due aree principali. Prima dobbiamo discutere della [Composizione della Pagina](#page-composition) - ovvero come assemblare una pagina da più componenti gestiti da team diversi. Dopo, mostreremo esempi per implementare le [Transizioni di Pagina](#page-transition) lato client.
 
 
 ## Composizione della Pagina
 
-Oltre proprio all'integrazione del codice lato __client__ e __server__ scritto con __framework diversi__, ci sono un sacco di argomenti a lato da discutere: i meccanismi per __isolare il javascript__, __evitare i conflitti css__, __caricare le risorse__ quando serve, __condividere le risorse comuni__ fra i team, gestire __il fetch dei dati__ e pensare a una giusta __gestione degli stati__ per l'utente. Affronteremo questi argomenti un passo alla volta.
+Oltre proprio all'integrazione del codice lato __client__ e __server__ scritto con __framework diversi__, ci sono un sacco di argomenti a lato da discutere: i meccanismi per __isolare il javascript__, __evitare i conflitti CSS__, __caricare le risorse__ quando serve, __condividere le risorse comuni__ fra i team, gestire __la richiesta di dati__ e pensare a una giusta __gestione degli stati di caricamento__ per l'utente. Affronteremo questi argomenti un passo alla volta.
 
 ### Il Prototipo Base
 
-Useremo come base per gli esempi seguenti la pagina prodotto di un negozio di modelli di trattori.
+Useremo come base per gli esempi seguenti la pagina prodotto di un negozio di modellini di trattori.
 
-Espone un __selettore di varianti__ per scegliere fra i tre diversi modelli di trattore. Quando il selettore cambia, si aggiornano l'immagine, il nome, il prezzo e le raccomandazioni del prodotto. C'è anche un __pulsante d'acquisto__, che aggiunge la variante selezionata al cestino, e un __mini carrello__ alla sommità della pagina, che si aggiorna di conseguenza.
+Espone un __selettore di varianti__ per scegliere fra i tre diversi modellini di trattore. A ogni cambio, si aggiornano l'immagine, il nome, il prezzo e le raccomandazioni del prodotto. C'è anche un __pulsante d'acquisto__, che aggiunge la variante selezionata al cestino, e un __mini carrello__ alla sommità della pagina, che si aggiorna di conseguenza.
 
 [![Esempio 1 - Pagina Prodotto - JS Puro](./ressources/video/model-store-0.gif)](./0-model-store/)
 
-[provalo nel browser](./0-model-store/) & [mostra il codice](https://github.com/neuland/micro-frontends/tree/master/0-model-store)
+[provalo nel browser](./0-model-store/) & [ispeziona il codice](https://github.com/neuland/micro-frontends/tree/master/0-model-store)
 
-Tutto l'HTML è generato usando __JavaScript puro__ e stringhe template ES6 senza __nessuna dipendenza__. Il codice usa una semplice separazione stato/markup e ri-renderizza tutto l'HTML lato client a ogni cambiamento - non c'è nessun DOM diffing strano e nessun __rendering universale__ per ora. Inoltre, non c'è __separazione fra team__. - [il codice](https://github.com/neuland/micro-frontends/tree/master/0-model-store) è scritto in un file js/css.
+Tutto l'HTML è generato usando __JavaScript puro__ e stringhe template ES6 senza __nessuna dipendenza__. Il codice usa una semplice separazione stato/markup e ri-renderizza tutto l'HTML lato client a ogni cambiamento - non c'è nessun DOM diffing strano e nessun __rendering universale__ per ora. Inoltre, non c'è __separazione fra team__ - [il codice](https://github.com/neuland/micro-frontends/tree/master/0-model-store) è scritto in un file js/css.
 
 ### Integrazione lato Client
 
@@ -65,9 +65,9 @@ In quest'esempio, la pagina è divisa in componenti/frammenti separati, gestiti 
 
 [![Esempio 1 - Pagina Prodotto - Composizione](./ressources/screen/three-teams.png)](./1-composition-client-only/)
 
-[prova nel browser](./1-composition-client-only/) & [mostra il codice](https://github.com/neuland/micro-frontends/tree/master/1-composition-client-only)
+[prova nel browser](./1-composition-client-only/) & [ispeziona il codice](https://github.com/neuland/micro-frontends/tree/master/1-composition-client-only)
 
-Un team alla volta
+Ogni Team
 
 Il __Team Product__ decide che funzionalità dev'essere inclusa e dove deve essere posizionata nel layout. La pagina contiene informazioni che possono essere fornite dallo stesso Team Product, come il nome del prodotto, l'immagine e le varianti disponibili. La pagina include anche frammenti (elementi custom) dagli altri team.
 
@@ -84,7 +84,7 @@ Prendiamo per esempio il __pulsante d'acquisto__. Il Team Product include il pul
     }
     window.customElements.define('blue-buy', BlueBuy);
 
-Adesso, ogni volta che il browser trova un nuovo tag `blue-buy`, viene chiamata la `connectedCallback`. `this` è un riferimento al nodo DOM root dell'elemento custom. Si possono usare tutte le proprietà e i metodi di un elemento DOM standard, come `innerHTML` or `getAttribute()`.
+Adesso, ogni volta che il browser trova un nuovo tag `blue-buy`, viene chiamata la callback `connectedCallback`. `this` è un riferimento al nodo DOM root dell'elemento custom. Si possono usare tutte le proprietà e i metodi di un elemento DOM standard, come `innerHTML` or `getAttribute()`.
 
 <img alt="Elemento Custom in Azione" src="./ressources/video/custom-element.gif" loading="lazy" />
 
@@ -97,6 +97,7 @@ Se l'utente seleziona un altro trattore nel __selettore di varianti__, dev'esser
     container.innerHTML;
     // => <blue-buy sku="t_porsche">...</blue-buy>
     container.innerHTML = '<blue-buy sku="t_fendt"></blue-buy>';
+    
 La callback `disconnectedCallback` del vecchio elemento viene invocata in maniera sincrona per dare all'elemento la possibilità di fare pulizia di cose come i listener di eventi. Dopo, viene invocata la callback `connectedCallback` dell'elemento appena creato `t_fendt`.
 
 Un'altra possibilità più performante è di aggiornare solo l'attibuto `sku` dell'elemento esistente:
@@ -134,28 +135,28 @@ Per supportare questo comportamento, l'Elemento Custom può implementare la call
     }
     window.customElements.define('blue-buy', BlueBuy);
 
-Per evitare duplicazioni di codice, introduciamo un metodo `render()` che viene chiamato da `connectedCallback` e `attributeChangedCallback`. Questo metodo raccoglie i dati necessari e il nuovo markup è in innerHTML. Quando si decide di usare un motore o framework di template più sofisticato nell'Elemento Custom, questo è il posto dove dovrebbe andare il suo codice d'inizializzazione.
+Per evitare duplicazioni, introduciamo un metodo `render()` che viene chiamato da `connectedCallback` e `attributeChangedCallback`. Questo metodo raccoglie i dati necessari e il nuovo markup è in innerHTML. Quando si decide di usare un motore o framework di template più sofisticato nell'Elemento Custom, questo è il posto dove dovrebbe andare il suo codice d'inizializzazione.
 
 ### Supporto dei Browser
 
-L'esempio precedente usa la specifica versione 1 degli Elementi Custom, che al momento è [supportata da Chrome, Safari e Opera](http://caniuse.com/#feat=custom-elementsv1). Però, con [documento-registra-elemento](https://github.com/WebReflection/document-register-element) è stato reso disponibile un polyfill rodato e leggero per far funzionare tutto questo in tutti i broser. Sotto il cofano, usa un'API [ampiamente supportata](http://caniuse.com/#feat=mutationobserver), la Mutation Observer, dunque non ci sono controlli strani in background dell'albero DOM.
+L'esempio precedente usa la specifica versione 1 degli Elementi Custom, che al momento è [supportata da Chrome, Safari e Opera](http://caniuse.com/#feat=custom-elementsv1). Però, con il progetto [document-register-element](https://github.com/WebReflection/document-register-element) è stato reso disponibile un polyfill rodato e leggero per far funzionare tutto questo in tutti i browser. Sotto il cofano, usa un'API [ampiamente supportata](http://caniuse.com/#feat=mutationobserver), la Mutation Observer, dunque non ci sono controlli strani in background dell'albero DOM.
 
 ### Compatibilità Framework
 
-Siccome gli Elementi Custom sono uno standard web, li supportano tutti i principali framework JavaScript, come Angular, React, Preact, Vue o Hyperapp. Però, quando vai a entri nei dettagli, alcuni di questi framework hanno ancora qualche problemino implementativo. Su [Custom Elements Everywhere](https://custom-elements-everywhere.com/), [Rob Dodson](https://twitter.com/rob_dodson) ha messo in piedi una suite di test che mette in evidenza i problemi da risolvere.
+Siccome gli Elementi Custom sono uno standard web, li supportano tutti i principali framework JavaScript, come Angular, React, Preact, Vue o Hyperapp. Però, quando entri nei dettagli, alcuni di questi framework hanno ancora qualche problemino implementativo. Su [Custom Elements Everywhere](https://custom-elements-everywhere.com/), [Rob Dodson](https://twitter.com/rob_dodson) ha messo in piedi una suite di test che mette in evidenza i problemi irrisolti.
 
-### Evita l'Anarchia dei Framework
+### Evitiama l'Anarchia dei Framework
 
-Usare gli Elementi Custom è un ottimo modo per raggiungere un alto grado di disaccoppiamento fra i frammenti dei diversi team. In questo modo, ogni team è libero di scegliere un framework di frontend. Però, solo perché puoi farlo non significa che sia saggio mixare tecnologie differenti. Proviamo ad evitare l'[Anarchia dei Micro Frontend](https://www.thoughtworks.com/radar/techniques/micro-frontend-anarchy) e a creare un livello di allineamento ragionevole fra i vari team. Così, i team possono scambiarsi insegnamenti e best practice. Ci renderà la vita più facile se vogliamo stabilire una pattern library centralizzata.
+Usare gli Elementi Custom è un ottimo modo per raggiungere un alto grado di disaccoppiamento fra i frammenti dei diversi team. In questo modo, ogni team è libero di scegliere un framework di frontend. Però, solo perché puoi farlo non significa che sia saggio mixare tecnologie differenti. Proviamo ad evitare l'[Anarchia dei Micro Frontend](https://www.thoughtworks.com/radar/techniques/micro-frontend-anarchy) e a creare invece un livello di allineamento ragionevole fra i vari team. Così, i team possono scambiarsi insegnamenti e best practice. Ci renderà poi la vita più facile se vogliamo stabilire una pattern library centralizzata.
 Detto ciò, la possibilità di mixare le tecnologie può essere utile quando lavori con un'applicazione legacy e vuoi migrarla a uno stack tecnologico nuovo.
 
 ### Comunicazione fra Figlio-Genitore o fra Fratelli / Eventi DOM
 
-Ma passare gli attributi non è sufficiente per tutte le interazioni. Nel nostro esempio, il  __mini carrello dovrebbe aggiornari__ quando l'utente __clicca sul pulsante d'acquisto__.
+Ma passare gli attributi non è sufficiente per tutte le interazioni. Nel nostro esempio, il __mini carrello dovrebbe aggiornari__ quando l'utente __clicca sul pulsante d'acquisto__.
 
-Entrambi i frammenti sono di proprietà del Team Checkout (blu), quindi loro potrebbero creare una qualche API JavaScript interna che permetta al mini carrello di sapere quando è stato premuto un pulsante. Ma questo significa che le istanze dei componenti ovrebbero conoscersi a vicenda e questa sarebbe pure una violazione dell'isolamento.
+Entrambi i frammenti sono di proprietà del Team Checkout (blu), quindi loro potrebbero creare una qualche API JavaScript interna che permettesse al mini carrello di sapere quando è stato premuto un pulsante. Ma questo significherebbe che le istanze dei componenti dovrebbero conoscersi a vicenda e questa sarebbe pure una violazione dell'isolamento.
 
-Un modo più pulito è di usare un meccanismo PubSub, in cui un componente può pubblicare un messaggio e altri componenti possono sottoscriversi a certi topic. Per fortuna, i browser hanno nativamente uesta funzionalità. Questo è esattamnte come funzionano eventi del browser tipo `click`, `select` o `mouseover`. In aggiunta agli eventi nativi, c'è anche la possibilità di creare eventi di livello superiore con `new CustomEvent(...)`. Gli evneti sono sempre legati al nodo DOM su cui sono stati creati o dispacciati. La maggior parte degli eventi nativi supportano anche il bubbling. Questo rende possibile ascoltare tutti gli eventi su un sotto-albero specifico del DOM. Se vuoi ascoltare tutti gli eveti della pagina, attacca l'event listener all'elemento window. Ecco come appare la crazione dell'evento `blue:basket:changed` nell'esempio:
+Un modo più pulito è di usare un meccanismo PubSub, in cui un componente può pubblicare un messaggio e altri componenti possono sottoscriversi a certi topic. Per fortuna, i browser hanno nativamente questa funzionalità. Questo è esattamente come funzionano eventi del browser tipo `click`, `select` o `mouseover`. In aggiunta agli eventi nativi, c'è anche la possibilità di creare eventi di livello superiore con `new CustomEvent(...)`. Gli eventi sono sempre legati al nodo DOM su cui sono stati creati o dispacciati. La maggior parte degli eventi nativi supporta anche il bubbling. Questo rende possibile ascoltare tutti gli eventi su un sotto-albero specifico del DOM. Se vuoi ascoltare tutti gli eventi della pagina, attacca l'event listener all'elemento window. Ecco come appare la creazione dell'evento `blue:basket:changed` nell'esempio:
 
     class BlueBuy extends HTMLElement {
       [...]
@@ -178,7 +179,7 @@ Un modo più pulito è di usare un meccanismo PubSub, in cui un componente può 
       }
     }
 
-Il mini carrello può adesso sottoscriversi a quest'evento su `window` ed essere notificato quando dovrebbe aggiornare i suoi dati.
+Il mini carrello può adesso sottoscriversi a quest'evento su `window` ed essere avvisato quando dovrebbe aggiornare i suoi dati.
 
     class BlueBasket extends HTMLElement {
       connectedCallback() {
@@ -193,7 +194,7 @@ Il mini carrello può adesso sottoscriversi a quest'evento su `window` ed essere
       }
     }
 
-Con quest'approccio, il frammento del mini carrello aggiunge un listener a un elemento del DOM che è fuori dal suo scope (`window`). Questo dovrebbe essere OK in molte applicazioni ma, se questo non piace, si può anche implementare un approccio in cui la pagina stessa (Team Product) ascolta un evento e notifica il mini carrello chiamando `refresh()` sull'elemento del DOM.
+Con quest'approccio, il frammento del mini carrello aggiunge un listener a un elemento del DOM che è fuori dal suo scope (`window`). Questo dovrebbe essere OK in molte applicazioni ma, se proprio non piace, si può anche implementare un approccio in cui la pagina stessa (Team Product) ascolta un evento e notifica il mini carrello chiamando `refresh()` sull'elemento del DOM.
 
     // page.js
     const $ = document.getElementsByTagName;
@@ -206,7 +207,7 @@ Non è comune chiamare imperativamente metodi del DOM, ma si può trovare un ese
 
 ## Rendering lato Server / Rendering Universale
 
-Gli Elementi Custom sono grandi per integrare componenti nel browser. Però, quando costruisci un sito che è acceduto sul web, è probabile che siano importanti pure le performance di caricamento iniziale e gl iutenti vedranno lo schermo bianco finché non vengono scaricati ed eseguiti tutti i framework JavaScript. In aggiunta, è utile capire cosa succede quando JavaScript fallisce o è bloccato. [Jeremy Keith](https://adactio.com/) ne spiega l'importanza nel suo eBook /podcast [Resilient Web Design](https://resilientwebdesign.com/). Dunque, è essenziale la capacità di renderizzare i contentuti core sul server. Purtroppo, la specifica sui web component non parla proprio di rendering lato server. Né JavaScript, né Elementi Custom :(
+Gli Elementi Custom vanno benissimo per integrare componenti nel browser. Però, quando costruisci un sito che è accessibile dal web, è probabile che siano importanti pure le performance di caricamento iniziale e gli utenti vedranno lo schermo bianco finché non vengono scaricati ed eseguiti tutti i framework JavaScript. In aggiunta, è utile capire cosa succede quando il JavaScript fallisce o è bloccato. [Jeremy Keith](https://adactio.com/) ne spiega l'importanza nel suo eBook / podcast [Resilient Web Design](https://resilientwebdesign.com/). Dunque, la capacità di renderizzare i contentuti core sul server è chiave. Purtroppo, la specifica sui web component non parla proprio di rendering lato server. Niente JavaScript, niente Elementi Custom :(
 
 ### Elementi Custom + Server Side Includes = ❤️
 
@@ -215,7 +216,7 @@ Per far funzionare il rendering lato server, bisogna fare refactoring dell'esemp
     $ curl http://127.0.0.1:3000/blue-buy?sku=t_porsche
     <button type="button">acquista a 66,00 €</button>
 
-Il nome del tag dell'Elemento Custom viene usato come nome del percorso - gli attributi diventano query parameters. Adesso abbiamo un modo per renderizzare lato server il contenuto di ogni componente. Insieme agli Elementi Custom `<blue-buy>`, si ottinere qualcosa di molto simile a un __Componente Web Universale__:
+Il nome del tag dell'Elemento Custom viene usato come nome del percorso - gli attributi diventano query parameters. Adesso abbiamo un modo per renderizzare lato server il contenuto di ogni componente. Insieme agli Elementi Custom `<blue-buy>`, si ottiene qualcosa di molto simile a un __Componente Web Universale__:
 
     <blue-buy sku="t_porsche">
       <!--#include virtual="/blue-buy?sku=t_porsche" -->
@@ -253,15 +254,15 @@ Il commento `#include` viene sostituito dalla risposta di `/blue-buy?sku=t_porsc
       }
     }
 
-La direttiva `ssi: on;` abilita la funzionalità SSI feature and viene aggiunto un block `upstream` e `location` per team, per assicurarsi che tutti gli URL che cominciano con `/blue` siano diretti all'applicazione giusta (`team_blue:3001`). In aggiunta, la rotta `/` viene mappata al Team Red, che contolla la homepage / pagina prodotto.
+La direttiva `ssi: on;` abilita la funzionalità SSI. Viene aggiunto un block `upstream` e `location` per team, per assicurarsi che tutti gli URL che cominciano con `/blue` siano diretti all'applicazione giusta (`team_blue:3001`). In aggiunta, la rotta `/` viene mappata al Team Red, che contolla la homepage / pagina prodotto.
 
-Quest'animazione mostra il negozio di trattori in un browser che ha __JavaScript disabilitato__.
+Quest'animazione mostra il negozio di modellini di trattori in un browser che ha __JavaScript disabilitato__.
 
-[![Rendering lato Server - JavaScript Disabilitao](./ressources/video/server-render.gif)](./ressources/video/server-render.mp4)
+[![Rendering lato Server - JavaScript Disabilitato](./ressources/video/server-render.gif)](./ressources/video/server-render.mp4)
 
 [ispeziona il codice](https://github.com/neuland/micro-frontends/tree/master/2-composition-universal)
 
-I pulsanti di selezione della variante adesso sono proprio link e ogni click porta a ricaricare la pagina. IL terminale sulla destra mostra il processo con cui una richiesta della pagina viene inoltrata al Team Rosso, che controlla la pagina prodotto, e dopo il markup viene fornito dai frammenti dei Team Blu e Verde.
+I pulsanti di selezione della variante adesso sono proprio link e ogni click porta a ricaricare la pagina. Il terminale sulla destra mostra il processo con cui una richiesta della pagina viene inoltrata al Team Rosso, che controlla la pagina prodotto, e dopo il markup viene fornito dai frammenti dei Team Blu e Verde.
 
 Se viene riattivato JavaScript, sarà visibile solo il messaggio di log per la prima richiesta. Tutte le modifiche al trattore successive saranno gestite lato client, come nel primo esempio. In un esempio successivo, i dati dei prodotti saranno estratti dal Javascript e caricati da una API REST come necessarin.
 
