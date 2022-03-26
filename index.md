@@ -262,9 +262,9 @@ Quest'animazione mostra il negozio di modellini di trattori in un browser che ha
 
 [ispeziona il codice](https://github.com/neuland/micro-frontends/tree/master/2-composition-universal)
 
-I pulsanti di selezione della variante adesso sono proprio link e ogni click porta a ricaricare la pagina. Il terminale sulla destra mostra il processo con cui una richiesta della pagina viene inoltrata al Team Rosso, che controlla la pagina prodotto, e dopo il markup viene fornito dai frammenti dei Team Blu e Verde.
+I pulsanti di selezione della variante adesso sono proprio link e ogni click porta a ricaricare la pagina. La linea di comando sulla destra mostra il processo con cui una richiesta della pagina viene inoltrata al Team Rosso, che controlla la pagina prodotto, e dopo il markup viene fornito dai frammenti dei Team Blu e Verde.
 
-Se viene riattivato JavaScript, sarà visibile solo il messaggio di log per la prima richiesta. Tutte le modifiche al trattore successive saranno gestite lato client, come nel primo esempio. In un esempio successivo, i dati dei prodotti saranno estratti dal Javascript e caricati da una API REST come necessarin.
+Se viene riattivato JavaScript, sarà visibile solo il messaggio di log per la prima richiesta. Tutte le modifiche al trattore successive saranno gestite lato client, come nel primo esempio. In un esempio successivo, i dati dei prodotti saranno estratti dal Javascript e caricati da una API REST per quanto serve.
 
 Puoi giocare con quest'esempio sulla tua macchina locale. Devi installare solo [Docker Compose](https://docs.docker.com/compose/install/).
 
@@ -272,11 +272,11 @@ Puoi giocare con quest'esempio sulla tua macchina locale. Devi installare solo [
     cd micro-frontends/2-composition-universal
     docker-compose up --build
 
-Docker fa partire nginx sulla port 3000 e costruisce l'immagine node.js per ogni team. Quando apri [http://127.0.0.1:3000/](http://127.0.0.1:3000/) nel browser, dovresti vedere un trattore rosso. I log combinati di `docker-compose` permettono di vedere facilmente cosa succede sulla rete. Purtroppo non c'è modo di controllare il colore, quindi devi rassegnarti al fatto ch il Team Blu può essere evidenziato in verde :)
+Docker fa partire nginx sulla porta 3000 e costruisce un'immagine node.js per ogni team. Quando apri [http://127.0.0.1:3000/](http://127.0.0.1:3000/) nel browser, dovresti vedere un trattore rosso. I log combinati di `docker-compose` permettono di vedere facilmente cosa succede sulla rete. Purtroppo non c'è modo di controllare il colore dell'output, quindi devi rassegnarti al fatto ch il Team Blu potrebbe essere evidenziato in verde :)
 
-I file `src` sono mappati in container individuali e l'applicazione node ripartirà quando fai una modifica al codice. Cambiare il file `nginx.conf` richiede un riavvio di `docker-compose` per avere effetto. Sentiti libero di giochicchiare e di fornire un riscontro.
+I file `src` sono mappati nei container individuali e l'applicazione node ripartirà quando fai una modifica al codice. Cambiare il file `nginx.conf` richiede un riavvio di `docker-compose` per avere effetto. Sentiti libero di giochicchiare e di fornire un feedback.
 
-### Lettura dei dati e stati di Caricamento
+### Lettura dei dati & stati di Caricamento
 
 Uno svantaggio dell'approccio SSI/ESI è che __il frammento più lento determina il tempo di risposta__ dell'intera pagina.
 Quindi, è bene cachare la risposta di un frammento.
@@ -296,12 +296,12 @@ Una possibile soluzione sarebbe che il Team Rosso salta proprio l'SSI Include.
 
     <green-recos sku="t_porsche"></green-recos>
 
-*Nota a lato imporante. Gli Elementi Custom [non possono essere self-closing](https://developers.google.com/web/fundamentals/architecture/building-components/customelements#jsapi), quindi è sbagliato scrivere `<green-recos sku="t_porsche" />`*
+*Nota a lato importante. Gli Elementi Custom [non possono essere self-closing](https://developers.google.com/web/fundamentals/architecture/building-components/customelements#jsapi), quindi è sbagliato scrivere `<green-recos sku="t_porsche" />`*
 
-<img alt="Riposizionamento" src="./ressources/video/data-fetching-reflow.gif" style="width: 500px" loading="lazy" />
+<img alt="Riassestamento" src="./ressources/video/data-fetching-reflow.gif" style="width: 500px" loading="lazy" />
 
-Il rendering accade solo nel browser.
-Ma, come si può vedere nell'aimazione, questo cambio ha introdotto un __riposiziomanento__ della pagina.
+Il rendering avviene solo nel browser.
+Ma, come si può vedere nell'animazione, questo cambio ha introdotto un __riassestamento sostanziale__ della pagina.
 Il principio, la sezione raccomandazioni è bianca.
 Il JavaScript del Team Verde viene caricato ed eseguito.
 Viene fatta la chiamata API per ricevere le raccomandazioni personalizzate.
@@ -326,10 +326,10 @@ Così __prenota lo spazio necessario__ e il riempimento del contenuto reale non 
 Gli Skeleton screen sono anche molto __utili per il rendering lato client__.
 Quando il tuo Elemento Custom viene inserito nel DOM per un'azione del'utente, potrebbe __renderizzare immediatamente lo scheletro__ finché non arrivano i dati di cui ha bisogno dal server.
 
-Anche per un __cambio d'attributo__ (per esempio per una __variante selezionata__ si può decidere di passare alla vita scheletro finché non arrivino i nuovi dati.
+Anche per un __cambio d'attributo__ (per esempio per la __selezione di una variante__ si può decidere di passare alla vista scheletro finché non arrivano i nuovi dati.
 
-IN questo modo, l'utente riceve un'indicazione che qulcosa sta succedendo nel frammento. 
-Ma quando l'endpoint risponde velocamente, può dare fastidio anche un piccolo __sfarfallio dello scheletro__ fra i dati vecchi e nuovi.
+Im questo modo, l'utente riceve un'indicazione che qualcosa sta succedendo nel frammento. 
+Ma quando l'endpoint risponde velocemente, può dare fastidio anche un piccolo __sfarfallio dello scheletro__ fra i dati vecchi e nuovi.
 Può aiutare preservare i vecchi dati o usare timeout intelligenti.
 Quindi, usa questa tecnica saggiamente e cerca di ottenere il feedback degli utenti.
 
@@ -348,12 +348,12 @@ Guarda il [Repo Github](https://github.com/neuland/micro-frontends) per ricevere
 - [Slides: Micro Frontends - JSUnconf.eu 2017](https://speakerdeck.com/naltatis/micro-frontends-building-a-modern-webapp-with-multiple-teams)
 - [Discussione: Break Up With Your Frontend Monolith - JS Kongress 2017](https://www.youtube.com/watch?v=W3_8sxUurzA) Elisabeth Engel parla dell'implementazione dei Micro Frontends a gutefrage.net
 - [Articolo: Micro Frontends](https://martinfowler.com/articles/micro-frontends.html) Articolo di Cam Jackson sul blog di Martin Fowler 
-- [Post: Micro frontends - a microservice approach to front-end web development](https://medium.com/@tomsoderlund/micro-frontends-a-microservice-approach-to-front-end-web-development-f325ebdadc16) Tom Söderlund explains spiega i concetti base e fornisce link sull'argomento
+- [Post: Micro frontends - a microservice approach to front-end web development](https://medium.com/@tomsoderlund/micro-frontends-a-microservice-approach-to-front-end-web-development-f325ebdadc16) Tom Söderlund spiega i concetti base e fornisce link sull'argomento
 - [Post: Microservices to Micro-Frontends](http://www.agilechamps.com/microservices-to-micro-frontends/) Sandeep Jain riassume i principi chiave di  microservizi e micro frontends
-- [Link Collection: Micro Frontends by Elisabeth Engel](https://micro-frontends.zeef.com/elisabeth.engel?ref=elisabeth.engel&share=ee53d51a914b4951ae5c94ece97642fc) una lista esaustiv di posts, discorsi, strumenti e altre risorse sull'argomento
+- [Link Collection: Micro Frontends by Elisabeth Engel](https://micro-frontends.zeef.com/elisabeth.engel?ref=elisabeth.engel&share=ee53d51a914b4951ae5c94ece97642fc) una lista esaustiva di post, discorsi, strumenti e altre risorse sull'argomento
 - [Awesome Micro Frontends](https://github.com/ChristianUlbrich/awesome-microfrontends) una lista curata di link di Christian Ulbrich 🕶
-- [Custom Elements Everywhere](https://custom-elements-everywhere.com/) Per assicurarsi che i framework e gli elementi custom siano BFF (best friend dforever)
-- I trattori si possono comprare da  [manufactum.com](https://www.manufactum.com/) :)<br>_Questo negozio è stato sviluppato da due team usando le tecniche qui descritte._
+- [Custom Elements Everywhere](https://custom-elements-everywhere.com/) Per assicurarsi che i framework e gli elementi custom siano BFF (best friend forever)
+- I trattori si possono comprare da [manufactum.com](https://www.manufactum.com/) :)<br>_Questo negozio è stato sviluppato da due team usando le tecniche qui descritte._
 
 ## Related Techniques
 - [Posts: Cookie Cutter Scaling](https://paulhammant.com/categories.html#Cookie_Cutter_Scaling) David Hammet has scritto una serie di blog post su quest'argomento 
@@ -383,6 +383,6 @@ Guarda il [Repo Github](https://github.com/neuland/micro-frontends) per ricevere
 - [Soobin Bak](https://github.com/soobing) cha ha tradotto il sito in [Coreano](https://soobing.github.io/micro-frontends/).
 - [Sergei Babin](https://github.com/serzn1) cha ha tradotto il sito in [Russo](https://serzn1.github.io/micro-frontends/).
 - [Shiwei Yang](https://github.com/swearer23) cha ha tradotto il sito in [Cinese](https://swearer23.github.io/micro-frontends/).
-- [Riccardo Moschetti] che ha tradotto il sito in [Italiano]
+- [Riccardo Moschetti](https://github.com/RiccardoGMoschetti) che ha tradotto il sito in [Italiano]
 
 Questo sito è generato da Github Pages. Il codice si trova qui: [neuland/micro-frontends](https://github.com/neuland/micro-frontends/).
