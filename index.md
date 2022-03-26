@@ -342,47 +342,46 @@ Guarda il [Repo Github](https://github.com/neuland/micro-frontends) per ricevere
 
 ## Risorse Aggiuntive
 - [Libro: Micro Frontends in Action](https://www.manning.com/books/micro-frontends-in-action?a_aid=mfia&a_bid=5f09fdeb) Scritto da me.
-- [Talk: Micro Frontends - MicroCPH, Copenhagen 2019](https://www.youtube.com/watch?v=wCHYILvM7kU) ([Slides](https://noti.st/naltatis/zQb2m5/micro-frontends-the-nitty-gritty-details-or-frontend-backend-happyend)) The Nitty Gritty Details or Frontend, Backend, 🌈 Happyend
-- [Talk: Micro Frontends - Web Rebels, Oslo 2018](https://www.youtube.com/watch?v=dTW7eJsIHDg) ([Slides](https://noti.st/naltatis/HxcUfZ/micro-frontends-think-smaller-avoid-the-monolith-love-the-backend)) Think Smaller, Avoid the Monolith, ❤️the Backend
+- [Discussione: Micro Frontends - MicroCPH, Copenhagen 2019](https://www.youtube.com/watch?v=wCHYILvM7kU) ([Slides](https://noti.st/naltatis/zQb2m5/micro-frontends-the-nitty-gritty-details-or-frontend-backend-happyend)) I dettagli più essenziali di Frontend, Backend, 🌈 Happyend
+- [Discussione: Micro Frontends - Web Rebels, Oslo 2018](https://www.youtube.com/watch?v=dTW7eJsIHDg) ([Slides](https://noti.st/naltatis/HxcUfZ/micro-frontends-think-smaller-avoid-the-monolith-love-the-backend)) Pensa in piccolo, Evita il Monolite,❤️ il Backend
 - [Slides: Micro Frontends - JSUnconf.eu 2017](https://speakerdeck.com/naltatis/micro-frontends-building-a-modern-webapp-with-multiple-teams)
-- [Talk: Break Up With Your Frontend Monolith - JS Kongress 2017](https://www.youtube.com/watch?v=W3_8sxUurzA) Elisabeth Engel talks about implementing Micro Frontends at gutefrage.net
-- [Article: Micro Frontends](https://martinfowler.com/articles/micro-frontends.html) Article by Cam Jackson on Martin Fowlers Blog
-- [Post: Micro frontends - a microservice approach to front-end web development](https://medium.com/@tomsoderlund/micro-frontends-a-microservice-approach-to-front-end-web-development-f325ebdadc16) Tom Söderlund explains the core concept and provides links on this topic
-- [Post: Microservices to Micro-Frontends](http://www.agilechamps.com/microservices-to-micro-frontends/) Sandeep Jain summarizes the key principals behind microservices and micro frontends
-- [Link Collection: Micro Frontends by Elisabeth Engel](https://micro-frontends.zeef.com/elisabeth.engel?ref=elisabeth.engel&share=ee53d51a914b4951ae5c94ece97642fc) extensive list of posts, talks, tools and other resources on this topic
-- [Awesome Micro Frontends](https://github.com/ChristianUlbrich/awesome-microfrontends) a curated list of links by Christian Ulbrich 🕶
-- [Custom Elements Everywhere](https://custom-elements-everywhere.com/) Making sure frameworks and custom elements can be BFFs
-- Tractors are purchasable at [manufactum.com](https://www.manufactum.com/) :)<br>_This store is developed by two teams using the here described techniques._
+- [Discussione: Break Up With Your Frontend Monolith - JS Kongress 2017](https://www.youtube.com/watch?v=W3_8sxUurzA) Elisabeth Engel parla dell'implementazione dei Micro Frontends a gutefrage.net
+- [Articolo: Micro Frontends](https://martinfowler.com/articles/micro-frontends.html) Articolo di Cam Jackson sul blog di Martin Fowler 
+- [Post: Micro frontends - a microservice approach to front-end web development](https://medium.com/@tomsoderlund/micro-frontends-a-microservice-approach-to-front-end-web-development-f325ebdadc16) Tom Söderlund explains spiega i concetti base e fornisce link sull'argomento
+- [Post: Microservices to Micro-Frontends](http://www.agilechamps.com/microservices-to-micro-frontends/) Sandeep Jain riassume i principi chiave di  microservizi e micro frontends
+- [Link Collection: Micro Frontends by Elisabeth Engel](https://micro-frontends.zeef.com/elisabeth.engel?ref=elisabeth.engel&share=ee53d51a914b4951ae5c94ece97642fc) una lista esaustiv di posts, discorsi, strumenti e altre risorse sull'argomento
+- [Awesome Micro Frontends](https://github.com/ChristianUlbrich/awesome-microfrontends) una lista curata di link di Christian Ulbrich 🕶
+- [Custom Elements Everywhere](https://custom-elements-everywhere.com/) Per assicurarsi che i framework e gli elementi custom siano BFF (best friend dforever)
+- I trattori si possono comprare da  [manufactum.com](https://www.manufactum.com/) :)<br>_Questo negozio è stato sviluppato da due team usando le tecniche qui descritte._
 
 ## Related Techniques
-- [Posts: Cookie Cutter Scaling](https://paulhammant.com/categories.html#Cookie_Cutter_Scaling) David Hammet wrote a series of blog posts on this topic.
-- [Wikipedia: Java Portlet Specification](https://en.wikipedia.org/wiki/Java_Portlet_Specification) Specification that addresses similar topics for building enterprise portals.
-
+- [Posts: Cookie Cutter Scaling](https://paulhammant.com/categories.html#Cookie_Cutter_Scaling) David Hammet has scritto una serie di blog post su quest'argomento 
+- [Wikipedia: Java Portlet Specification](https://en.wikipedia.org/wiki/Java_Portlet_Specification) Specifica che si rivolge ad argomento simili per la costruzione di portali enterprise.
 ---
 
-## Things to come ... (very soon)
+## Cose in Arrivo ... (molto presto)
 
 - Use Cases
-  - Navigating between pages
-    - soft vs. hard navigation
+  - Navigazione fra le pagine
+    - navigazione soft vs. hard 
     - universal router
   - ...
-- Side Topics
-  - Isolated CSS / Coherent User Interface / Style Guides & Pattern Libraries
-  - Performance on initial load
-  - Performance while using the site
-  - Loading CSS
-  - Loading JS
-  - Integration Testing
+- Argomenti a lato
+  - CSS Isolato / Interfaccia Utente Coerente / Style Guide & Pattern Library
+  - Performance al caricamento iniziale
+  - Performance mentre usi il sito
+  - Caricare il  CSS
+  - Caricare JS
+  - Test d'Integrazione
   - ...
 
-## Contributors
-- [Koike Takayuki](https://github.com/koiketakayuki) who translated the site to [Japanese](https://micro-frontends-japanese.org/).
-- [Jorge Beltrán](https://github.com/scipion) who translated the site to [Spanish](https://micro-frontends-es.org).
-- [Bruno Carneiro](https://github.com/Tautorn) who translated the site to [Portuguese](https://tautorn.github.io/micro-frontends/).
-- [Soobin Bak](https://github.com/soobing) who translated the site to [Korean](https://soobing.github.io/micro-frontends/).
-- [Sergei Babin](https://github.com/serzn1) who translated the site to [Russian](https://serzn1.github.io/micro-frontends/).
-- [Shiwei Yang](https://github.com/swearer23) who translated the site to [Chinese](https://swearer23.github.io/micro-frontends/).
+## Hanno contribuito
+- [Koike Takayuki](https://github.com/koiketakayuki) cha ha tradotto il sito in [Giapponese](https://micro-frontends-japanese.org/).
+- [Jorge Beltrán](https://github.com/scipion) cha ha tradotto il sito in [Spagnolo](https://micro-frontends-es.org).
+- [Bruno Carneiro](https://github.com/Tautorn) cha ha tradotto il sito in [Portoghese](https://tautorn.github.io/micro-frontends/).
+- [Soobin Bak](https://github.com/soobing) cha ha tradotto il sito in [Coreano](https://soobing.github.io/micro-frontends/).
+- [Sergei Babin](https://github.com/serzn1) cha ha tradotto il sito in [Russo](https://serzn1.github.io/micro-frontends/).
+- [Shiwei Yang](https://github.com/swearer23) cha ha tradotto il sito in [Cinese](https://swearer23.github.io/micro-frontends/).
 - [Riccardo Moschetti] che ha tradotto il sito in [Italiano]
 
-Questo sito è generato da Github Pages. Il suo codice si trova qui: [neuland/micro-frontends](https://github.com/neuland/micro-frontends/).
+Questo sito è generato da Github Pages. Il codice si trova qui: [neuland/micro-frontends](https://github.com/neuland/micro-frontends/).
