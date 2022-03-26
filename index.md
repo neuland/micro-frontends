@@ -1,4 +1,4 @@
-Tecniche, strategie e ricette per sviluppare un'__applicazione web moderna__ da parte di __team diversificati__ che possano __rilasciare le funzionalità in maniera indipendente__.
+Tecniche, strategie e ricette per sviluppare un'__applicazione web moderna__ con contributo di __team diversificati__ che possano __rilasciare le funzionalità in maniera indipendente__.
 
 ## Cosa sono i Micro Frontend?
 
@@ -277,70 +277,71 @@ I file `src` sono mappati in container individuali e l'applicazione node riparti
 
 ### Lettura dei dati e stati di Caricamento
 
-A downside of the SSI/ESI approach is, that the __slowest fragment determines the response time__ of the whole page.
-So it's good when the response of a fragment can be cached.
-For fragments that are expensive to produce and hard to cache it's often a good idea to exclude them from the initial render.
-They can be loaded asynchronously in the browser.
-In our example the `green-recos` fragment, that shows personalized recommendations is a candidate for this.
+Uno svantaggio dell'approccio SSI/ESI è che __il frammento più lento determina il tempo di risposta__ dell'intera pagina.
+Quindi, è bene cachare la risposta di un frammento.
+Per frammenti che sono dispendiosi da produrre e difficili da mettere in cache, è spesso indicato escluderli dal rendering iniziale.
+Possono essere caricati in maniera asincrona nel browser.
+Nel nostro esempio, un buon candidato per questo è il frammento `green-recos`, che mostra raccomandazioni personalizzate.
 
-One possible solution would be that team red just skips the SSI Include.
+Una possibile soluzione sarebbe che il Team Rosso salta proprio l'SSI Include.
 
-**Before**
+**Prima**
 
     <green-recos sku="t_porsche">
       <!--#include virtual="/green-recos?sku=t_porsche" -->
     </green-recos>
 
-**After**
+**Dopo**
 
     <green-recos sku="t_porsche"></green-recos>
 
-*Important Side-note: Custom Elements [cannot be self-closing](https://developers.google.com/web/fundamentals/architecture/building-components/customelements#jsapi), so writing `<green-recos sku="t_porsche" />` would not work correctly.*
+*Nota a lato imporante. Gli Elementi Custom [non possono essere self-closing](https://developers.google.com/web/fundamentals/architecture/building-components/customelements#jsapi), quindi è sbagliato scrivere `<green-recos sku="t_porsche" />`*
 
-<img alt="Reflow" src="./ressources/video/data-fetching-reflow.gif" style="width: 500px" loading="lazy" />
+<img alt="Riposizionamento" src="./ressources/video/data-fetching-reflow.gif" style="width: 500px" loading="lazy" />
 
-The rendering only takes place in the browser.
-But, as can be seen in the animation, this change has now introduced a __substantial reflow__ of the page.
-The recommendation area is initially blank.
-Team greens JavaScript is loaded and executed.
-The API call for fetching the personalized recommendation is made.
-The recommendation markup is rendered and the associated images are requested.
-The fragment now needs more space and pushes the layout of the page.
+Il rendering accade solo nel browser.
+Ma, come si può vedere nell'aimazione, questo cambio ha introdotto un __riposiziomanento__ della pagina.
+Il principio, la sezione raccomandazioni è bianca.
+Il JavaScript del Team Verde viene caricato ed eseguito.
+Viene fatta la chiamata API per ricevere le raccomandazioni personalizzate.
+Viene renderizzao il markup delle racconamdazioni e vengono richieste le immagini associate.
+Il frammento ora ha bisogno di più spazio e spinge il layout della pagine.
 
-There are different options to avoid an annoying reflow like this.
-Team red, which controls the page, could __fixate the recommendation containers height__.
-On a responsive website its often tricky to determine the height, because it could differ for different screen sizes.
-But the more important issue is, that __this kind of inter-team agreement creates a tight coupling__ between team red and green.
-If team green wants to introduce an additional sub-headline in the reco element, it would have to coordinate with team red on the new height.
-Both teams would have to rollout their changes simultaneously to avoid a broken layout.
+Ci sono diverse opzioni per evitare un riposizionamento fastidioso come questo.
 
-A better way is to use a technique called [Skeleton Screens](https://blog.prototypr.io/luke-wroblewski-introduced-skeleton-screens-in-2013-through-his-work-on-the-polar-app-later-fd1d32a6a8e7).
-Team red leaves the `green-recos` SSI Include in the markup.
-In addition team green changes the __server-side render method__ of its fragment so that it produces a __schematic version of the content__.
-The __skeleton markup__ can reuse parts of the real content's layout styles.
-This way it __reserves the needed space__ and the fill-in of the actual content does not lead to a jump.
+Il Team Rosso, che controlla la pagina, potrebbe __rendere fissa l'altezza del container delle raccomandazioni__.
+Su un sito responsive è spesso ingannevole determinare l'altezza, perché potrebbe differire per schermi diversi.
+Ma il problema più serio è che __questo tipo di accordi inter-team crea un accoppiamento stretto__ fra i Team Rosso e Verde.
+Se i Team Verde vuole introdurre un sottotitolo aggiuntivo nell'elemento raccomandazioni, dovrebbe coordinarsi con il Team Rosso per la nuova altezza. Entrambi i team dovrebbero rilasciare simpultaneamente per evitare che si rompa il layout.
 
-<img alt="Skeleton Screen" src="./ressources/video/data-fetching-skeleton.gif" style="width: 500px" loading="lazy" />
+Un metodo migliore è di usare una tecnica chiamata [Skeleton Screens](https://blog.prototypr.io/luke-wroblewski-introduced-skeleton-screens-in-2013-through-his-work-on-the-polar-app-later-fd1d32a6a8e7).
+Il Team Rosso lascia l'include SSI `green-recos` nel  markup.
+In più, il Team Verde cambia  __il metodo di renderizzazione lato-server__ del suo frammento in modo che produca una __versione schematica del contentuto__.
+Il __markup skeleton___ può riusare parte degli stili del layout del contenuto reale.
+Così __prenota lo spazio necessario__ e il riempimento del contenuto reale non comporta un salto.
 
-Skeleton screens are also __very useful for client rendering__.
-When your custom element is inserted into the DOM due to a user action it could __instantly render the skeleton__ until the data it needs from the server has arrived.
+<img alt="Schermo Skeleton" src="./ressources/video/data-fetching-skeleton.gif" style="width: 500px" loading="lazy" />
 
-Even on an __attribute change__ like for the _variant select_ you can decide to switch to skeleton view until the new data arrives.
-This ways the user gets an indication that something is going on in the fragment.
-But when your endpoint responds quickly a short __skeleton flicker__ between the old and new data could also be annoying.
-Preserving the old data or using intelligent timeouts can help.
-So use this technique wisely and try to get user feedback.
+Gli Skeleton screen sono anche molto __utili per il rendering lato client__.
+Quando il tuo Elemento Custom viene inserito nel DOM per un'azione del'utente, potrebbe __renderizzare immediatamente lo scheletro__ finché non arrivano i dati di cui ha bisogno dal server.
 
-## Navigating Between Pages
+Anche per un __cambio d'attributo__ (per esempio per una __variante selezionata__ si può decidere di passare alla vita scheletro finché non arrivino i nuovi dati.
 
-__to be continued soon ... (I promise)__
+IN questo modo, l'utente riceve un'indicazione che qulcosa sta succedendo nel frammento. 
+Ma quando l'endpoint risponde velocamente, può dare fastidio anche un piccolo __sfarfallio dello scheletro__ fra i dati vecchi e nuovi.
+Può aiutare preservare i vecchi dati o usare timeout intelligenti.
+Quindi, usa questa tecnica saggiamente e cerca di ottenere il feedback degli utenti.
 
-watch the [Github Repo](https://github.com/neuland/micro-frontends) to get notified
+## Navigare Fra le Pagine
+
+__continua presto ... (Giuro)__
+
+Guarda il [Repo Github](https://github.com/neuland/micro-frontends) per ricevere le notifiche
 
 
 
-## Additional Resources
-- [Book: Micro Frontends in Action](https://www.manning.com/books/micro-frontends-in-action?a_aid=mfia&a_bid=5f09fdeb) Written by me.
+## Risorse Aggiuntive
+- [Libro: Micro Frontends in Action](https://www.manning.com/books/micro-frontends-in-action?a_aid=mfia&a_bid=5f09fdeb) Scritto da me.
 - [Talk: Micro Frontends - MicroCPH, Copenhagen 2019](https://www.youtube.com/watch?v=wCHYILvM7kU) ([Slides](https://noti.st/naltatis/zQb2m5/micro-frontends-the-nitty-gritty-details-or-frontend-backend-happyend)) The Nitty Gritty Details or Frontend, Backend, 🌈 Happyend
 - [Talk: Micro Frontends - Web Rebels, Oslo 2018](https://www.youtube.com/watch?v=dTW7eJsIHDg) ([Slides](https://noti.st/naltatis/HxcUfZ/micro-frontends-think-smaller-avoid-the-monolith-love-the-backend)) Think Smaller, Avoid the Monolith, ❤️the Backend
 - [Slides: Micro Frontends - JSUnconf.eu 2017](https://speakerdeck.com/naltatis/micro-frontends-building-a-modern-webapp-with-multiple-teams)
