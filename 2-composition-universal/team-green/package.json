@@ -17,6 +17,6 @@
     "morgan": "^1.10.0"
   },
   "devDependencies": {
-    "rollup": "^1.32.1"
+    "rollup": "^3.28.0"
   }
 }
