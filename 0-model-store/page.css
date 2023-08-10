@@ -10,8 +10,7 @@ aside {
 
 dl {
   display: grid;
-  grid-column-gap: 15px;
-  grid-row-gap: 2px;
+  grid-gap: 2px 15px;
   grid-template-columns: 2fr 1fr;
   max-width: 300px;
 }
@@ -26,9 +25,7 @@ dd {
 
 #app {
   display: grid;
-  grid-column-gap: 20px;
-  grid-gap: 20px;
-  grid-row-gap: 10px;
+  grid-gap: 10px 20px;
   margin: 20px auto;
   min-width: 500px;
 }

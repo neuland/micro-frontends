@@ -11,7 +11,10 @@
     "at-rule-no-unknown": null,
     "color-hex-length": "long",
     "color-hex-case": "lower",
-    declaration-block-no-shorthand-property-overrides: null,
-    no-descending-specificity: null
+    "declaration-block-no-shorthand-property-overrides": null,
+    "no-descending-specificity": null,
+    "media-feature-range-notation": null,
+    "no-duplicate-selectors": null,
+    "declaration-block-no-redundant-longhand-properties": null
   }
 }
