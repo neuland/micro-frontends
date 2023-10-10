@@ -1,5 +1,5 @@
 /* eslint-disable no-use-before-define, no-console, class-methods-use-this */
-/* globals HTMLElement, window, CustomEvent */
+/* globals HTMLElement, window */
 import render from './render';
 
 class BlueBuy extends HTMLElement {

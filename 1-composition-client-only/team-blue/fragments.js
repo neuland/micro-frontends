@@ -1,5 +1,5 @@
 /* eslint-disable max-classes-per-file, no-use-before-define, no-console, class-methods-use-this */
-/* globals HTMLElement, window, CustomEvent */
+/* globals HTMLElement, window */
 (function fragments() {
   const prices = {
     t_porsche: '66,00 €',
