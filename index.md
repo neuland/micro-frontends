@@ -6,7 +6,7 @@ The term __Micro Frontends__ first came up in [ThoughtWorks Technology Radar](ht
 
 The idea behind Micro Frontends is to think about a website or web app as __a composition of features__ which are owned by __independent teams__. Each team has a __distinct area of business__ or __mission__ it cares about and specialises in. A team is __cross functional__ and develops its features __end-to-end__, from database to user interface.
 
-However, this idea is not new. It has a lot in common with the [Self-contained Systems](http://scs-architecture.org/) concept. In the past approaches like this went by the name of [Frontend Integration for Verticalised Systems](https://dev.otto.de/2014/07/29/scaling-with-microservices-and-vertical-decomposition/). But Micro Frontends is clearly a more friendly and less bulky term.
+However, this idea is not new. It has a lot in common with the [Self-contained Systems](http://scs-architecture.org/) concept. In the past approaches like this went by the name of [Frontend Integration for Verticalised Systems](https://www.otto.de/jobs/en/technology/techblog/blogpost/architecture-principles-2013-04-15.php). But Micro Frontends is clearly a more friendly and less bulky term.
 
 __Monolithic Frontends__
 <img alt="Monolithic Frontends" src="./ressources/diagrams/organisational/monolith-frontback-microservices.png" loading="lazy" />
@@ -66,8 +66,6 @@ In this example, the page is split into separate components/fragments owned by t
 [![Example 1 - Product Page - Composition](./ressources/screen/three-teams.png)](./1-composition-client-only/)
 
 [try in browser](./1-composition-client-only/) & [inspect the code](https://github.com/neuland/micro-frontends/tree/master/1-composition-client-only)
-
-Each team
 
 __Team Product__ decides which functionality is included and where it is positioned in the layout. The page contains information that can be provided by Team Product itself, like the product name, image and the available variants. But it also includes fragments (Custom Elements) from the other teams.
 
@@ -139,11 +137,12 @@ To avoid duplication a `render()` method is introduced which is called from `con
 
 ### Browser Support
 
-The above example uses the Custom Element V1 Spec which is currently [supported in Chrome, Safari and Opera](http://caniuse.com/#feat=custom-elementsv1). But with [document-register-element](https://github.com/WebReflection/document-register-element) a lightweight and battle-tested polyfill is available to make this work in all browsers. Under the hood, it uses the [widely supported](http://caniuse.com/#feat=mutationobserver) Mutation Observer API, so there is no hacky DOM tree watching going on in the background.
+The above example uses the Custom Element V1 Spec which is [supported by all modern browsers](http://caniuse.com/#feat=custom-elementsv1). No polyfills or hacks are needed.
 
 ### Framework Compatibility
 
-Because Custom Elements are a web standard, all major JavaScript frameworks like Angular, React, Preact, Vue or Hyperapp support them. But when you get into the details, there are still a few implementation problems in some frameworks. At [Custom Elements Everywhere](https://custom-elements-everywhere.com/) [Rob Dodson](https://twitter.com/rob_dodson) has put together a compatibility test suite that highlights unresolved issues.
+Because Custom Elements are a web standard, all major JavaScript frameworks like React, Vue, Angular, Svelte or Preact support them.
+They allow you to embed a Custom Element in your application just like a native HTML tag, and they also provide ways to publish your framework-specific application as a Custom Element.
 
 ### Avoid Framework Anarchy
 
