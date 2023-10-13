@@ -145,26 +145,6 @@ dd {
   grid-area: buy;
 }
 
-#buy button {
-  background: none;
-  border: 1px solid gray;
-  border-radius: 20px;
-  cursor: pointer;
-  display: block;
-  font-size: 20px;
-  outline: none;
-  padding: 20px;
-  width: 100%;
-}
-
-#buy button:hover {
-  border-color: black;
-}
-
-#buy button:active {
-  border-color: seagreen;
-}
-
 #reco {
   grid-area: reco;
 }
@@ -186,16 +166,6 @@ dd {
     text-align: center;
     width: 100%;
   }
-}
-
-#reco h3 {
-  font-weight: 400;
-}
-
-#reco img {
-  display: inline-block;
-  height: 180px;
-  width: 180px;
 }
 
 green-recos {

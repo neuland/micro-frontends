@@ -49,6 +49,7 @@ function renderOption(variant) {
 function renderPage() {
   const variant = product.variants.find((v) => state.variant === v.sku);
   $app.innerHTML = `
+    <link rel="stylesheet" href="./team-red/page.css" />
     <h1 id="store">The Model Store</h1>
     <blue-basket id="basket"></blue-basket>
     <div id="image"><div><img src="${variant.image}" alt="${variant.name}" /></div></div>

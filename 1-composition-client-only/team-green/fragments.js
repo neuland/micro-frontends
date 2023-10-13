@@ -26,7 +26,11 @@
     render() {
       const sku = this.getAttribute('sku');
       const reco = recos[sku] || [];
-      this.innerHTML = `
+      if (!this.shadowRoot) {
+        this.attachShadow({ mode: 'open' });
+      }
+      this.shadowRoot.innerHTML = `
+        <link rel="stylesheet" href="./team-green/fragments.css">
         <h3>Related Products</h3>
         ${reco.map((id) => `<img src="./team-green/images/reco_${id}.jpg" alt="Reco ${id}" />`).join('')}
       `;

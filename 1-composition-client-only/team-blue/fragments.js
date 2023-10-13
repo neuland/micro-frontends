@@ -52,7 +52,7 @@
       const sku = this.getAttribute('sku');
       this.log('connected', sku);
       this.render();
-      this.firstChild.addEventListener('click', this.addToCart);
+      this.shadowRoot.querySelector('button').addEventListener('click', this.addToCart);
     }
 
     addToCart() {
@@ -64,9 +64,15 @@
     }
 
     render() {
+      if (!this.shadowRoot) {
+        this.attachShadow({ mode: 'open' });
+      }
       const sku = this.getAttribute('sku');
       const price = prices[sku];
-      this.innerHTML = `<button type="button">buy for ${price}</button>`;
+      this.shadowRoot.innerHTML = `
+        <link rel="stylesheet" href="./team-blue/fragments.css">
+        <button type="button">buy for ${price}</button>
+      `;
     }
 
     attributeChangedCallback(attr, oldValue, newValue) {
@@ -75,7 +81,7 @@
     }
 
     disconnectedCallback() {
-      this.firstChild.removeEventListener('click', this.addToCart);
+      this.shadowRoot.querySelector('button').removeEventListener('click', this.addToCart);
       const sku = this.getAttribute('sku');
       this.log('disconnected', sku);
     }
