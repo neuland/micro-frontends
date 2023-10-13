@@ -67,7 +67,7 @@
       if (!this.shadowRoot) {
         this.attachShadow({ mode: 'open' });
       }
-      const sku = this.getAttribute('sku');
+      const sku = this.getAttribute('sku') || 't_porsche';
       const price = prices[sku];
       this.shadowRoot.innerHTML = `
         <link rel="stylesheet" href="./team-blue/fragments.css">

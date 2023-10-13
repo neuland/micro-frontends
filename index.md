@@ -75,7 +75,8 @@ Lets take the __buy button__ as an example. Team Product includes the button sim
 
     class BlueBuy extends HTMLElement {
       connectedCallback() {
-        this.innerHTML = `<button type="button">buy for 66,00 €</button>`;
+        this.attachShadow({ mode: 'open' });
+        this.shadowRoot = `<button type="button">buy for 66,00 €</button>`;
       }
 
       disconnectedCallback() { ... }
@@ -122,9 +123,12 @@ To support this the Custom Element can implement the `attributeChangedCallback` 
         this.render();
       }
       render() {
+        if (!this.shadowRoot) {
+          this.attachShadow({ mode: 'open' });
+        }
         const sku = this.getAttribute('sku');
         const price = prices[sku];
-        this.innerHTML = `<button type="button">buy for ${price}</button>`;
+        this.shadowRoot.innerHTML = `<button type="button">buy for ${price}</button>`;
       }
       attributeChangedCallback(attr, oldValue, newValue) {
         this.render();
@@ -137,7 +141,8 @@ To avoid duplication a `render()` method is introduced which is called from `con
 
 ### Browser Support
 
-The above example uses the Custom Element V1 Spec which is [supported by all modern browsers](http://caniuse.com/#feat=custom-elementsv1). No polyfills or hacks are needed.
+The above example uses the Custom Element Spec which is [supported by all modern browsers](http://caniuse.com/#feat=custom-elementsv1). No polyfills or hacks are needed.
+The same is true for [Shadow DOM](https://caniuse.com/shadowdomv1), which is used to encapsulate the Custom Element's markup and styles.
 
 ### Framework Compatibility
 
@@ -162,7 +167,7 @@ A cleaner way is to use a PubSub mechanism, where a component can publish a mess
       connectedCallback() {
         [...]
         this.render();
-        this.firstChild.addEventListener('click', this.addToCart);
+        this.shadowRoot.querySelector('button').addEventListener('click', this.addToCart);
       }
       addToCart() {
         // maybe talk to an api
@@ -171,10 +176,13 @@ A cleaner way is to use a PubSub mechanism, where a component can publish a mess
         }));
       }
       render() {
-        this.innerHTML = `<button type="button">buy</button>`;
+        if (!this.shadowRoot) {
+          this.attachShadow({ mode: 'open' });
+        }
+        this.shadowRoot.innerHTML = `<button type="button">buy</button>`;
       }
       disconnectedCallback() {
-        this.firstChild.removeEventListener('click', this.addToCart);
+        this.shadowRoot.querySelector('button').removeEventListener('click', this.addToCart);
       }
     }
 
