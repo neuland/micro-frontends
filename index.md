@@ -339,11 +339,18 @@ But when your endpoint responds quickly a short __skeleton flicker__ between the
 Preserving the old data or using intelligent timeouts can help.
 So use this technique wisely and try to get user feedback.
 
-## Navigating Between Pages
+## Need More Examples?
 
-__to be continued soon ... (I promise)__
 
-watch the [Github Repo](https://github.com/neuland/micro-frontends) to get notified
+<a href="/tractor-store/">
+<img alt="Tractor Store 2.0" src="./ressources/video/tractor-store-2.webp" style="width: 500px" loading="lazy" />
+</a>
+
+[Check out the Tractor Store 2.0](/tractor-store/)
+
+It's a more real-world micro frontends example that includes challenges like __routing & navigation__, __communication__, __handling state__, __loading strategies__, __sharing code__, __asset optimizations__ and __testing__.
+The site is a collection of different tech-specific implementations of the same application.
+Think of it as a [TodoMVC](http://todomvc.com/) for micro frontends.
 
 
 
@@ -361,27 +368,6 @@ watch the [Github Repo](https://github.com/neuland/micro-frontends) to get notif
 - [Custom Elements Everywhere](https://custom-elements-everywhere.com/) Making sure frameworks and custom elements can be BFFs
 - Tractors are purchasable at [manufactum.com](https://www.manufactum.com/) :)<br>_This store is developed by two teams using the here described techniques._
 
-## Related Techniques
-- [Posts: Cookie Cutter Scaling](https://paulhammant.com/categories.html#Cookie_Cutter_Scaling) David Hammet wrote a series of blog posts on this topic.
-- [Wikipedia: Java Portlet Specification](https://en.wikipedia.org/wiki/Java_Portlet_Specification) Specification that addresses similar topics for building enterprise portals.
-
----
-
-## Things to come ... (very soon)
-
-- Use Cases
-  - Navigating between pages
-    - soft vs. hard navigation
-    - universal router
-  - ...
-- Side Topics
-  - Isolated CSS / Coherent User Interface / Style Guides & Pattern Libraries
-  - Performance on initial load
-  - Performance while using the site
-  - Loading CSS
-  - Loading JS
-  - Integration Testing
-  - ...
 
 ## Contributors
 - [Koike Takayuki](https://github.com/koiketakayuki) who translated the site to [Japanese](https://micro-frontends-japanese.org/).

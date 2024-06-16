@@ -111,7 +111,7 @@ aside#sidebar > * {
 }
 
 aside#sidebar .author {
-  padding: 0 1em;
+  padding: 0;
   margin-bottom: 33vh;
 }
 
@@ -128,8 +128,23 @@ aside#sidebar .author {
   margin-bottom: 33vh;
 }
 
+aside#sidebar .tractorstore {
+  margin-bottom: 33vh;
+}
+
+aside#sidebar .tractorstore img {
+  margin: 0.75em 0;
+  width: 100%;
+  max-width: 500px;
+  border: 1px solid #aaa;
+}
+
+aside#sidebar .tractorstore a:hover img {
+  border-color: #2879d0;
+}
+
 aside#sidebar .book {
-  padding: 0 1.5em;
+  padding: 0;
   height: 300vh;
   box-sizing: border-box;
 }
@@ -146,7 +161,7 @@ aside#sidebar .book__inner {
 aside#sidebar .book img {
   margin: 0.75em 0;
   padding: 0;
-  border: 1px solid #4F4A44;
+  border: 1px solid #aaa;
   box-sizing: border-box;
   display: block;
   width: 200px;
@@ -181,7 +196,8 @@ aside#sidebar .book .hidden {
   }
 
   aside#sidebar .author,
-  aside#sidebar .book {
+  aside#sidebar .book,
+  aside#sidebar .tractorstore {
     margin: 0 0 3em 0;
     padding: 0;
   }
