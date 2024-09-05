@@ -254,12 +254,14 @@ aside#sidebar .book .hidden {
 
 pre code {
   color: #245798;
-  direction: ltr;
 }
 
 // RTL styles
 @import url('https://fonts.googleapis.com/css2?family=Vazirmatn&display=swap');
 
+[dir="rtl"] pre {
+  direction: ltr;
+}
 [dir="rtl"] .languages {
   right: inherit;
   left: -0.4em;
@@ -329,4 +331,8 @@ pre code {
 [dir="rtl"] header a.button {
   font-family: 'Vazirmatn', 'Handlee', cursive;
   font-weight: normal;
+}
+
+[dir="rtl"] body{
+  font-family: 'Vazirmatn', 'Handlee', cursive;
 }
