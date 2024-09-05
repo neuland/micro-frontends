@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ site.lang | default: "en-US" }}">
+<html lang="{{ site.lang | default: "en-US" }}" dir="{{ site.dir | default: "ltr" }}">
   <head>
     <meta charset='utf-8'>
     <meta http-equiv="X-UA-Compatible" content="chrome=1">
@@ -57,7 +57,6 @@
       }
     </script>
     <link rel="stylesheet" href="{{ '/assets/css/style.css?v=' | append: site.github.build_revision | relative_url }}" media="screen" type="text/css">
-    <link rel="stylesheet" href="{{ '/assets/css/style-rtl.css?v=' | append: site.github.build_revision | relative_url }}" media="screen" type="text/css">
     <link rel="stylesheet" href="{{ '/assets/css/print.css' | relative_url }}" media="print" type="text/css">
   </head>
 

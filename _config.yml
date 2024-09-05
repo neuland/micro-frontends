@@ -1,10 +1,12 @@
 theme: jekyll-theme-architect
 show_downloads: false
-title: Micro Frontends
-description: extending the microservice idea to frontend development
+title: میکرو فرانت‌اند
+description: گسترش ایده میکروسرویس به فرانت‌اند و توسعه سمت کاربر
+lang: fa
+dir: rtl
 github:
   is_project_page: true
-  repository_url: https://github.com/neuland/micro-frontends
+  repository_url: https://github.com/johnadib/micro-frontends
 exclude:
   - 2-composition-universal
   - 3-data-fetching

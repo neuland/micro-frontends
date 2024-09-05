@@ -254,4 +254,76 @@ aside#sidebar .book .hidden {
 
 pre code {
   color: #245798;
+  direction: ltr;
+}
+
+// RTL styles
+@import url('https://fonts.googleapis.com/css2?family=Vazirmatn&display=swap');
+
+[dir="rtl"] .languages {
+  right: inherit;
+  left: -0.4em;
+}
+
+[dir="rtl"] aside#sidebar .author img {
+  float: left;
+  margin: 0 0.5em 0.5em 0;
+}
+
+[dir="rtl"] aside#sidebar {
+  padding-left: 0;
+  padding-right: 3em;
+}
+
+[dir="rtl"] aside#sidebar h2 {
+  text-align: right;
+}
+
+[dir="rtl"] aside#sidebar .book__inner {
+  text-align: right;
+}
+[dir="rtl"] header a.button {
+  left: 0;
+  right: inherit;
+  padding-right: 68px;
+  padding-left: 0;
+}
+[dir="rtl"] #main-content h2:before{
+  padding-left: 0.3em;
+  padding-right: 0;
+  margin-right: -1.5em;
+  margin-left: 0;
+}
+[dir="rtl"] #main-content h3:before{
+  padding-left: 0.3em;
+  padding-right: 0;
+  margin-right: -2em;
+  margin-left: 0;
+}
+
+@media only screen and (max-width: 767px) {
+  [dir="rtl"] aside#sidebar {
+    margin: 0;
+    padding: 0;
+  }
+
+  [dir="rtl"] aside#sidebar h2 {
+    text-align: left;
+  }
+  
+  [dir="rtl"] aside#sidebar .author img {
+    float: right;
+    margin: 0 0 0.5em 1em;
+  }
+}
+
+[dir="rtl"] #main-content h1,
+[dir="rtl"] #main-content h2,
+[dir="rtl"] #sidebar h2,
+[dir="rtl"] #main-content h3,
+[dir="rtl"] #main-content h4,
+[dir="rtl"] header,
+[dir="rtl"] header a.button {
+  font-family: 'Vazirmatn', 'Handlee', cursive;
+  font-weight: normal;
 }
