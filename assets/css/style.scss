@@ -315,6 +315,9 @@ pre code {
     float: right;
     margin: 0 0 0.5em 1em;
   }
+  [dir="rtl"] header a.button {
+    padding: 5px 10px;
+  } 
 }
 
 [dir="rtl"] #main-content h1,
