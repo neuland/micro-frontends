@@ -1,7 +1,8 @@
 /* eslint-disable no-use-before-define, no-console, class-methods-use-this */
 /* globals HTMLElement */
-import render from './render';
+
 import fetch from './fetch';
+import render from './render';
 
 class GreenRecos extends HTMLElement {
   static get observedAttributes() {

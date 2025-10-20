@@ -8,10 +8,10 @@ const app = express();
 app.use(morgan('dev'));
 app.use('/blue', express.static('./build'));
 
-app.use('/blue-buy', (req, res) => {
+app.get('/blue-buy', (req, res) => {
   res.send(renderBuy());
 });
-app.use('/blue-basket', (req, res) => {
+app.get('/blue-basket', (req, res) => {
   res.send(renderBasket(0));
 });
 

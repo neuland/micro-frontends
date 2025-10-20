@@ -12,11 +12,14 @@ app.set('view engine', 'ejs');
 app.use('/red/images', express.static('./images'));
 app.use('/red', express.static('./build'));
 
-app.get('/:sku?', (req, res) => {
+const handlePage = (req, res) => {
   const { sku } = req.params;
   const html = renderPage(sku);
   res.render('layout', { html });
-});
+};
+
+app.get('/', handlePage);
+app.get('/:sku', handlePage);
 
 app.listen(3003);
 console.log(`🔴  team red running. product page is available here:

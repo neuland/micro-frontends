@@ -8,7 +8,7 @@ app.use(morgan('dev'));
 app.use('/green/images', express.static('./images'));
 app.use('/green', express.static('./build'));
 
-app.use('/green-recos', (req, res) => {
+app.get('/green-recos', (req, res) => {
   res.send(renderRecos(req.query.sku));
 });
 
