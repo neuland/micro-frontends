@@ -231,7 +231,7 @@ GEM
       jekyll-seo-tag (~> 2.1)
     minitest (5.26.0)
     mutex_m (0.3.0)
-    nokogiri (1.15.7)
+    nokogiri (1.18.9)
       mini_portile2 (~> 2.8.2)
       racc (~> 1.4)
     octokit (4.25.1)
