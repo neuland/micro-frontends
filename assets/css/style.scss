@@ -190,7 +190,48 @@ hr {
   }
 }
 
+@keyframes h1-pop-out {
+  0% {
+    text-shadow: var(--h1-shadow-pressed);
+    transform: var(--h1-transform-pressed);
+  }
+  100% {
+    text-shadow: var(--h1-shadow-normal);
+    transform: var(--h1-transform-normal);
+  }
+}
+
 header {
+  --h1-shadow-pressed:
+    -1px -1px 0 #000,
+    1px -1px 0 #000,
+    -1px 1px 0 #000,
+    1px 1px 0 #000,
+    -2px 0 0 #000,
+    2px 0 0 #000,
+    0 -2px 0 #000,
+    0 2px 0 #000,
+    0.8px 0.8px 0 #000,
+    1.6px 1.6px 0 #000,
+    2.4px 2.4px 0 #000,
+    3.2px 3.2px 0 #000,
+    4px 4px 0 #000;
+  --h1-shadow-normal:
+    -1px -1px 0 #000,
+    1px -1px 0 #000,
+    -1px 1px 0 #000,
+    1px 1px 0 #000,
+    -2px 0 0 #000,
+    2px 0 0 #000,
+    0 -2px 0 #000,
+    0 2px 0 #000,
+    1.6px 1.6px 0 #000,
+    3.2px 3.2px 0 #000,
+    4.8px 4.8px 0 #000,
+    6.4px 6.4px 0 #000,
+    8px 8px 0 #000;
+  --h1-transform-pressed: scaleY(0.8) translate(6px, 6px);
+  --h1-transform-normal: scaleY(0.8) translate(-2px, -2px);
   background: linear-gradient(-45deg, #ff5a55, #ff3d00, #23a6d5, #23d5ab);
   background-size: 400% 400%;
   animation: gradient 35s ease infinite;
@@ -220,41 +261,16 @@ header h1 {
   line-height: 0.9;
   word-spacing: -0.025em;
   align-self: start;
-  text-shadow:
-    -1px -1px 0 #000,
-    1px -1px 0 #000,
-    -1px 1px 0 #000,
-    1px 1px 0 #000,
-    -2px 0 0 #000,
-    2px 0 0 #000,
-    0 -2px 0 #000,
-    0 2px 0 #000,
-    1.6px 1.6px 0 #000,
-    3.2px 3.2px 0 #000,
-    4.8px 4.8px 0 #000,
-    6.4px 6.4px 0 #000,
-    8px 8px 0 #000;
-  transform: scaleY(0.8) translate(-2px, -2px);
-  /* animation: shadow-depth 3s ease-in-out infinite; */
+  text-shadow: var(--h1-shadow-normal);
+  transform: var(--h1-transform-normal);
+  animation: h1-pop-out 0.6s cubic-bezier(0.68, -0.8, 0.265, 1.8);
   transition: text-shadow 0.6s cubic-bezier(0.68, -0.8, 0.265, 1.8), transform 0.6s cubic-bezier(0.68, -0.8, 0.265, 1.8);
 }
 
-header h1:hover {
-  text-shadow:
-    -1px -1px 0 #000,
-    1px -1px 0 #000,
-    -1px 1px 0 #000,
-    1px 1px 0 #000,
-    -2px 0 0 #000,
-    2px 0 0 #000,
-    0 -2px 0 #000,
-    0 2px 0 #000,
-    0.8px 0.8px 0 #000,
-    1.6px 1.6px 0 #000,
-    2.4px 2.4px 0 #000,
-    3.2px 3.2px 0 #000,
-    4px 4px 0 #000;
-  transform: scaleY(0.8) translate(6px, 6px);
+header h1:hover,
+header h1:active {
+  text-shadow: var(--h1-shadow-pressed);
+  transform: var(--h1-transform-pressed);
   transition: text-shadow 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55), transform 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
 }
 
