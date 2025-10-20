@@ -57,6 +57,7 @@
         }
       }
     </script>
+    <link rel="preload" href="/ressources/fonts/LeagueGothic-CondensedItalic.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="stylesheet" href="{{ '/assets/css/style.css?v=' | append: site.github.build_revision | relative_url }}" media="screen" type="text/css">
     <link rel="stylesheet" href="{{ '/assets/css/print.css' | relative_url }}" media="print" type="text/css">
   </head>
@@ -64,17 +65,12 @@
   <body>
     <header>
       <div class="inner">
-        <a href="{{ '/' | absolute_url }}">
-          <h1>{{ site.title }}</h1>
-        </a>
+        <h1>Micro Frontends</h1>
         <h2>{{ site.description | default: site.github.project_tagline }}</h2>
-        {% if site.github.is_project_page %}
-          <a href="{{ site.github.repository_url }}" class="button"><small>View project on</small> GitHub</a>
-        {% endif %}
-        {% if site.github.is_user_page %}
-          <a href="{{ site.github.repository_url }}" class="button"><small>Follow me on</small> GitHub</a>
-        {% endif %}
         <div class="languages">
+          <a href="https://github.com/neuland/micro-frontends" class="github-badge" aria-label="View project on GitHub">
+            <img src="https://img.shields.io/github/stars/neuland/micro-frontends?style=social" alt="GitHub stars">
+          </a>
           <strong>EN</strong>
           <a href="https://micro-frontends-japanese.org/">JP</a>
           <a href="https://micro-frontends-es.org/">ES</a>
@@ -97,20 +93,20 @@
 
         <aside id="sidebar">
           <div class="tractorstore">
-            <h2>Tractor Store 2.0</h2>
             <a href="/tractor-store/">
               <img src="/ressources/images/tractor-store-2.webp" alt="product page of the tractor store 2.0">
             </a>
+            <h2>Tractor Store 2.0</h2>
             <p>
-              A full-featured micro frontends application implemented
-              with different techniques and frameworks.
-              <a href="/tractor-store/">Think of TodoMVC, but for Micro Frontends.</a>
+              A full-featured micro frontends reference application.
+              Think of it as a TodoMVC for Micro Frontends.
+              <a href="/tractor-store/">Explore different implementations.</a>
             </p>
           </div>
           <div class="author">
             <h2>The Author</h2>
             <img src="/ressources/images/michael-geers-75.jpg" srcset="/ressources/images/michael-geers-75.jpg 1x, /ressources/images/michael-geers-150.jpg 2x" alt="Author Michael Geers">
-            <a href="https://geers.tv"><strong>Michael Geers</strong></a> is a software engineer at <a href="https://www.neuland-bfi.de/">neuland Büro für Informatik</a>.<br>He worked on multiple large e-commerce projects over the last ten years.<br>He loves the frontend and is passionate about design systems and web-performance.<br>
+            <a href="https://geers.tv"><strong>Michael Geers</strong></a> is a software architect. He works on large scale e-commerce projects at <a href="https://www.neuland-bfi.de/">neuland Büro für Informatik</a>.<br>He loves the browsers, design systems and web-performance.<br>
             Follow on <a href="https://mastodon.social/@naltatis">Mastodon</a> or <a href="https://github.com/naltatis">GitHub</a>.
           </div>
           <div class="book">
