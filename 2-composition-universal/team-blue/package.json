@@ -14,7 +14,7 @@
   "license": "ISC",
   "dependencies": {
     "ejs": "^3.1.10",
-    "express": "^5.1.0",
+    "express": "^5.2.0",
     "morgan": "^1.10.1"
   },
   "devDependencies": {
