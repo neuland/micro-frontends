@@ -45,6 +45,23 @@ function renderOption(variant) {
     </button>
   `;
 }
+function renderMfeFallback(id, teamName) {
+  const el = document.getElementById(id);
+  if (!el) return;
+
+  el.innerHTML = `
+    <div style="
+      padding: 12px;
+      border: 1px dashed #ccc;
+      background: #fafafa;
+      font-family: sans-serif;
+      margin: 8px 0;
+    ">
+      <strong>${teamName} service unavailable</strong>
+      <p>This micro-frontend could not be loaded.</p>
+    </div>
+  `;
+}
 
 function renderPage() {
   const variant = product.variants.find((v) => state.variant === v.sku);
@@ -59,12 +76,27 @@ function renderPage() {
     <green-recos id="reco" sku="${variant.sku}"></green-recos>
   `;
 }
+function checkMicroFrontendAvailability() {
+  if (!customElements.get('blue-basket')) {
+    renderMfeFallback('basket', 'Team Blue (Basket)');
+  }
+
+  if (!customElements.get('blue-buy')) {
+    renderMfeFallback('buy', 'Team Blue (Buy)');
+  }
+
+  if (!customElements.get('green-recos')) {
+    renderMfeFallback('reco', 'Team Green (Recommendations)');
+  }
+}
 
 function rerender() {
   removeListeners();
   renderPage();
+  checkMicroFrontendAvailability();
   addListeners();
 }
+
 
 function handleClickOption(e) {
   const sku = e.currentTarget.getAttribute('data-sku');
@@ -87,4 +119,6 @@ function removeListeners() {
 }
 
 renderPage();
+checkMicroFrontendAvailability();
 addListeners();
+
